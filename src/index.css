@@ -1,0 +1,463 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.mySlides {display:none;}
+
+
+.gridSlide {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+button {
+  cursor: pointer;
+}
+
+.topBottom {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+.spaceIn {
+  text-align: end;
+  width: 90%;
+}
+.longBtn {
+  width: 100%;
+
+}
+
+.squareImg {
+ text-align: center;
+}
+
+
+.squareImg2 {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+
+}
+
+.bidImage {
+  width: 100%;
+  height: 300px;
+}
+
+.bidText {
+  text-transform: uppercase;
+  font-size: medium;
+  margin: 3px;
+}
+
+.bidName {
+  text-transform: capitalize;
+  font-size: x-large;
+  margin: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px 30px 0px 0px;
+  -webkit-box-shadow: 0 9px 6px -5px grey;
+  -moz-box-shadow: 0 9px 6px -5px grey;
+       box-shadow: 0 9px 6px -5px grey;
+
+}
+
+.central {
+  margin-bottom: 20px;
+}
+
+.cirke {
+  text-align: center;
+
+  border-radius: 50%;
+}
+
+
+
+
+.cirke2 {
+  text-align: center;
+  border-radius: 50%;
+}
+
+.homeText {
+  font-size: xxx-large;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  margin: 0px;
+  padding-top: 100px;
+}
+
+.linkBtn {
+  background: transparent;
+  color: blue;
+  font-size: large;
+font-weight: normal;
+border: none;
+}
+
+.linkBtn2 {
+  color: rgb(68, 68, 255);
+  background: transparent;
+  border: none;
+  width: 300px;
+  height: 30px;
+  font-size: x-large;
+  text-decoration: underline;
+  text-align: center;
+  font-weight: bold;
+}
+
+.homePara {
+  font-size: x-large;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 20px;
+  color: white;
+}
+
+
+
+.smallPara {
+  font-size: medium;
+  text-align: center;
+  padding: 20px;
+}
+
+.winnersPara {
+  margin: 10px 4px 2px 4px;
+  font-size: medium;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.bordered {
+  width: 270px;
+  border: 2px solid #1565c0 ;
+  text-align: center;
+  margin: 10px;
+  border-radius: 30px;
+}
+
+.gridTwo, .gridTwo2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.padds  {
+  padding-left: 15px;
+}
+
+.winnerBox {
+  width: 350px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 34px;
+}
+
+.homeNav {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 30% 30% 40%;
+  align-items: center;
+  justify-content: center;
+background-color: rgb(211, 211, 211);
+}
+
+.logo {
+  width: 84px;
+}
+
+.loginBtn, .loginBtn2 {
+  width: 70%;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 6px -4px grey;
+  -moz-box-shadow: 0 6px 6px -4px grey;
+       box-shadow: 0 6px 6px -4px grey;
+}
+
+.loginBtn2 {
+  visibility: hidden;
+}
+
+.userNav {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 40% 20% 40%;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewAuction {
+  cursor: pointer;
+  width: 170px;
+  background-color: rgb(46, 46, 46);
+  padding: 2px;
+  margin: 2px;
+  border-radius: 20px;
+  color: white;
+  text-align: start;
+}
+
+
+.viewAuction span {
+  padding-left: 2px;
+  text-align: center;
+}
+
+.leftz {
+  text-align: end;
+  margin-right: 2px;
+}
+
+.logout {
+  margin-right: 2px;
+  background-color: white;
+  color: black;
+  width: 85px;
+  border: none;
+  height: 35px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 6px 6px -4px grey;
+  -moz-box-shadow: 0 6px 6px -4px grey;
+       box-shadow: 0 6px 6px -4px grey;
+}
+
+.ProfileInfo {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  text-align: center;
+}
+
+.userInfo {
+  display: grid;
+  text-align: start;
+  grid-template-columns: 1fr 1fr;
+}
+
+.userInfo div ul li {
+  text-transform: capitalize;
+  font-size: large;
+}
+
+.userInfo div ul li span {
+  font-weight: bold;
+}
+
+.imageCenter {
+  text-align: center;
+}
+
+
+.flexBtn {
+  display: flexbox;
+  flex-direction: column;
+
+}
+
+.btn2 {
+  width: 200px;
+  height: 40px;
+  margin: 2px;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: small;
+}
+
+
+.introPage {
+  text-align: center;
+  background-image: url(./images/Landing\ Page\ Image\ 1.1.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px
+}
+
+.introPage2 {
+  background-image: url(./images/land\ page\ image\ 4.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+  text-align: center;
+
+}
+
+.introPage4 {
+  background-image: url(./images/land\ page\ image\ 3.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  text-align: center;
+}
+
+.about {
+  text-align: center;
+}
+
+
+.about p {
+  font-size: xx-large;
+  padding: 20px;
+
+}
+.introPage4 h3 {
+  padding-top: 80px;
+}
+
+.introPage2 div img {
+  height: 200px;
+}
+
+.introPage2 div p {
+  font-size: xx-large;
+  padding: 10px;
+}
+
+.introPage2 h5{
+  padding-top: 100px;
+  margin-top: 0px;
+  font-size: xxx-large;
+  text-align: center;
+  margin-bottom: 100px;
+}
+.grid-three {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.introPage3 {
+
+  text-align: center;
+}
+
+.grid-three div {
+  text-align: center;
+}
+
+.introPage3 .grid-three div {
+  margin: 10px;
+  text-align: center;
+}
+
+.introPage3 .grid-three p {
+  font-size: large;
+  font-weight: bold;
+}
+
+.textMed {
+  text-align: center;
+    font-size: large;
+    font-weight: bold;
+    padding-top: 10px;
+} 
+
+
+.fees {
+  font-size: x-large;
+  text-align: start;
+  margin-left: 10%;
+}
+
+.blackBokx {
+  margin-left: 5%;
+  background-color: rgb(31, 31, 31);
+  border-radius: 50px;
+  width: 90%;
+  padding: 4%;
+}
+
+.blackBokx h5 {
+  color: white;
+  text-decoration: underline;
+}
+
+.introPage5 {
+  background-image: url(./images/land\ page\ image\ 5.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  text-align: center;
+
+}
+
+@media screen and (max-width: 800px) {
+
+
+  .imageCenter {
+    margin-left: 0%;
+  }
+
+  body {
+
+  }
+  .loginBtn2 {
+  visibility: visible;
+
+  }
+
+ .loginBtn {
+   float: left;
+ }
+  .hideSmal {
+    display: none;
+  }
+
+  .gridTwo2 {
+    grid-template-columns: 1fr;
+  }
+  .userNav {
+    grid-template-columns: 50% 20% 30%;
+  }
+  .viewAuction {
+    width: 150px;
+  }
+  .homeNav {
+    grid-template-columns: 30% 40% 30%;
+  }
+  
+  .ProfileInfo {
+    display: list-item;
+    margin: 5px;
+
+  }
+
+  .userInfo {
+    margin: 20px;
+    display: list-item;
+    text-align: start;
+  }
+}
+

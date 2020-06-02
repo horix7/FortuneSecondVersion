@@ -1,0 +1,175 @@
+
+
+Button props 
+
+
+longBtm for full width buttons 
+      <Button
+      style="btn longBtn  waves-effect waves-light red"
+      text="home"
+        info={{
+          type: "submit",
+          name: "action",
+          icon: {
+            class: "material-icons right",
+            icon: "share"
+          }
+        }}
+      />
+
+
+preloader props 
+
+ <Loader
+       type="circle" 
+      //  circle
+       style="preloader-wrapper small active"
+      />
+
+
+
+
+input props 
+
+<Input
+     info={{
+        style: "input-field",
+        id: "home",
+        type: "time",
+        label: "Last Name"
+
+     }}
+      />
+
+
+image Props 
+
+      <Image 
+      info={{
+        class: "cirke", // image 
+        type: "squareImg2", //bidImage  squareImg
+
+      }}
+      
+      />
+
+
+
+
+tables props info 
+
+
+  <Table 
+      heads={["name", "second", "third", "fice"]}
+        information={[
+
+          {
+            name: "first One",
+            second: "first One",
+            third: "firsy and third"
+          },
+
+          {
+            name: "secds One",
+            second: "secds wee",
+            third: "fid third"
+          },
+
+          {
+           
+            fice: "fid third"
+          }
+
+        ]}
+      />
+
+
+
+Paragrapy Props 
+
+  <Paragraphy 
+    info={{
+      type:"smallPara", //homeText homePara
+      text:"We We provide some basic styling on header tags. In the example, you can see the the 6 header tags' different sizes. provide some basic styling on header tags. In the example, you can see the the 6 header tags' different sizes."
+    }}
+    />
+
+    
+
+ 
+
+Products Props 
+
+
+    <Box 
+    info={{
+      winners: "20 winners",
+      price: "300 rwf",
+      fortunes: "230/34 fortunes number remains ",
+      image: "https://www.phonestablets.co.ke/images/products/1600/Tecno-Spark-4-Air-2.jpg"
+    }}/>
+
+
+
+winner box props info 
+
+
+
+    <WinnerBox 
+    info={{
+      winners: "20 winners",
+      names: "Benedict Here ",
+      wonfor : "230/34 fortunes number remains ",
+      image: "https://www.phonestablets.co.ke/images/products/1600/Tecno-Spark-4-Air-2.jpg",
+      location: "home town Now ",
+      description: "We We provide some 6 header tags' different sizes. provide some basic styling on header tags. In the example, you can see the the 6 header tags' different sizes."
+    }}/>
+
+
+
+
+user Navigation Props 
+
+
+   <UserNav
+                info={{
+                    account: this.state.account,
+                    name: "denedict",
+                    loading: this.state.loading
+                }}
+                refresh={this.refreshData}
+                switch={this.swithToAuction}
+                />
+
+
+
+Profile props 
+
+   <Profile 
+                info={{
+                    one: {
+                        name: "Mahoro ",
+                        Age: "1231"
+                    },
+
+                    two: {
+                        name: "Mahoro ",
+                        Age: "1231"
+                    }
+                }}
+            />
+
+
+
+            slider Props 
+
+  
+    <Slider 
+      displayIn={[
+        (<img width="100px"  height="100px" src={pic1} alt=""/>),
+      (<img width="100px"  height="100px" src={Paul} alt=""/>),
+     ( <img width="100px"  height="100px" src={Paul2} alt=""/>)
+      ]}
+    />
+
+    
