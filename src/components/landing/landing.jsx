@@ -189,7 +189,7 @@ class Landing extends Component {
                     <h5>YOUR NEXT WISH COULD BE 1$</h5>
                     <a href="#products" className="linkBtn11">View Auction</a>
 
-                    <div className="grid-three bottomAligned">
+                    <div className="bottomAligned grid-three">
 
                         <div>
                             <img width="250px" height="200px"src={GadgetPhone} alt=""/>
@@ -238,7 +238,7 @@ class Landing extends Component {
             </Fragment>
                 </div>
                 <div className="introPage4 padds2">
-                <h3>Fortune Auction is on a mission to build a community of lucky people who have the courage to go for their wants and desires regardless of their background, gender, race, & status.</h3>
+                <h3>Fortune Auction is on a mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.</h3>
                 <button className="linkBtn2" onClick={() => this.openAbout("about")}>Learn More</button>
                 
                 </div>
@@ -247,7 +247,7 @@ class Landing extends Component {
                 
                 <div className="about">
                     <h3>Think of Affordable, Fast & Secure way to get your Wishes. Think Fortune Auction! </h3>
-                    <div className="grid-three">
+                    <div className="grid-three lastFron">
                         <div className="blackBokx">
                             <h5>RETURN & REFUND</h5>
                             <p className="smallPara2"> We refund your money Immediately when the bid target is not reached after the bid deadline. So share to win!

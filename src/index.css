@@ -581,9 +581,69 @@ background-color: rgb(211, 211, 211);
 
 }
 
+
+
 @media screen and (max-width: 800px) {
 
+  .introPage2 {
+    background: rgb(209, 209, 209);
+    height: 100%
+  }
 
+  .introPage4 h3 {
+  padding-top: 100px;
+
+  justify-content: center;
+
+  font-size: 1.7rem;
+}
+
+
+  .introPage3 h5 , .about h3{
+    font-size: x-large;
+  }
+
+
+.mySlides {display:block}
+
+
+  .introPage {
+    text-align: center;
+    background-image: url(./images/Mobile\ Image\ 1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px
+  }
+
+
+  .lastFron {
+    background-image: url(./images/Mobile\ Image\ 3.png)
+  }
+
+  .blackBokx {
+    background-color: rgba(5, 5, 5, 0.589);
+  }
+  .homeText {
+    font-size: xx-large;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    margin: 0px;
+    padding-top: 30px;
+  }
+
+  .homePara {
+    font-size: large
+  }
+
+  .grid-three {
+    display: grid;
+    grid-template-columns: 1fr;
+
+  }
+ 
+  
   .imageCenter {
     margin-left: 0%;
   }
@@ -627,5 +687,16 @@ background-color: rgb(211, 211, 211);
     display: list-item;
     text-align: start;
   }
+  .introPage3 .bottomAligned {
+    display: none
+  }
+
+  .bottomAligned {
+    display: none;
+    background-color: red;
+    height: 0%;
+    visibility: hidden
+  }
+
 }
 
