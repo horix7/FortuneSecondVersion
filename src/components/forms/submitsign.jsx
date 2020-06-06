@@ -1,15 +1,242 @@
 import React, {Component ,Fragment} from 'react';
 import Input from '../UI/input';
 import Button from '../UI/button';
-
+import axios from 'axios';
+import Loader from '../UI/preloader'
 
 
 class SubmitSign  extends Component {
 
-    state={
-        account: false
-    }
+   state={
+      signUp: {
+         firstname: null,
+         secondname: null,
+         email: null,
+         phone: null,
+         age: null,
+         gender: "male",
+         password: null
 
+      },
+      btnLoad: false,
+      submit: null,
+      error: null,
+      account: false,
+      loginInfo: {
+         email: null,
+         password: null
+     },
+     token: null,
+     requestInfo: {
+        sells: null,
+        address: null,
+        store: null,
+        account: null
+     }
+    
+      
+   }
+
+   
+   showError = () => {
+      location.href = "#err"
+  }
+
+   postSignUp = (e) => {
+
+      e.preventDefault()
+      this.setState({
+         btnLoad: true
+      })
+      if(this.state.submit) {
+         axios({
+         method: 'post',
+         url: localStorage.address + "/api/v1/auth/signup",
+         data: this.state.signUp,
+         headers: {'Content-Type': "application/json" }
+         })
+         .then((response) => {
+
+            let request = {...this.state.requestInfo}
+            request.account = response.data.data[0].details.username
+
+             this.setState({
+               token: response.data.data[0].token,
+               details: JSON.stringify(response.data.data[0].details),
+               requestInfo: {...request}
+
+            })
+
+            this.rqVend()
+
+
+         }).catch(err => {
+            this.showError()
+            let info = err.response.data
+            console.log(info)
+            if (info.status == 400) {
+               this.setState({
+                  error: "Your Provided Invalid Information ",
+                  mess: null,
+                  btnLoad: false
+               })
+            } else if (info.status == 409 || info.status == 403) {
+               this.setState({
+                  error:  info.error || info.message,
+                  btnLoad: false
+               })
+            }
+           
+         })
+        
+      }
+   }
+
+   postSignIn  = (e) => {
+
+      e.preventDefault()
+      this.setState({
+         btnLoad: true
+      })
+      if(this.state.submit) {
+         axios({
+         method: 'post',
+         url: localStorage.address + "/api/v1/auth/signin",
+
+         data: this.state.loginInfo,
+         headers: {'Content-Type': "application/json" }
+         })
+         .then( (response) => {
+
+            let request = {...this.state.requestInfo}
+            request.account = response.data.data[0].details.username
+
+            this.setState({
+               token: response.data.data[0].token,
+               details: JSON.stringify(response.data.data[0].details),
+               requestInfo: {...request}
+
+            })
+            
+             this.rqVend()
+
+
+         }).catch(err => {
+            this.showError()
+
+            let info = err.response.data
+            if (info.status == 400) {
+               this.setState({
+                  error: "Your Provided Invalid Information",
+                  btnLoad: false,
+                   mess: null
+               })
+            } else if (info.status == 409 || info.status == 403) {
+               this.setState({
+                  error:  info.error || info.message,
+                  btnLoad: false,
+                   mess: null
+               })
+            }
+           
+
+            console.log(err)
+         })
+        
+      }
+   }
+
+   rqVend  = (e) => {
+ 
+         axios({
+         method: 'post',
+         url: localStorage.address + "/api/v1/reqvend",
+
+         data: this.state.requestInfo,
+         headers: {'Content-Type': "application/json" }
+         })
+         .then( (response) => {
+            this.showError()
+            
+            this.setState({
+               btnLoad: true,
+               error: null,
+               mess: "your request is sent"
+
+            })
+            
+            setTimeout(() => {
+               localStorage.setItem("auth", this.state.token)
+               localStorage.setItem("details", this.state.details)
+
+                  this.props.login()
+            }, 1000)
+            console.log(response)
+
+
+         }).catch(err => {
+           console.log(err)
+           
+         })
+        
+   }
+
+   handleInputChange = (e) => {
+      this.state.signUp[e.target.id] = e.target.value
+      this.changeSubmitAcc()
+      console.log(this.state)
+
+     
+   }
+
+   handleInputChangeR = (e) => {
+      this.state.loginInfo[e.target.id] = e.target.value
+      this.changeSubmitAcc2()
+      console.log(this.state)
+
+
+     
+   }
+
+   handleInputChangeRl = (e) => {
+      this.state.requestInfo[e.target.id] = e.target.value
+      this.changeSubmitAcc2()
+      this.changeSubmitAcc()
+      console.log(this.state)
+
+
+     
+   }
+
+   
+   changeSubmitAcc = () => {
+      let checkAll =  Object.values(this.state.signUp).some(n => n == null) && Object.values(this.state.requestInfo).some(n => n == null)
+      console.log(checkAll)
+      if(!checkAll) {
+            this.setState({
+               submit: true
+            })
+      } else {
+         this.setState({
+            submit: false 
+         })
+      }
+   }
+
+   changeSubmitAcc2 = () => {
+      let checkAll = Object.values(this.state.loginInfo).some(n => n == null) && Object.values(this.state.requestInfo).some(n => n == null)
+      console.log(checkAll)
+
+      if(!checkAll) {
+            this.setState({
+               submit: true
+            })
+      } else {
+         this.setState({
+            submit: false 
+         })
+      }
+   }
     componentDidMount() {
         const M = window.M
         
@@ -21,49 +248,69 @@ class SubmitSign  extends Component {
 
 
     changeForm = () => {
-        let newState = {...this.state}
+     
+      var elems = document.querySelectorAll('input');
+      elems.forEach(n => {
+         n.value = ""
+      })
+      let newState = {...this.state}
         this.setState({
             account: !newState.account
         })
     }
 
    render() {
+      let excute = null 
+      if(!this.state.account) {
+         excute = this.postSignUp
+      }else {
+         excute = this.postSignIn
 
-    return(
+      }
+
+
+      return(
         <Fragment>
+
+            {this.state.error ? <div id="err" className="errorz">{this.state.error}</div> : null}
+             {this.state.mess ? <div id="err" className="successz">{this.state.mess}</div> : null}
+
             <div className="gridTwo">
 
-                <button className="btn white black-text" onClick={this.changeForm}>
+                <div className="btn white black-text" onClick={this.changeForm}>
                    {!this.state.account ? <i className="material-icons left ">radio_button_checked</i> : <i className="material-icons left">radio_button_unchecked</i> }
                     New User 
-                </button>
+                </div>
 
-                <button className="btn white black-text" onClick={this.changeForm}>
+                <div className="btn white black-text" onClick={this.changeForm}>
                    {this.state.account ? <i className="material-icons left">radio_button_checked</i> : <i className="material-icons left">radio_button_unchecked</i> }
                     registered
-                </button>
+                </div>
 
             </div>
            {!this.state.account ? <div>
             <Input 
                  info={{
                     style: "input-field",
-                    id: "Names",
+                    id: "firstname",
                     type: "text",
                     label: "Your Names"
             
                  }}
+                 changed={this.handleInputChange}
                  />
 
                 <Input 
                  info={{
                     style: "input-field",
-                    id: "user",
+                    id: "secondname",
                     type: "text",
                     label: "User Name",
                     icon: "account_circle"
             
                  }}
+                 changed={this.handleInputChange}
+
                  />
 
                  <div className="gridTwo">
@@ -75,6 +322,8 @@ class SubmitSign  extends Component {
                     label: "Your Current Age"
             
                  }}
+                 changed={this.handleInputChange}
+
                  />
 
                 <div>
@@ -92,11 +341,13 @@ class SubmitSign  extends Component {
                  info={{
                     style: "input-field",
                     id: "phone",
-                    type: "tel",
+                    type: "number",
                     label: "Phone Number",
                     icon: "phone"
             
                  }}
+                 changed={this.handleInputChange}
+
                 />
 
             <Input 
@@ -109,117 +360,70 @@ class SubmitSign  extends Component {
 
             
                  }}
+                 changed={this.handleInputChange}
+
                 />
 
             <Input 
                  info={{
                     style: "input-field",
-                    id: "sell",
+                    id: "sells",
                     type: "text",
                     label: "What Do You Sell",
 
             
                  }}
+                 changed={this.handleInputChangeRl}
+
                 />
 
             <Input 
                  info={{
                     style: "input-field",
-                    id: "store",
+                    id: "address",
                     type: "text",
                     label: "Store Address",
                     icon:"location_on"
 
             
                  }}
+                 changed={this.handleInputChangeRl}
+
+
                 />
 
                  <Input 
                  info={{
                     style: "input-field",
-                    id: "store2",
+                    id: "store",
                     type: "text",
                     label: "Store Name",
                     icon: "store"
 
             
                  }}
+                 changed={this.handleInputChangeRl}
+
+
                 />
 
                 <Input 
                  info={{
                     style: "input-field",
-                    id: "pass",
+                    id: "password",
                     type: "password",
                     label: "Password"
             
                  }}
+                 changed={this.handleInputChange}
+
                 />
 
             <p className="">By Signing Up You Agree To Our Terms And Conditions </p>
                  <br/>
 
-             
-               
-            </div>
-        : 
-        <div>
-              <Input 
-                 info={{
-                    style: "input-field",
-                    id: "user",
-                    type: "text",
-                    label: "User Name"
-            
-                 }}
-                 />
-                             <Input 
-                 info={{
-                    style: "input-field",
-                    id: "sell",
-                    type: "text",
-                    label: "What Do You Sell",
-
-            
-                 }}
-                />
-
-            <Input 
-                 info={{
-                    style: "input-field",
-                    id: "store",
-                    type: "text",
-                    label: "Store Address",
-                    icon:"location_on"
-
-            
-                 }}
-                />
-
-                 <Input 
-                 info={{
-                    style: "input-field",
-                    id: "store2",
-                    type: "text",
-                    label: "Store Name",
-                    icon: "store"
-
-            
-                 }}
-                />
-                <Input 
-                 info={{
-                    style: "input-field",
-                    id: "pass",
-                    type: "password",
-                    label: "Password"
-            
-                 }}
-                />
-        </div>
-        }
-
-        <Button 
+          {this.state.btnLoad ? <Loader />: <div>
+           {!this.state.submit ? <Button 
                  style="btn  waves-effect waves-light black"
                  text="Request Now"
                    info={{
@@ -227,7 +431,109 @@ class SubmitSign  extends Component {
                      name: "action",
                     
                    }}
+                /> :  <Button 
+                     style="btn  waves-effect waves-light black"
+                     text="Request Now"
+                     info={{
+                     type: "submit",
+                     name: "action",
+                     
+                     }}
+                     clicked={excute}
+               />}
+           </div>}
+               
+            </div>
+
+            
+        : 
+        <div>
+              <Input 
+                 info={{
+                    style: "input-field",
+                    id: "email",
+                    type: "text",
+                    label: "User Name"
+            
+                 }}
+                 changed={this.handleInputChangeR}
+
+                 />
+                             <Input 
+                 info={{
+                    style: "input-field",
+                    id: "sells",
+                    type: "text",
+                    label: "What Do You Sell",
+
+            
+                 }}
+                 changed={this.handleInputChangeRl}
+
                 />
+
+            <Input 
+                 info={{
+                    style: "input-field",
+                    id: "address",
+                    type: "text",
+                    label: "Store Address",
+                    icon:"location_on"
+
+            
+                 }}
+                 changed={this.handleInputChangeRl}
+
+                />
+
+                 <Input 
+                 info={{
+                    style: "input-field",
+                    id: "store",
+                    type: "text",
+                    label: "Store Name",
+                    icon: "store"
+
+            
+                 }}
+                 changed={this.handleInputChangeRl}
+
+                />
+                <Input 
+                 info={{
+                    style: "input-field",
+                    id: "password",
+                    type: "password",
+                    label: "Password"
+            
+                 }}
+                 changed={this.handleInputChangeR}
+
+                />
+                 {this.state.btnLoad ? <Loader />: <div>
+           {!this.state.submit ? <Button 
+                 style="btn  waves-effect waves-light black"
+                 text="Request Now"
+                   info={{
+                     type: "submit",
+                     name: "action",
+                    
+                   }}
+                /> :  <Button 
+                     style="btn  waves-effect waves-light black"
+                     text="Request Now"
+                     info={{
+                     type: "submit",
+                     name: "action",
+                     
+                     }}
+                     clicked={excute}
+               />}
+           </div>}
+        </div>
+        }
+
+      
 
         </Fragment>
     )

@@ -8,10 +8,21 @@ import Image from '../UI/image';
 class Profile extends Component {
 
     state={
+      
+    }
 
+
+    formatData = (arr) => {
+      arr.map(n => {
+        return { product: n.product, date: n.time.toString().split('T')[0],price: n.revenue, tickets: n.fortunes}
+      })
     }
 
     render() {
+      let fetchDataArr =  this.props.dataTable.map(n => {
+        return { product: n.product, date: n.time.toString().split('T')[0],price: n.revenue, tickets: n.fortunes}
+      })
+console.log(fetchDataArr)
 
         return (
             <Fragment>
@@ -47,37 +58,22 @@ class Profile extends Component {
                             </ul>
                         </div>
                     </div>
-                       <h6 className="topBottom">Your Bidding History </h6>
+                       
 
 
+                   {this.props.dataTable.length > 1 ?
+                   <Fragment>
+                    <h6 className="topBottom">Your Bidding History </h6>
                     <Tables 
-                          heads={["name", "second", "third", "fice"]}
-                          information={[
-                  
-                            {
-                              name: "first One",
-                              second: "first One",
-                              third: "firsy and third"
-                            },
-                  
-                            {
-                              name: "secds One",
-                              second: "secds wee",
-                              third: "fid third"
-                            },
-                  
-                            {
-                             
-                              fice: "fid third"
-                            }
-                  
-                          ]}
-                    />
+                          heads={Object.keys(fetchDataArr[0])}
+                          information={fetchDataArr}
+                    />  
+                   </Fragment>
+                    : <h6 className="topBottom">No Bidding History </h6>}
 
                     <div className="flexBtn">
                     <button className="btn btn2 black left">  Download Bids Data</button>
-                    <button className="btn btn2 black ">  <i className="material-icons">remove_red_eye</i>  View Winners</button>
-                    <button className="btn btn2 black ">  <i className="material-icons">add</i> Create Auction</button>
+                    <button className="btn btn2 black "> View Winners</button>
                     
                     </div>
                    </div>

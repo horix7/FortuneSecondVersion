@@ -4,9 +4,15 @@ import React from 'react';
 let FormHolder = props => {
 
         return (
-            <div className="formHolder">
-                <i className="material-icons">keyboard_backspace</i>
+            <div id="err" className="formHolder">
+                <div className="backIco" onClick={props.clecked}>
+                <i className="material-icons" >keyboard_backspace</i>
+
+                </div>
+                <form>
                 {props.children}
+                </form>
+
             </div>
         )
 }

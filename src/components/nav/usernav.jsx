@@ -3,7 +3,7 @@ import Loader from '../UI/preloader';
 
 
 let userNav = props => {
-
+  
     return (
 
         <div className="userNav">
@@ -25,7 +25,7 @@ let userNav = props => {
             </div>
 
             <div className="leftz">
-           <button className="logout">
+           <button className="logout" onClick={props.logout}>
                 logout
            </button>
             </div>

@@ -8,14 +8,13 @@ import Image from  '../UI/image';
 import GadgetPhone from '../../images/iphone.jpg';
 import Lcd from '../../images/lcdScreen.jpg';
 import shoe from '../../images/shoes.jpg';
-import paul from '../../images/IMG_20200330_141645_174.jpg'
-import benedict from '../../images/benedict.jpeg'
-import morris from '../../images/IMG-20200412-WA0000.jpg'
 import Form from '../../containers/formHolder'
 import LoginForm from '../../components/forms/login'
 import RequestForm from '../../components/forms/submitsign'
 import SignForm from '../../components/forms/signUp'
-
+import axios from 'axios'
+import Footer from '../../components/UI/footer'
+import About from '../../components/landing/about'
 
 
 
@@ -29,14 +28,59 @@ class Landing extends Component {
         terms: {
 
         },
-        forms: false
+        products: null,
+        winners: null,
+
+        forms: false,
+        openAbout: false,
+        aboutType: null
     }
 
     componentDidMount() {
-    
+   
+        this.getFrontPro()
+        this.getFrontWin()
 
     }
 
+    openAbout = (type) => {
+        let newState = {...this.state}
+
+        this.setState({
+            openAbout: !newState.openAbout,
+            aboutType: type
+        })
+    }
+
+    getFrontPro = () => {
+        axios.get(localStorage.address + "/api/v1/frontpro")
+        .then(response => {
+            console.log(response.data.data)
+            let newArray = [...response.data.data]
+            
+             this.setState({
+                products: newArray
+            })
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
+
+    getFrontWin = () => {
+        axios.get(localStorage.address + "/api/v1/frontwin")
+        .then(response => {
+            console.log(response.data.data)
+            let newArray = [...response.data.data]
+            
+             this.setState({
+                winners: newArray
+            })
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
     openLogin = () => {
         let newState = {...this.state}
         this.setState({
@@ -61,25 +105,42 @@ class Landing extends Component {
         })
     }
 
+    loginSign = () => {
+        let newState = {...this.state}
+        this.setState({
+            login: !newState.login,
+            sign: !newState.sign
+        })
+    }
+
     
     render() {
 
         let CurrentForm = null
+        let func = null
+        let func2 = null
+
 
         if(this.state.login) {
-            CurrentForm =( <LoginForm />)
+            CurrentForm =( <LoginForm login={this.props.onLogin}/>)
+            func = this.openLogin
+
         }
 
         if(this.state.sign) {
-            CurrentForm =( <SignForm />)
+            CurrentForm =( <SignForm  login={this.props.onLogin}/>)
+            func = this.openSign
         }
 
          if (this.state.request) {
-            CurrentForm = (<RequestForm />)
+            CurrentForm = (<RequestForm login={this.props.onLogin} />)
+            func = this.openRequest
+
         }
 
         return (
-        <React.Fragment>
+            <React.Fragment>
+        { !this.state.openAbout ?<React.Fragment>
 
        {!this.state.forms ? <React.Fragment>
 
@@ -93,19 +154,19 @@ class Landing extends Component {
                 />
                  <Par 
                 info={{
-                type:"homePara", //homeText homePara
+                type:"homePara padds2", //homeText homePara
                 text:"We Auction Products as the Winning Prize for one of you with the Lucky Fortune Number to claim it for as Low as $1 "
                 }}
                 />
 
-                <button className="linkBtn2">Learn More</button>
+                <a href="#how" className="linkBtn2">Learn More</a>
 
             </div>
 
 
-            <div className="introPage2"> 
+            <div id="how" className="introPage2"> 
              <h5>How It Works </h5>
-             <div className="grid-three">
+             <div className="grid-three padds2">
                  <div>
                     <img src={one} alt=""/>
                     <p>Vendors Auction Used or Brand New Items</p>
@@ -125,25 +186,25 @@ class Landing extends Component {
 
             <div className="introPage3">
 
-                    <h4>YOUR NEXT COULD BE 1$</h4>
-                    <button className="linkBtn">View Auction</button>
+                    <h5>YOUR NEXT WISH COULD BE 1$</h5>
+                    <a href="#products" className="linkBtn11">View Auction</a>
 
-                    <div className="grid-three">
+                    <div className="grid-three bottomAligned">
 
                         <div>
-                            <img src={GadgetPhone} alt=""/>
+                            <img width="250px" height="200px"src={GadgetPhone} alt=""/>
                        
                              <p>Gadgets</p>
                         </div>
 
                         <div>
-                        <img src={shoe} alt=""/>
+                        <img width="250px" height="200px"src={shoe} alt=""/>
 
                              <p>Fashion</p>
                         </div>
 
                         <div>
-                        <img src={Lcd} alt=""/>
+                        <img width="250px" height="200px"src={Lcd} alt=""/>
                              <p>Electronics</p>
                         </div>
 
@@ -176,57 +237,20 @@ class Landing extends Component {
              </div>
             </Fragment>
                 </div>
-            <div className="introPage4">
-                <h3>Fortune Auction is the Next Generation Digital Raffle Bid Platform that brings your Wishes to Reality </h3>
-                <button className="linkBtn2">Learn More</button>
+                <div className="introPage4 padds2">
+                <h3>Fortune Auction is on a mission to build a community of lucky people who have the courage to go for their wants and desires regardless of their background, gender, race, & status.</h3>
+                <button className="linkBtn2" onClick={() => this.openAbout("about")}>Learn More</button>
                 
-            </div>
-
-                <div className="about">
-                    <h3>ABOUT US</h3>
-                    <p>Fortune Auction started as a result to create a bid platform that people can win items during this pandemic. We are a group of passionate youths with the desire to build a world where you can get your wants & needs without pain & hustle
-                        <br/>  We believe that creating a community of people with desire to meet their wishes and help others meet theirs will build a better world. Join Us Today! 
-                    </p>
-
                 </div>
-
-                <div className="about">
-                    <h3>TEAM</h3>
-                    <div className="grid-three">
-                        <div>
-
-                        <div className="">
-                            <img  width="230px" height="230px" src={benedict} alt="" className="cirke2"/>
-                        </div>
-                        <div className="textMed">Benedict Okolie</div>
-                        </div>
-
-
-                        <div>
-                        <div className="">
-                            <img  width="230px" height="230px" src={morris} alt="" className="cirke2"/>
-                        </div>
-                        <div className="textMed">Morris Mwitti</div>
-
-                        </div>
-                        
-                        <div>
-                        <div className="">
-                            <img  width="230px" height="230px" src={paul} alt="" className="cirke2"/>
-                        </div>
-                        <div className="textMed">Paul Mahoro</div>
-
-                        </div>
-                        
-                    </div>  
-                    </div>
-
+                
+                        {/* About  Appears here  */}
+                
                 <div className="about">
                     <h3>Think of Affordable, Fast & Secure way to get your Wishes. Think Fortune Auction! </h3>
                     <div className="grid-three">
                         <div className="blackBokx">
                             <h5>RETURN & REFUND</h5>
-                            <p className="homePara"> We refund your money Immediately when the bid target is not reached after the bid deadline. So share to win!
+                            <p className="smallPara2"> We refund your money Immediately when the bid target is not reached after the bid deadline. So share to win!
                             </p>   
                             <button className="linkBtn2">Learn More</button>
 
@@ -234,17 +258,17 @@ class Landing extends Component {
 
                         <div className="blackBokx">
                             <h5> VENDORS </h5>
-                            <p className="homePara"> We partner with vendors globally with legal new or used items to auction. 
+                            <p className="smallPara2"> We partner with vendors globally with legal new or used items to auction. 
                             </p>    
-                            <button className="linkBtn2">Learn More</button>
+                            <button className="linkBtn2" onClick={() => this.openAbout("ww")} >Learn More</button>
                             <br/>
-                            <p className="homePara">Do you have item(s) to auction? </p>
+                            <p className="smallPara2">Do you have item(s) to auction? </p>
                             <button className="linkBtn2" onClick={this.openRequest} >Request Now</button>
                         </div>
 
                         <div className="blackBokx">
                             <h5>SECURITY</h5>
-                            <p className="homePara">We encrypt your password & payment information with safe technology. Your privacy is highly important to us.
+                            <p className="smallPara2">We encrypt your password & payment information with safe technology. Your privacy is highly important to us.
                             </p>   
                             <button className="linkBtn2">Learn More</button>
 
@@ -252,41 +276,30 @@ class Landing extends Component {
                     </div>
                 </div>
        
-                <div className="about">
-                    <h3> ABOUT VENDORS </h3>
-                    <p>We designed this platform to enable vendors/sellers with both used & new items to auction, get bids and sell the item. Item type Such as Cars, Computer/Gadgets, Clothes & Home Electronics.
-                        <br/>  You too our registered user can also sell any of your used items. Just Request! Have your legal proof of ownership (receipt, papers etc.) Auction and get bids.         
-                        </p>
-
-                        <button className="btn blue" onClick={this.openRequest}>Request Now </button>
-                    <h5>FEES & CHARGES</h5>
-                    <p>
-                    We charge a commission fee on every item sold both new and used at the following rate
-                    </p>
-                    <ol className="fees">
-                        <li>New Items: 9%</li>
-                        <li>Used items from users: 10%</li>
-
-                    </ol>
-
-                    <p>Contact us for inquiries</p>
-                </div>
-
+               {/* display about us 2 end  */}
 
                 <div className="introPage5">
                     <p className="homeText">YOUR LOCATION IS NEVER A BARRIER</p>
                     <p className="homePara">WINNER’S PRIZE IS DELIVERED GLOBALLY REGARDLESS OF THE LOCATION </p>
                 </div>
+                <div id="products">
+                {JSON.stringify(this.state.products)}
+
+                </div>
+                {JSON.stringify(this.state.winners)}
+
+                <Footer />
 
         </React.Fragment> : <Form 
-        clicked={}>
+        clecked={func} sign={func2}
+        >
             {CurrentForm}
         </Form>
 
 
 }
 </React.Fragment>
-    )
+    : <About type={this.state.aboutType} click={() => this.openAbout(null)}  openRequest={this.openRequest}/>} </React.Fragment>)
 
             }
 } 
