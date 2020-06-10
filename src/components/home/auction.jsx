@@ -6,7 +6,8 @@ import Modal from '../../containers/modal'
 
 class Auction extends Component {
     state= {
-        openModal: false
+        openModal: false,
+        checked: []
     }
 
     componentDidMount() {
@@ -29,8 +30,28 @@ class Auction extends Component {
 
     }
 
+    handleClickedCheckBox = () => {
+            let array = []
+            let checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+            for (let i = 0; i < checkboxes.length; i++) {
+                array.push(checkboxes[i].value)
+            }
+             this.setState({
+                 checked: array
+             })
+    }
+
+     toggle = () =>  {
+       let  checkboxes = document.querySelectorAll('#indeterminate-checkbox');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = "checked";
+        this.handleClickedCheckBox()
+
+        }
+      }
+
     openModal = (id) => {
-        console.log("doone")
         this.setState({
             openModal: true,
             tickets: false
@@ -53,6 +74,7 @@ class Auction extends Component {
                  this.setState({
                     tickets: dataTick(response.data.data[0].current),
                     sold: dataTick(response.data.data[0].sold),
+                    currentPrice: response.data.data[0].price,
                     ticket: true 
                })
             }).catch(err => console.error(err))
@@ -77,17 +99,19 @@ class Auction extends Component {
                       }}
                       showTickets={() => this.openModal(n.id)}
                       />)) : <Loader/>}
-                </div> : <Modal clecked={this.openModal2}> 
-                       {this.state.ticket ?  <div className="grid-three">
+                </div> : <Modal clecked={this.openModal2} chosen={this.state.checked} price={this.state.currentPrice}> 
+                       {this.state.ticket ? <div>  
+                    <button className="btn white black-text" onClick={this.toggle}>Select All</button>
+                 <div className="gridTwo">
                            {this.state.tickets.map(n => (
-                               <p>
+                               <p key={n}>
                                <label>
-                                 <input id="indeterminate-checkbox" type="checkbox" />
+                                 <input value={n} name="fortunes" id="indeterminate-checkbox" type="checkbox" onChange={this.handleClickedCheckBox}/>
                                  <span>Fortune Number: {n} </span>
                                </label>
                              </p>
                            ))}
-                       </div> :  <div className="midLoader"> <Loader type="circle" style="preloader-wrapper large active"/>  </div> }
+                       </div>  </div> :  <div className="midLoader"> <Loader type="circle" style="preloader-wrapper large active"/>  </div> }
                     </Modal>}
 
             </Fragment>
