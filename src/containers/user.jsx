@@ -3,6 +3,7 @@ import UserNav from '../components/nav/usernav';
 import Profile from '../components/home/userProfile';
 import axios from 'axios';
 import Loader from '../components/UI/preloader';
+import Auction  from '../components/home/auction'
 
 
 class User extends Component {
@@ -11,7 +12,8 @@ class User extends Component {
         account: false,
         loading: false,
         userInfo : false,
-        bids: false
+        bids: false,
+        openAuction: false 
     }
     
     swithToAuction = () => {
@@ -71,12 +73,12 @@ class User extends Component {
     render() {
         console.log(this.state)
         return (
-            <Fragment>
-
+         <Fragment>
+             
            {this.state.userInfo ? <UserNav
                 info={{
                     account: this.state.account,
-                    name: "denedict",
+                    name: "My Account",
                     loading: this.state.loading
                 }}
                 refresh={this.refreshData}
@@ -84,6 +86,8 @@ class User extends Component {
                 logout={this.props.onLogout}
                 /> : <div className="headLoader"> <Loader/>  </div> 
 }
+    {!this.state.account ?<Fragment>
+
     {this.state.userInfo ?
           <Fragment>
           {this.state.bids ? <Profile 
@@ -106,6 +110,7 @@ class User extends Component {
             /> : <div className="midLoader"> <Loader type="circle" style="preloader-wrapper large active"/>  </div> }
           </Fragment> : null
             }
+             </Fragment> : <Auction /> }
             </Fragment>           
         )
     }

@@ -15,7 +15,11 @@ import SignForm from '../../components/forms/signUp'
 import axios from 'axios'
 import Footer from '../../components/UI/footer'
 import About from '../../components/landing/about'
-
+import ProBox from '../../components/holders/productBox'
+import Loader from '../../components/UI/preloader'
+import WinerBox from '../../components/holders/winnerBox'
+import Slider from '../../components/holders/slider'
+import Counter from '../../components/holders/counter'
 
 
 
@@ -122,7 +126,7 @@ class Landing extends Component {
 
 
         if(this.state.login) {
-            CurrentForm =( <LoginForm login={this.props.onLogin}/>)
+            CurrentForm =( <LoginForm sign={this.loginSign}  login={this.props.onLogin}/>)
             func = this.openLogin
 
         }
@@ -214,45 +218,48 @@ class Landing extends Component {
                 <div className="imageSlider">
                 <Fragment>
             <div className="w3-content w3-section" >
-
-                
+            <Slider 
+            timer="1000"
+            displayIn={    [
                      <div className="mySlides">
                             <img src={GadgetPhone} alt=""/>
                        
                              <p>Gadgets</p>
-                        </div>
+                        </div>,
 
                         <div className="mySlides">
                         <img src={shoe} alt=""/>
 
                              <p>Fashion</p>
-                        </div>
+                        </div>,
 
                         <div className="mySlides">
                         <img src={Lcd} alt=""/>
                              <p>Electronics</p>
                         </div>
-
+                ]} 
+                />
               
              </div>
             </Fragment>
                 </div>
                 <div className="introPage4 padds2">
-                <h3>Fortune Auction is on a mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.</h3>
-                <button className="linkBtn2" onClick={() => this.openAbout("about")}>Learn More</button>
+                <h3>Fortune Auction is on a mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.</ h3>
+                <a className="linkBtn2" onClick={() => this.openAbout("about")}>Learn More</a>
                 
                 </div>
                 
                         {/* About  Appears here  */}
                 
-                <div className="about">
+                <div className="about lastFron">
                     <h3>Think of Affordable, Fast & Secure way to get your Wishes. Think Fortune Auction! </h3>
-                    <div className="grid-three lastFron">
+                    <div className="grid-three">
+                        
                         <div className="blackBokx">
                             <h5>RETURN & REFUND</h5>
                             <p className="smallPara2"> We refund your money Immediately when the bid target is not reached after the bid deadline. So share to win!
                             </p>   
-                            <button className="linkBtn2">Learn More</button>
+                            <a className="linkBtn2">Learn More</a>
 
                         </div>
 
@@ -260,17 +267,17 @@ class Landing extends Component {
                             <h5> VENDORS </h5>
                             <p className="smallPara2"> We partner with vendors globally with legal new or used items to auction. 
                             </p>    
-                            <button className="linkBtn2" onClick={() => this.openAbout("ww")} >Learn More</button>
+                            <a className="linkBtn2" onClick={() => this.openAbout("ww")} >Learn More</a>
                             <br/>
                             <p className="smallPara2">Do you have item(s) to auction? </p>
-                            <button className="linkBtn2" onClick={this.openRequest} >Request Now</button>
+                            <a className="linkBtn2" onClick={this.openRequest} >Request Now</a>
                         </div>
 
                         <div className="blackBokx">
                             <h5>SECURITY</h5>
                             <p className="smallPara2">We encrypt your password & payment information with safe technology. Your privacy is highly important to us.
                             </p>   
-                            <button className="linkBtn2">Learn More</button>
+                            <a className="linkBtn2">Learn More</a>
 
                         </div>
                     </div>
@@ -282,11 +289,98 @@ class Landing extends Component {
                     <p className="homeText">YOUR LOCATION IS NEVER A BARRIER</p>
                     <p className="homePara">WINNER’S PRIZE IS DELIVERED GLOBALLY REGARDLESS OF THE LOCATION </p>
                 </div>
-                <div id="products">
-                {JSON.stringify(this.state.products)}
+              {this.state.products ?  <div id="products" className="">
+              <div className="hideSmall grid-three">
+                
+                {this.state.products.map(n => (
+                     <ProBox 
+                     key={n.id}
+                     info={{
+                        name: n.name,
+                        winners: n.winners,
+                        price: n.price,
+                        fortunes: n.tickets,
+                        image: n.picture,
+                        date: n.date,
+                        hour: n.hour,
+                        sold: n.sold
+                       }}
+                       login={this.openLogin}
+                       check={true}
+                       />
+                ))}
+               </div> 
 
+               <div className="hideBig">
+             <Slider 
+                
+                timer= "3000"
+                displayIn={this.state.products.map(n => (
+                    <ProBox 
+                    key={n.id}
+                    info={{
+                        name: n.name,
+                        winners: n.winners,
+                        price: n.price,
+                        fortunes: n.tickets,
+                        image: n.picture,
+                        date: n.date,
+                        hour: n.hour,
+                        sold: n.sold
+                      }}
+                      login={this.openLogin}
+                      check={true}
+                      />
+                ))} 
+            />
+               </div> 
+
+
+                </div> : <Loader type="circle"  style="preloader-wrapper large active"/>}
+
+              {this.state.winners ?  <div className="winners">
+                <div className="hideSmall grid-three">
+
+                {this.state.winners.map(n => (
+                    <WinerBox 
+                    key={n.id}
+
+                    info={{
+                        winners: n.id,
+                        names: n.name,
+                        wonfor : n.product,
+                        image: n.picture,
+                        location: n.location,
+                        description: n.quote
+                      }}
+                    />
+                ))}
                 </div>
-                {JSON.stringify(this.state.winners)}
+                
+                <div className="hideBig">
+
+                <Slider 
+                
+                timer= "3000"
+                displayIn={this.state.winners.map(n => (
+                    <WinerBox 
+                    key={n.id}
+
+                    info={{
+                        winners: n.id,
+                        names: n.name,
+                        wonfor : n.product,
+                        image: n.picture,
+                        location: n.location,
+                        description: n.quote
+                      }}
+                    />
+                ))} 
+            />
+                </div>
+
+
+                </div> : <Loader type="circle"  style="preloader-wrapper large active"/>}
 
                 <Footer />
 

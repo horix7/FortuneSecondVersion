@@ -28,6 +28,9 @@ button, i {
   cursor: pointer;
 }
 
+a {
+  cursor: pointer
+}
 
 .topBottom {
   margin-top: 20px;
@@ -160,6 +163,10 @@ border: none;
   padding: 20px;
 }
 
+.hideBig {
+  display: none
+}
+
 .smallPara2 {
   font-size: small;
   font-weight: lighter;
@@ -175,10 +182,10 @@ border: none;
 }
 
 .bordered {
-  width: 270px;
-  border: 2px solid #1565c0 ;
+  width: 96%;
+  border: 2px solid rgb(61, 90, 255) ;
   text-align: center;
-  margin: 10px;
+  margin: 2%;
   border-radius: 30px;
 }
 
@@ -195,6 +202,25 @@ border: none;
   margin: 0px;
 }
 
+.hideBig {
+  margin-top: 20px;
+}
+.flexBtn {
+  display: flexbox;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.flexBtn button{
+  margin: 20px;
+}
+
+.ProductsHere {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+}
+
 .padds  {
   padding-left: 15px;
 }
@@ -206,11 +232,11 @@ border: none;
 }
 
 .winnerBox {
-  width: 350px;
+  width: 98%;
   background-color: black;
   color: white;
   text-align: center;
-  margin: 10px;
+  margin: 1%;
   padding: 20px;
   border-radius: 34px;
 }
@@ -371,7 +397,7 @@ background-color: rgb(211, 211, 211);
 
 .formHolder {
   display: grid;
-  padding: 10%;
+  padding: 6%;
   grid-template-rows: 10% 90%;
 }
 
@@ -449,6 +475,21 @@ background-color: rgb(211, 211, 211);
 
 }
 
+.longz {
+  width: 107%
+}
+.btn1 {
+ color: blue;
+}
+
+.btn2 {
+  text-align: end;
+  color: black
+}
+
+.btn1, .btn2 {
+  padding-top: 20px;
+}
 .introPage4 {
   background-image: url(./images/land\ page\ image\ 3.png);
   background-position: center center;
@@ -589,6 +630,20 @@ background-color: rgb(211, 211, 211);
     background: rgb(209, 209, 209);
     height: 100%
   }
+  
+.adminNav {
+  grid-template-columns: 25% 45% 20%;
+}
+.highlight {
+  grid-template-columns: 1fr 1fr;
+}
+
+.adminNav p {
+  font-size: medium;
+  width: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
   .introPage4 h3 {
   padding-top: 100px;
@@ -637,6 +692,9 @@ background-color: rgb(211, 211, 211);
     font-size: large
   }
 
+  .lastFron h3 {
+    color: white;
+  }
   .grid-three {
     display: grid;
     grid-template-columns: 1fr;
@@ -697,6 +755,31 @@ background-color: rgb(211, 211, 211);
     height: 0%;
     visibility: hidden
   }
+  .hideSmall {
+    display: none;
+  }
+  
+  .hideBig {
+    display: block;
+  }
 
+
+  .introPage5 {
+    background-image: url(images/junko-nakase-Q-72wa9-7Dg-unsplash.jpg);
+  }
+
+  .introPage5 p {
+    color: black;
+    padding-top: 70px;
+  }
+
+  .ProductsHere {
+    grid-template-columns: 1fr 1fr ;
+  }
 }
 
+@media screen and (max-width: 700px) {
+  .ProductsHere {
+    grid-template-columns: 1fr ;
+  }
+}

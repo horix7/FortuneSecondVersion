@@ -17,16 +17,10 @@ class WinnerBox extends Component {
             <div className="winnerBox">
                
                <div className="central">
-               <Image 
-                    info={{
-                        class: "cirke", // image 
-                        type: "squareImg2", //bidImage  squareImg
-                        src: this.props.info.image
-
-                    }}
+               <img src={this.props.info.image} alt="" width="100px" height="100px" className="circle"/>
                     
 
-               />
+               
                </div>
                     <Par 
                          info={{

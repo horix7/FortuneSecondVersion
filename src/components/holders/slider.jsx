@@ -11,7 +11,7 @@ class Slider extends Component {
     }
 
   componentDidMount() {
-      let time = setInterval(() => this.changeCurrent(), 3000)
+      let time = setInterval(() => this.changeCurrent(), parseInt(this.props.timer))
   }
     changeCurrent() {
 

@@ -31,7 +31,9 @@ class SubmitSign  extends Component {
         sells: null,
         address: null,
         store: null,
-        account: null
+        account: null,
+        phone: null,
+        email: null
      }
     
       
@@ -59,6 +61,8 @@ class SubmitSign  extends Component {
 
             let request = {...this.state.requestInfo}
             request.account = response.data.data[0].details.username
+            request.phone = response.data.data[0].details.phone
+            request.email = response.data.data[0].details.email
 
              this.setState({
                token: response.data.data[0].token,
@@ -110,6 +114,10 @@ class SubmitSign  extends Component {
 
             let request = {...this.state.requestInfo}
             request.account = response.data.data[0].details.username
+            request.phone = response.data.data[0].details.phone
+            request.email = response.data.data[0].details.email
+
+
 
             this.setState({
                token: response.data.data[0].token,
@@ -275,7 +283,7 @@ class SubmitSign  extends Component {
             {this.state.error ? <div id="err" className="errorz">{this.state.error}</div> : null}
              {this.state.mess ? <div id="err" className="successz">{this.state.mess}</div> : null}
 
-            <div className="gridTwo">
+            <div className="gridTwo longz">
 
                 <div className="btn white black-text" onClick={this.changeForm}>
                    {!this.state.account ? <i className="material-icons left ">radio_button_checked</i> : <i className="material-icons left">radio_button_unchecked</i> }
