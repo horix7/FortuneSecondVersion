@@ -72,8 +72,19 @@ a {
 }
 
 
+.fa {
+  margin: auto;
+  margin-left: 20px;
+  text-align: start;
+}
+
 .payment {
   margin-top: 10%;
+}
+
+.flexCont {
+  display: grid;
+grid-template-columns: 1fr 1fr 1fr;
 }
 
 

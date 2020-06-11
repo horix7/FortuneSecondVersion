@@ -37,10 +37,16 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
-                 this.setState({
-                    winners: response.data.data,
-                    wins: true 
-               })
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+                    console.log(response)
+                } else {
+
+                    this.setState({
+                        winners: response.data.data,
+                        wins: true 
+                   })
+                }
+                 
             }).catch(err => console.error(err))
     }
     
@@ -51,10 +57,15 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+
+                } else {
                  this.setState({
                     bidata: response.data.data,
                     bids: true 
                })
+            }
+
             }).catch(err => console.error(err))
            
     }
@@ -70,6 +81,12 @@ class Admin extends Component {
             })
             .then( (response) => {
                 console.log(response)
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+                    console.log(response)
+                } else {
+                    console.log(response)
+                    console.log("response")
+
                  this.setState({
                     requestedPro: response.data.data.map(n => {
                         return {
@@ -84,6 +101,7 @@ class Admin extends Component {
                     }),
                     proReq: true
                })
+            }
             }).catch(err => console.error(err))
            
     }
@@ -96,10 +114,14 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+
+                } else {
                  this.setState({
                     bidata: response.data.data,
                     bids: true 
                })
+            }
             }).catch(err => console.error(err))
            
     }
@@ -115,9 +137,13 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+
+                } else {
                 this.setState({
                     loadPage: false
                 })
+            }
                console.log(response)
             }).catch(err => console.error(err))
            
@@ -131,7 +157,9 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
-                
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+
+                } else {
                 this.setState({
                     products: response.data.data.map(n =>{
                         return  {
@@ -145,6 +173,7 @@ class Admin extends Component {
                     }}),
                     pro: true 
                })
+            }
             }).catch(err => console.error(err))
            
     }
@@ -156,6 +185,9 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+
+                } else {
                  this.setState({
                     vendors: response.data.data.map(n => {
                         return {
@@ -174,6 +206,7 @@ class Admin extends Component {
                     }),
                     vend: true 
                })
+            }
             }).catch(err => console.error(err))
            
     }
