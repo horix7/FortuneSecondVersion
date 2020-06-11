@@ -55,6 +55,7 @@ class Counter extends React.Component {
         return (
            <React.Fragment>
           {this.state.timer ? <div  className="Counter">
+               <span>DeadLine :</span>
                 <span>{this.state.days}</span> :
                 <span>{this.state.hours}</span> :
                 <span>{this.state.minutes}</span> :

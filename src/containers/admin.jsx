@@ -6,7 +6,7 @@ import Loader from '../components/UI/preloader';
 import Tables from '../components/UI/tables';
 import CreatePro from '../components/forms/createpro'
 import CreateWin from '../components/forms/createwinn'
-import Counter from '../components/holders/counter'
+import Counter from '../components/UI/counter'
 
 import Form from '../containers/formHolder'
 
@@ -21,15 +21,16 @@ class Admin extends Component {
        this.runAllFunc()
     }
 
-    runAllFunc = () => {
-       if(!this.loadPage) {
-        this.getProData()
-        this.getBidData()
-        this.getVendReq()
-        this.vendorProReq()
-        this.getWinnerData()
-       }
+    runAllFunc = async () => {
+      
+
+         this.getProData()
+         this.getBidData()
+         this.getVendReq()
+         this.vendorProReq()
+         this.getWinnerData()
     }
+
     getWinnerData = () => {
         axios({
             method: 'get',
@@ -131,6 +132,8 @@ class Admin extends Component {
           this.setState({
                     loadPage: true
                 })
+
+
         axios({
             method: 'post',
             url: localStorage.address + "/api/v1/cancel/" + id.toString(),
@@ -138,8 +141,11 @@ class Admin extends Component {
             })
             .then( (response) => {
                 if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+       this.runAllFunc()
 
                 } else {
+       this.runAllFunc()
+
                 this.setState({
                     loadPage: false
                 })
@@ -212,6 +218,8 @@ class Admin extends Component {
     }
 
     handleCreatePro = () => {
+       this.runAllFunc()
+
         let stateN = {...this.state}
         this.setState({
             createPro: !stateN.createPro,
@@ -220,6 +228,8 @@ class Admin extends Component {
     }
 
     handleCreateWin = () => {
+       this.runAllFunc()
+
         let stateN = {...this.state}
         this.setState({
             createWin: !stateN.createWin,
@@ -229,6 +239,8 @@ class Admin extends Component {
 
 
     handleSendMoney = () => {
+       this.runAllFunc()
+
         let stateN = {...this.state}
         this.setState({
             createWin: !stateN.createWin,
@@ -260,9 +272,7 @@ class Admin extends Component {
 
     render() {
       
-        const M = window.M
-        M.AutoInit();
-
+     
        let CurrentForm = null 
        let func = null 
 
@@ -412,7 +422,14 @@ class Admin extends Component {
             
             </Fragment> : 
              <Form 
-             clecked={func} 
+             clecked={() => {
+                this.runAllFunc()
+                const M = window.M
+                M.AutoInit();
+                func()
+                window.location.reload()
+
+            }} 
              >
                  {CurrentForm}
              </Form>

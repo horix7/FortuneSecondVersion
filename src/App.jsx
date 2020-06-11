@@ -5,7 +5,7 @@ import Landing  from './components/landing/landing';
 
 
 
-localStorage.setItem("address", "https://fortunesecondv.herokuapp.com")
+localStorage.setItem("address", "https://hidden-reaches-83437.herokuapp.com")
 localStorage.setItem("auth", localStorage.auth || null)
 localStorage.setItem("details", localStorage.details || null)
 

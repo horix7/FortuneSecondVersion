@@ -7,7 +7,7 @@ import three from '../../images/three.png';
 import Image from  '../UI/image';
 import GadgetPhone from '../../images/iphone.jpg';
 import Lcd from '../../images/lcdScreen.jpg';
-import shoe from '../../images/shoes.jpg';
+import shoe from '../../images/Nikeshoe_2.jpg';
 import Form from '../../containers/formHolder'
 import LoginForm from '../../components/forms/login'
 import RequestForm from '../../components/forms/submitsign'
@@ -107,6 +107,10 @@ class Landing extends Component {
             request: !newState.request,
             forms: !newState.forms
         })
+        
+        setTimeout(() => {
+            location.href="#topz"
+        }, 10);
     }
 
     loginSign = () => {
@@ -152,14 +156,14 @@ class Landing extends Component {
             <div className="introPage">
             <Par 
                 info={{
-                type:"homeText", //homeText homePara
-                text:"IT’S ALWAYS ABOUT THE COMMUNITY’S LOVE"
+                type:"homeText padds2", //homeText homePara
+                text:" DO YOU BELIEVE YOU ARE A LUCKY PERSON? "
                 }}
                 />
                  <Par 
                 info={{
                 type:"homePara padds2", //homeText homePara
-                text:"We Auction Products as the Winning Prize for one of you with the Lucky Fortune Number to claim it for as Low as $1 "
+                text:"ou Stand a Chance to Own a Valuable Item for a Minimum of $1. Today!"
                 }}
                 />
 
@@ -173,24 +177,24 @@ class Landing extends Component {
              <div className="grid-three padds2">
                  <div>
                     <img src={one} alt=""/>
-                    <p>Vendors Auction Used or Brand New Items</p>
+                    <p>Our Vendors Auction Brand New Items you Desire</p>
                  </div>
 
                  <div>
                     <img src={two} alt=""/>
-                    <p>You Choose a Lucky Fortune Number & Pay as Low as $1 as the Bid Ticket </p>
+                    <p>You Choose your Desired Item & Lucky Fortune Number(s). Then, Pay the Bid price as Ticket fee to stand a chance of winning </p>
                  </div>
 
                  <div>
                     <img src={three} alt=""/>
-                    <p>Our Technology Shuffles & Spins your Fortune Numbers to Choose the Lucky Winner</p>
+                    <p> Our Technology Shuffles & Spins your Fortune Numbers to Choose the Lucky Winner</p>
                  </div>
              </div>
             </div>
 
             <div className="introPage3">
 
-                    <h5>YOUR NEXT WISH COULD BE 1$</h5>
+                    <h5 className="padds2">YOUR NEXT WISH COULD BE $1</h5>
                     <a href="#products" className="linkBtn11">View Auction</a>
 
                     <div className="bottomAligned grid-three">
@@ -222,19 +226,19 @@ class Landing extends Component {
             timer="1000"
             displayIn={    [
                      <div className="mySlides">
-                            <img src={GadgetPhone} alt=""/>
+                            <img src={GadgetPhone} alt="" width="250px" height="200px" />
                        
                              <p>Gadgets</p>
                         </div>,
 
                         <div className="mySlides">
-                        <img src={shoe} alt=""/>
+                        <img src={shoe} alt="" width="250px" height="200px" />
 
                              <p>Fashion</p>
                         </div>,
 
                         <div className="mySlides">
-                        <img src={Lcd} alt=""/>
+                        <img src={Lcd} alt="" width="250px" height="200px" />
                              <p>Electronics</p>
                         </div>
                 ]} 
@@ -243,6 +247,12 @@ class Landing extends Component {
              </div>
             </Fragment>
                 </div>
+                
+                <div className="introPage5">
+                    <p className="homeText">YOUR LOCATION IS NEVER A BARRIER</p>
+                    <p className="homePara">WINNER’S PRIZE IS DELIVERED GLOBALLY REGARDLESS OF THE LOCATION </p>
+                </div>
+                
                 <div className="introPage4 padds2">
                 <h3>Fortune Auction is on a mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.</ h3>
                 <a className="linkBtn2" onClick={() => this.openAbout("about")}>Learn More</a>
@@ -257,7 +267,7 @@ class Landing extends Component {
                         
                         <div className="blackBokx">
                             <h5>RETURN & REFUND</h5>
-                            <p className="smallPara2"> We refund your money Immediately when the bid target is not reached after the bid deadline. So share to win!
+                            <p className=""> We refund your money Immediately when the bid target is not reached after the bid deadline. So share to win!
                             </p>   
                             <a className="linkBtn2">Learn More</a>
 
@@ -265,17 +275,17 @@ class Landing extends Component {
 
                         <div className="blackBokx">
                             <h5> VENDORS </h5>
-                            <p className="smallPara2"> We partner with vendors globally with legal new or used items to auction. 
+                            <p className=""> We partner with vendors globally with legal new or used items to auction. 
                             </p>    
                             <a className="linkBtn2" onClick={() => this.openAbout("ww")} >Learn More</a>
                             <br/>
-                            <p className="smallPara2">Do you have item(s) to auction? </p>
+                            <p className="">Do you have item(s) to auction? </p>
                             <a className="linkBtn2" onClick={this.openRequest} >Request Now</a>
                         </div>
 
                         <div className="blackBokx">
                             <h5>SECURITY</h5>
-                            <p className="smallPara2">We encrypt your password & payment information with safe technology. Your privacy is highly important to us.
+                            <p className="">We encrypt your password & payment information with safe technology. Your privacy is highly important to us.
                             </p>   
                             <a className="linkBtn2">Learn More</a>
 
@@ -285,10 +295,6 @@ class Landing extends Component {
        
                {/* display about us 2 end  */}
 
-                <div className="introPage5">
-                    <p className="homeText">YOUR LOCATION IS NEVER A BARRIER</p>
-                    <p className="homePara">WINNER’S PRIZE IS DELIVERED GLOBALLY REGARDLESS OF THE LOCATION </p>
-                </div>
               {this.state.products ?  <div id="products" className="">
               <div className="hideSmall grid-three">
                 

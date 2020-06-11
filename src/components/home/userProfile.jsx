@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import Tables from '../UI/tables';
 import Button from '../UI/button';
 import Image from '../UI/image';
-
+import Winners from '../home/winners'
 
 
 class Profile extends Component {
@@ -16,6 +16,10 @@ class Profile extends Component {
       arr.map(n => {
         return { product: n.product, date: n.time.toString().split('T')[0],price: n.revenue, tickets: n.fortunes}
       })
+    }
+
+    viewWin = () => {
+
     }
 
     render() {
@@ -72,8 +76,8 @@ console.log(fetchDataArr)
                     : <h6 className="topBottom">No Bidding History </h6>}
 
                     <div className="flexBtn">
-                    <button className="btn btn2 black left">  Download Bids Data</button>
-                    <button className="btn btn2 black "> View Winners</button>
+                    <button className="btn">  Download Bids Data</button>
+                    <button className="btn" onClick={this.viewWin}> View Winners</button>
                     
                     </div>
                    </div>

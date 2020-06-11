@@ -51,10 +51,17 @@ class Auction extends Component {
         }
       }
 
+      openModal2 = () => {
+        this.setState({
+            openModal: false,
+            ticket: false
+
+        })
+      }
     openModal = (id) => {
         this.setState({
             openModal: true,
-            tickets: false
+            ticket: false
 
         })
         axios({

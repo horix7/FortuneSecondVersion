@@ -46,16 +46,18 @@ let footer = () => {
             </div>
             <div className="footer-copyright">
                 <div className="container">
-                © 2018 Copyright Fortune Auction
+               <div className="copy">
+               © 2018 Copyright Fortune Auction
+               </div>
                
                 <a className="grey-text text-lighten-4 right" href="#!">
-                <i class="fa fa-facebook-official" style={{fontSize: "30px", color: "blue"}}></i>
+                <i className="fa fa-facebook-official" style={{fontSize: "30px", color: "blue"}}></i>
                 </a>
                 <a className="grey-text text-lighten-4 right" href="#!">
-                <i class="fa fa-instagram" style={{fontSize: "30px", color: "white"}}></i>
+                <i className="fa fa-instagram" style={{fontSize: "30px", color: "white"}}></i>
                 </a>
                 <a className="grey-text text-lighten-4 right" href="#!"> 
-                <i class="fa fa-youtube-play" style={{fontSize: "30px", color: "red"}}></i></a>
+                <i className="fa fa-youtube-play" style={{fontSize: "30px", color: "red"}}></i></a>
                 <a className="grey-text text-lighten-4 right" href="#!">
                     Join Us 
                 </a>

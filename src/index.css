@@ -69,8 +69,22 @@ a {
   display: grid;
   text-align: center;
   grid-template-columns: 1fr 1fr ;
+  justify-content: center;
+  align-items:center;
+  align-self: center;
 }
 
+
+.Counter {
+  color: black;
+  font-size: medium;
+  padding-top: 10px;
+}
+
+.Counter span {
+  width: 70px;
+  padding: 2px
+}
 
 .fa {
   margin: auto;
@@ -104,8 +118,8 @@ grid-template-columns: 1fr 1fr 1fr;
 
 .optionPay p {
   background-color: rgba(2, 2, 2, 0.103);
-  border: 2px solid white;
-  padding: 5px;
+  border: 1px solid white;
+  padding: 4px;
   margin: auto;
   width: 100%;
   color: white;
@@ -182,7 +196,8 @@ grid-template-columns: 1fr 1fr 1fr;
   text-transform: uppercase;
   color: white;
   margin: 0px;
-  padding-top: 100px;
+  padding-top: 90px;
+  /* font-family: rock; */
 }
 
 .linkBtn {
@@ -207,10 +222,9 @@ border: none;
   color: rgb(68, 68, 255);
   background: transparent;
   border: none;
-  width: 300px;
+  width: 250px;
   height: 30px;
-  font-size: x-large;
-  text-decoration: underline;
+  font-size: large;
   text-align: center;
   font-weight: bold;
 }
@@ -288,9 +302,14 @@ border: none;
 
 .ProductsHere {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   text-align: center;
+  margin: 20px 0px 0px 0px;
+
 }
+
+
+
 
 .padds  {
   padding-left: 15px;
@@ -601,7 +620,7 @@ background-color: rgb(211, 211, 211);
 }
 
 .introPage2 h5{
-  padding-top: 100px;
+  padding-top: 90px;
   margin-top: 0px;
   font-size: xxx-large;
   text-align: center;
@@ -618,7 +637,7 @@ background-color: rgb(211, 211, 211);
 }
 
 .introPage3 h5 , .about h3{
-    padding-top: 100px;
+    padding-top: 90px;
     margin-top: 0px;
     font-size: xxx-large;
     text-align: center;
@@ -627,7 +646,7 @@ background-color: rgb(211, 211, 211);
 
 
 .introPage2 h5 {
-  padding-top: 100px;
+  padding-top: 90px;
   margin-top: 0px;
   font-size: xxx-large;
   text-align: center;
@@ -667,10 +686,15 @@ background-color: rgb(211, 211, 211);
   background-color: rgb(31, 31, 31);
   border-radius: 50px;
   width: 90%;
-  padding: 4%;
+  padding: 1%;
   margin-bottom: 30px;
 }
 
+.blackBokx p {
+  font-size: large;
+  color: white;
+  font-weight: lighter;
+}
 .aboutBox {
   margin-top: 20px;
   padding: 5%;
@@ -694,9 +718,34 @@ background-color: rgb(211, 211, 211);
 }
 
 
+.copy {
+  margin-top: 10px;
+  padding: 20px
+}
+
+@media screen and (max-width: 1300px) {
+  .ProductsHere {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .ProductsHere {
+    grid-template-columns: 1fr 1fr ;
+  }
+}
+
 
 @media screen and (max-width: 800px) {
 
+  .tickets {
+    grid-template-columns: 1fr
+    
+  }
+
+  .flexCont { 
+    grid-template-columns: 1fr
+  }
   .introPage2 {
     background: rgb(209, 209, 209);
     height: 100%
@@ -717,7 +766,7 @@ background-color: rgb(211, 211, 211);
 }
 
   .introPage4 h3 {
-  padding-top: 100px;
+  padding-top: 90px;
 
   justify-content: center;
 
@@ -836,8 +885,23 @@ background-color: rgb(211, 211, 211);
 
 
   .introPage5 {
-    background-image: url(images/junko-nakase-Q-72wa9-7Dg-unsplash.jpg);
+    background-image: url(images/Mobile\ Image\ 4.png);
   }
+
+  .introPage5 .homeText{
+      color: white
+    }
+
+    .introPage5 .homePara{
+      color: white
+    }
+
+  .introPage4 {
+    background-image: none;
+    background-color: rgba(180, 180, 180, 0.884);
+  }
+
+
 
   .introPage5 p {
     color: black;

@@ -127,7 +127,7 @@ let tickets = props => {
                       WebkitOverflowScrolling: 'touch',
                       borderRadius: '50px',
                       outline: 'none',
-                      padding: '20px'
+                      padding: '10px'
                     }
                   }}
                  isOpen={modal} onRequestClose={() => setModal(false)}>
@@ -136,7 +136,7 @@ let tickets = props => {
                         <p>
                         <label>
                             <input name="group1" type="radio" checked={Momo} onChange={() => setRadion("M")} />
-                            <span className="black-text">Mobile Money </span>
+                            <span className="black-text">MoMo Pay </span>
                         </label>
                         </p>
                         <p>
