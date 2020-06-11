@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal'
+import Input from '../components/UI/input'
+import axios from 'axios'
+import Loader from '../components/UI/preloader'
 
 Modal.setAppElement('#root')
 
@@ -8,6 +11,11 @@ let tickets = props => {
     const [Momo, setMomo] = useState("checked")
     const [Card, setCard] = useState(null)
     const [Airtel, setAirtel] = useState(null)
+    const [userNumber, setNumber] = useState(null)
+    const [btnLoad, setBtn] = useState(true)
+
+
+
 
 
     const [payment, setPayment] = useState("momo")
@@ -38,6 +46,39 @@ let tickets = props => {
             setAirtel(null)
         }
     }
+    
+  let  payMomo = () => {
+        setBtn(false)
+        let postForPayment = {
+            "trxRef": new Date().getTime() + "-" + Math.floor(Math.random() * 100),
+            "channelId": "momo-mtn-rw",
+            "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
+            "msisdn": userNumber,
+            "amount":parseInt(total),
+            "callback": "http://front-213v31.herokuapp.com/"
+          }
+    
+        axios({
+            method: 'post',
+            url: "https://payments-api.fdibiz.com/v2/momo/pull",
+            date: postForPayment,
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"application/json", 
+             "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjZmNWIwOThhLWQ0NmMtNDAzYy1iNTk2LTE0MTgxYTA1NGE4NyIsImV4cCI6MTU4ODQ5NTU4OSwiZXhwaXJlcyI6IjIwMjAtMDUtMDMgMDg6NDY6MjkiLCJwbGF0Zm9ybUlkIjoiMDhjNmE5ZjQtNWU1Ni00NWU5LWE4ZmMtYzM5MmIyNWI1ZWM3IiwidGVuYW50SWQiOiI4MDAzOTJkYS04ZDYyLTQzM2UtODYyZi1lOGVjOGM2NzY0ZDAifQ.1VserJZbxEoDi7tsK5jb4PhOaWVK8yw8ULIDWlbGRMg"
+                
+                }
+            })
+            .then( (response) => {
+                 console.log(response)
+                    setBtn(false)
+
+            }).catch(err => console.error(err))
+      }
+
+     let getPhoneNumber = e => {
+          setNumber(e.target.value)
+      }
         return (    
             <div id="err" className="formHolder">
                 <div className="backIco" onClick={props.clecked}>
@@ -95,24 +136,42 @@ let tickets = props => {
                         <p>
                         <label>
                             <input name="group1" type="radio" checked={Momo} onChange={() => setRadion("M")} />
-                            <span>MTN Money </span>
+                            <span className="black-text">Mobile Money </span>
                         </label>
                         </p>
                         <p>
                         <label>
-                            <input name="group1" type="radio" onChange={() => setRadion("A")} checked={Airtel}/>
-                            <span>Airtel-Tigo s Money </span>
-                        </label>
-                        </p>
-                        <p>
-                        <label>
-                            <input class="with-gap" name="group1" type="radio" onChange={() => setRadion("C")}  checked={Card}/>
-                            <span>Credit Card </span>
+                            <input className="with-gap" name="group1" type="radio" onChange={() => setRadion("C")}  checked={Card}/>
+                            <span className="black-text">Credit Card </span>
                         </label>
                         </p>
                        
                     </form>
                     </div>
+
+              {Momo ?  <div className="payment">
+                 <div className="center-align"> Total Payment <span> {total} </span> Rwf</div>
+              <div className="spaceIn">
+
+                <Input 
+                 info={{
+                    style: "input-field",
+                    id: "email",
+                    type: "number",
+                    label: "07xxxxxxx",
+                    icon: "phone"
+
+                 }}
+                 changed={getPhoneNumber}
+                  />
+                  </div>
+
+                  <div className="spaceIn">
+                  {btnLoad ? <button className="btn white green-text waves-effect waves-light " onClick={payMomo}>PAY</button> 
+                  : <div className="midLoader"> <Loader type="circle" style="preloader-wrapper small active"/>  </div> }
+                  </div>
+                </div> : null }
+
                 </Modal>
             </div>
         )

@@ -5,7 +5,7 @@ import Landing  from './components/landing/landing';
 
 
 
-localStorage.setItem("address", "http://localhost:5000")
+localStorage.setItem("address", "https://fortunesecondv.herokuapp.com/")
 
 
 
