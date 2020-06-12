@@ -51,6 +51,15 @@ class Auction extends Component {
         }
       }
 
+      toggle2 = () =>  {
+        let  checkboxes = document.querySelectorAll('#indeterminate-checkbox');
+         for(var i=0, n=checkboxes.length;i<n;i++) {
+           checkboxes[i].checked = null;
+         this.handleClickedCheckBox()
+ 
+         }
+       }
+
       openModal2 = () => {
         this.setState({
             openModal: false,
@@ -102,13 +111,18 @@ class Auction extends Component {
                         image: n.picture,
                         date: n.date,
                         hour: n.hour,
-                        sold: n.sold
+                        sold: n.sold,
+                        type: n.type
                       }}
                       showTickets={() => this.openModal(n.id)}
                       />)) : <Loader/>}
                 </div> : <Modal clecked={this.openModal2} chosen={this.state.checked} price={this.state.currentPrice}> 
                        {this.state.ticket ? <div>  
-                    <button className="btn white black-text" onClick={this.toggle}>Select All</button>
+                           <div className="row">
+                    <button className="btn-small white black-text col5" width="100px" onClick={this.toggle}>Select All</button>
+                    <button className="btn-small white black-text col5" onClick={this.toggle2}>Un Select All</button>
+
+                           </div>
                  <div className="gridTwo">
                            {this.state.tickets.map(n => (
                                <p key={n}>

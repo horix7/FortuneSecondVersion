@@ -163,7 +163,7 @@ class Landing extends Component {
                  <Par 
                 info={{
                 type:"homePara padds2", //homeText homePara
-                text:"ou Stand a Chance to Own a Valuable Item for a Minimum of $1. Today!"
+                text:"Today, You Stand A Chance to Own A Valuable Item You Desire For A Minimum of $1"
                 }}
                 />
 
@@ -171,8 +171,11 @@ class Landing extends Component {
 
             </div>
 
+            <div id="how" className="homePara padds2 black-text">
+            We Auction Valuable Item as a winning Prize for one of you with the lucky Fortune Number to Claim it
 
-            <div id="how" className="introPage2"> 
+            </div>
+            <div  className="introPage2"> 
              <h5>How It Works </h5>
              <div className="grid-three padds2">
                  <div>
@@ -254,14 +257,15 @@ class Landing extends Component {
                 </div>
                 
                 <div className="introPage4 padds2">
-                <h3>Fortune Auction is on a mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.</ h3>
+                <h3 >Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.</ h3>
+                
                 <a className="linkBtn2" onClick={() => this.openAbout("about")}>Learn More</a>
                 
                 </div>
                 
                         {/* About  Appears here  */}
                 
-                <div className="about lastFron">
+                <div className="about lastFron padds2">
                     <h3>Think of Affordable, Fast & Secure way to get your Wishes. Think Fortune Auction! </h3>
                     <div className="grid-three">
                         
@@ -296,7 +300,7 @@ class Landing extends Component {
                {/* display about us 2 end  */}
 
               {this.state.products ?  <div id="products" className="">
-              <div className="hideSmall grid-three">
+              <div className="hideSmall ProductsHere">
                 
                 {this.state.products.map(n => (
                      <ProBox 
@@ -309,7 +313,8 @@ class Landing extends Component {
                         image: n.picture,
                         date: n.date,
                         hour: n.hour,
-                        sold: n.sold
+                        sold: n.sold,
+                        type: n.type
                        }}
                        login={this.openLogin}
                        check={true}
@@ -332,7 +337,8 @@ class Landing extends Component {
                         image: n.picture,
                         date: n.date,
                         hour: n.hour,
-                        sold: n.sold
+                        sold: n.sold,
+                        type: n.type
                       }}
                       login={this.openLogin}
                       check={true}
@@ -345,8 +351,7 @@ class Landing extends Component {
                 </div> : <Loader type="circle"  style="preloader-wrapper large active"/>}
 
               {this.state.winners ?  <div className="winners">
-                <div className="hideSmall grid-three">
-
+                <div className="hideSmall ProductsHere">
                 {this.state.winners.map(n => (
                     <WinerBox 
                     key={n.id}
@@ -357,7 +362,11 @@ class Landing extends Component {
                         wonfor : n.product,
                         image: n.picture,
                         location: n.location,
-                        description: n.quote
+                        description: n.quote,
+                        price: n.price,
+                        audio: n.audion,
+                        video: n.video
+
                       }}
                     />
                 ))}
@@ -371,15 +380,19 @@ class Landing extends Component {
                 displayIn={this.state.winners.map(n => (
                     <WinerBox 
                     key={n.id}
-
                     info={{
                         winners: n.id,
                         names: n.name,
                         wonfor : n.product,
                         image: n.picture,
                         location: n.location,
-                        description: n.quote
+                        description: n.quote,
+                        price: n.price,
+                        audio: n.audion,
+                        video: n.video
+
                       }}
+
                     />
                 ))} 
             />

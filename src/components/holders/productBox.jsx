@@ -3,6 +3,8 @@ import Button from '../UI/button';
 import Image from '../UI/image';
 import Par from '../UI/paragraphs';
 import Counter from '../holders/counter';
+import Modal from 'react-modal';
+Modal.setAppElement('#root')
 
 class ProducBox extends Component {
 
@@ -19,6 +21,11 @@ class ProducBox extends Component {
         openModal: true
       })
     }
+    opneModal = () => {
+      this.setState({
+        modal: true
+      })
+    }
     render() {
       let returnNum = (num) => {
         if (num == null) {
@@ -33,6 +40,7 @@ class ProducBox extends Component {
 
          {!this.state.openModal ? <div>
             <Counter date={this.props.info.date} hour={this.props.info.hour}/>
+         <div className="protype">{this.props.info.type}</div>
             <div className="bordered">
                   <Image 
                     info={{
@@ -71,7 +79,7 @@ class ProducBox extends Component {
                           <div>
                    {!this.props.check ?       
                     <Button
-                     style="btn  waves-effect waves-light light-green darken-2"
+                     style="btn  light-green darken-2"
                      text="Bid Now"
                        info={{
                          type: "submit",
@@ -81,7 +89,7 @@ class ProducBox extends Component {
                        clicked={this.props.showTickets}
                         /> :
                          <Button
-                     style="btn  waves-effect waves-light light-green darken-2"
+                     style="btn  light-green darken-2"
                      text="Bid Now"
                        info={{
                          type: "submit",
@@ -102,17 +110,48 @@ class ProducBox extends Component {
                   }}
                   />
                 <Button 
-                 style="btn  waves-effect waves-light  blue darken-3"
+                 style="btn   blue darken-3"
                  text="share now"
                    info={{
                      type: "submit",
                      name: "action",
                     
                    }}
+
+                   clicked={this.opneModal}
                    />
             </div>
           </div> : null
-          }</Fragment>
+          }
+            <Modal
+                style={{
+                    overlay: {
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: 'rgba(0, 0, 0, 0.304)'
+                    },
+                    content: {
+                      position: 'absolute',
+                      top: '40px',
+                      left: '40px',
+                      right: '40px',
+                      height: "200px",
+                      border: '1px solid #fff',
+                      background: '#fff',
+                      overflow: 'auto',
+                      WebkitOverflowScrolling: 'touch',
+                      borderRadius: '10px',
+                      outline: 'none',
+                      padding: '30px'
+                    }
+                  }}
+                 isOpen={this.state.modal} onRequestClose={() => this.setState({ modal: false})}> 
+                                     
+                 </Modal>
+          </Fragment>
 
         )
     }

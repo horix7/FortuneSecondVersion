@@ -4,7 +4,7 @@ import Profile from '../components/home/userProfile';
 import axios from 'axios';
 import Loader from '../components/UI/preloader';
 import Auction  from '../components/home/auction'
-
+import Winnerz from '../components/home/winners'
 
 class User extends Component {
 
@@ -19,7 +19,18 @@ class User extends Component {
     swithToAuction = () => {
         let newState = {...this.state}
         this.setState({
+            account: !newState.account,
+            winers: false
+
+        })
+    }
+
+    switchTOWinners = () => {
+        let newState = {...this.state}
+        this.setState({
+            winers: !newState.winers,
             account: !newState.account
+
         })
     }
 
@@ -91,6 +102,9 @@ class User extends Component {
     {this.state.userInfo ?
           <Fragment>
           {this.state.bids ? <Profile 
+                
+                image={this.state.details.picture}
+                refreshData={this.getAccountInfo}
                 info={{
                     one: {
                         name: this.state.details.firstname,
@@ -106,11 +120,15 @@ class User extends Component {
                     }
                 }}
 
+                winnners={this.switchTOWinners}
+
                 dataTable={this.state.bidata}
             /> : <div className="midLoader"> <Loader type="circle" style="preloader-wrapper large active"/>  </div> }
           </Fragment> : null
             }
-             </Fragment> : <Auction /> }
+             </Fragment> : <Fragment>
+                    {this.state.winers ? <Winnerz /> :<Auction /> }
+             </Fragment> }
             </Fragment>           
         )
     }

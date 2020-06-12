@@ -13,7 +13,6 @@ class CreatePro  extends Component{
             price: null,
             date: null,
             hour: null,
-            target: null,
             type: null,
             picture: null,
             tickets: null,
@@ -129,33 +128,19 @@ render() {
 
 <div className="gridTwo">
 
-    <div className="spaceIn">
-                <Input 
-                    info={{
-                        style: "input-field",
-                        id: "tickets",
-                        type: "number",
-                        label: "Number Of Tickets",
-                
-                    }}
-                    changed={this.handleInputs}
-
-                    />
-        </div>
 
         <div className="spaceIn">
-        <Input 
-                    info={{
-                        style: "input-field",
-                        id: "type",
-                        type: "text",
-                        label: "Product Type",
-                
-                    }}
-                    changed={this.handleInputs}
+             <div>
+                <label>Product Type</label>
+                    <select id="type"  className="browser-default" onChange={this.handleInputs}>
+                    <option value="Brand New">Brand New </option>
+                    <option value="Second Hand">Second Hand</option>
+                    </select>
+                </div>
 
-                    />
-        </div>
+                 </div>
+
+    
 
     </div>
 
@@ -166,9 +151,9 @@ render() {
             <Input 
                  info={{
                     style: "input-field",
-                    id: "target",
+                    id: "tickets",
                     type: "number",
-                    label: "Bid Target",
+                    label: "Number Of Tickets",
             
                  }}
                  changed={this.handleInputs}

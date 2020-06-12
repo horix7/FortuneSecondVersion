@@ -423,10 +423,7 @@ class Admin extends Component {
             </Fragment> : 
              <Form 
              clecked={() => {
-                this.runAllFunc()
-                const M = window.M
-                M.AutoInit();
-                func()
+                
                 window.location.reload()
 
             }} 
