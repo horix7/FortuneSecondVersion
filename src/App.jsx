@@ -2,11 +2,11 @@ import React, {Fragment, Component} from 'react';
 import Admin from './containers/admin';
 import User  from './containers/user';
 import Landing  from './components/landing/landing';
+// import Pdf from './documents/document'
+// import Payment from './payment/payment'
 
-
-
-localStorage.setItem("address", "https://fortunesecondv.herokuapp.com")
-// localStorage.setItem("address", "http://localhost:5000")
+// localStorage.setItem("address", "https://fortunesecondv.herokuapp.com")
+localStorage.setItem("address", "http://localhost:5000")
 localStorage.setItem("auth", localStorage.auth || null)
 localStorage.setItem("details", localStorage.details || null)
 
@@ -56,7 +56,7 @@ class App extends Component {
  let tCheck = this.checkToken(localStorage.auth) 
   return (
     <Fragment>
-        {!check ? <Fragment>
+      {!check ? <Fragment>
        {tCheck && this.state.logined ?  <User onLogout={this.logout}/> : <Landing  onLogin={this.logIn}/>}
 
         </Fragment> :  <Admin logout={() => {

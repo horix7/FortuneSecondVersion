@@ -1,8 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, Component } from 'react';
 import Modal from 'react-modal'
 import Input from '../components/UI/input'
 import axios from 'axios'
 import Loader from '../components/UI/preloader'
+import { RaveProvider, RavePaymentButton } from "react-ravepayment";
+ 
+const config = {
+  txref: "rave-123456",
+  customer_email: "user@example.com",
+  customer_phone: "234099940409",
+  amount: 1000,
+  currency: "USD",
+  PBFPubKey: "FLWPUBK-b7454e2336475fcfa01d20f6343eeb41-X",
+  production: true,
+  onSuccess: () => {},
+  onClose: () => {}
+} 
+
 
 Modal.setAppElement('#root')
 
@@ -65,7 +79,7 @@ let tickets = props => {
             headers: {
                 "Content-Type":"application/json",
                 "Accept":"application/json", 
-             "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjZmNWIwOThhLWQ0NmMtNDAzYy1iNTk2LTE0MTgxYTA1NGE4NyIsImV4cCI6MTU4ODQ5NTU4OSwiZXhwaXJlcyI6IjIwMjAtMDUtMDMgMDg6NDY6MjkiLCJwbGF0Zm9ybUlkIjoiMDhjNmE5ZjQtNWU1Ni00NWU5LWE4ZmMtYzM5MmIyNWI1ZWM3IiwidGVuYW50SWQiOiI4MDAzOTJkYS04ZDYyLTQzM2UtODYyZi1lOGVjOGM2NzY0ZDAifQ.1VserJZbxEoDi7tsK5jb4PhOaWVK8yw8ULIDWlbGRMg"
+             "Authorization":"Bearer" + " " + localStorage.paymentAuth
                 
                 }
             })
@@ -149,7 +163,8 @@ let tickets = props => {
                     </form>
                     </div>
 
-              {Momo ?  <div className="payment">
+              {Momo ?  
+              <div className="payment">
                  <div className="center-align"> Total Payment <span> {total} </span> Rwf</div>
               <div className="spaceIn">
 
@@ -171,6 +186,13 @@ let tickets = props => {
                   : <div className="midLoader"> <Loader type="circle" style="preloader-wrapper small active"/>  </div> }
                   </div>
                 </div> : null }
+
+
+                <div className="payCard">
+                    <RaveProvider {...config}>
+                        <RavePaymentButton>Pay 2000</RavePaymentButton>
+                    </RaveProvider>
+                </div>
 
                 </Modal>
             </div>
