@@ -4,14 +4,26 @@ import Button from '../UI/button';
 import Image from '../UI/image';
 import Winners from '../home/winners'
 import axios from 'axios';
-import Loader from '../UI/preloader'
+import Loader from '../UI/preloader';
+import CreatePro from '../forms/productReq';
+import Form from '../../containers/formHolder'
+
+
+if(localStorage.currency == null ) {
+  localStorage.setItem("currency", JSON.stringify({
+    currency: "USD",
+    rate: 1
+  }))
+}
+
 
 class Profile extends Component {
 
     state={
       image: null,
       img: false,
-      loadUpload: false 
+      loadUpload: false,
+      proReq: false
     }
 
 
@@ -21,7 +33,10 @@ class Profile extends Component {
       })
     }
 
-  
+    componentDidMount() {
+      const M = window.M
+      M.AutoInit();
+  }
 
   changeUserPic = e => {
       e.preventDefault()
@@ -60,9 +75,66 @@ class Profile extends Component {
           
           this.props.refreshData()
         })
-        .catch(err => console.log(err))
+        .catch(err => console.err(err))
          
        }).catch(err => console.error(err))
+  }
+
+  changeCurrency = e => {
+    if(e.target.value == "USD") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "USD",
+        rate: 1
+      }))
+    }else if (e.target.value == "UGX") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "UGX",
+        rate: 0.000268837
+
+      }))
+    }else if (e.target.value == "KES") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "KES",
+        rate: 0.00939586
+
+      }))
+    } else if (e.target.value == "GHS") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "GHS",
+        rate: 0.172936
+
+      }))
+    } else if (e.target.value == "ZMW") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "ZMW",
+        rate: 0.0545316
+
+      }))
+    } else if (e.target.value == "NGN") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "NGN",
+        rate: 0.00258065
+
+      }))
+    }  else if (e.target.value == "RWF") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "RWF",
+        rate: 0.00105281
+
+      }))
+    } else if (e.target.value == "GBP") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "GBP",
+        rate: 1.25198
+
+      }))
+    }  else if (e.target.value == "EUR") {
+      localStorage.setItem("currency", JSON.stringify({
+        currency: "EUR",
+        rate: 1.12380
+
+      }))
+    }
   }
 
   handleInputs = (e) => {
@@ -73,6 +145,13 @@ class Profile extends Component {
    })
 
     }
+
+    openProReq = () => {
+      this.setState({
+        proReq: !this.state.proReq
+      })
+    }
+    
     render() {
       let fetchDataArr =  this.props.dataTable.map(n => {
         return { product: n.product, date: n.time.toString().split('T')[0],price: n.revenue, tickets: n.fortunes}
@@ -81,80 +160,108 @@ console.log(fetchDataArr)
 
         return (
             <Fragment>
-              {this.state.loadUpload ? <Loader /> : null}
-                <div className="ProfileInfo">
-                    <div className="imageCenter">
-                       {this.props.image ? <Image 
-                         info={{
-                            class: "cirke2",
-                            type: "squareImg", 
-                            wid: "120px",
-                            height: "120px",
-                            src: this.props.image
-                          }}
-                          /> :  <form className="gridTwo">
-                             <div className="file-field input-field">
-                          <div className="btn black">
-                              <span>Select Your Profile Picture</span>
-                              <input type="file" id="picture" onChange={this.handleInputs} className="validate" required/>
-                          </div>
-                          <div className="file-path-wrapper">
-                              <input className="file-path validate"  type="text" />
-                          </div>
-      
-                          </div>
-                            <div className="spaceIn">
-                           {this.state.img ?  <button 
-                            className="btn  black-text white" 
-                            style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
-                            onClick={this.changeUserPic}>Upload</button> : <button className="btn black-text white"
-                            style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
-                            >Upload</button>}
-
-                            </div>
-                            </form>
-      }
-
-                    </div>
-
-                   <div>
-                   <div className="userInfo">
-                        <div>
-                            <ul>
-                    {Object.keys(this.props.info.one).map(n => <li  key={n}> <span>{n}</span> {this.props.info.one[n]}</li>)}
-                                
-                            </ul>
-
-                        </div>
-
-                        <div>
-                            <ul>
-                    {Object.keys(this.props.info.two).map(n => <li key={n}> <span>{n}</span> {this.props.info.two[n]}</li>)}
-
-                            </ul>
-                        </div>
-                    </div>
-                       
+           {this.state.proReq ? <Form
+           clecked={this.openProReq}>
+             <CreatePro />
+           </Form>
+           :  <Fragment>
 
 
-                   {this.props.dataTable.length > 1 ?
-                   <Fragment>
-                    <h6 className="topBottom">Your Bidding History </h6>
-                    <Tables 
-                          heads={Object.keys(fetchDataArr[0])}
-                          information={fetchDataArr}
-                    />  
-                   </Fragment>
-                    : <h6 className="topBottom">No Bidding History </h6>}
+           {this.state.loadUpload ? <Loader /> : null}
+             <div className="ProfileInfo">
+                 <div className="imageCenter">
+                    {this.props.image ? <Image 
+                      info={{
+                         class: "cirke2",
+                         type: "squareImg", 
+                         wid: "120px",
+                         height: "120px",
+                         src: this.props.image
+                       }}
+                       /> :  <form className="gridTwo">
+                          <div className="file-field input-field">
+                       <div className="btn black">
+                           <span>Select Your Profile Picture</span>
+                           <input type="file" id="picture" onChange={this.handleInputs} className="validate" required/>
+                       </div>
+                       <div className="file-path-wrapper">
+                           <input className="file-path validate"  type="text" />
+                       </div>
+   
+                       </div>
+                         <div className="spaceIn">
+                        {this.state.img ?  <button 
+                         className="btn  black-text white" 
+                         style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                         onClick={this.changeUserPic}>Upload</button> : <button className="btn black-text white"
+                         style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                         >Upload</button>}
 
-                    <div className="flexBtn">
-                    <button className="btn">  Download Bids Data</button>
-                    <button className="btn" onClick={this.props.winnners}> View Winners</button>
+                         </div>
+                         </form>
+   }
+
+                 </div>
+
+              
+
+                <div>
+                <div className="userInfo">
+                     <div>
+                         <ul>
+                 {Object.keys(this.props.info.one).map(n => <li  key={n}> <span>{n}</span> {this.props.info.one[n]}</li>)}
+                             
+                         </ul>
+
+                     </div>
+
+                     <div>
+                         <ul>
+                 {Object.keys(this.props.info.two).map(n => <li key={n}> <span>{n}</span> {this.props.info.two[n]}</li>)}
+
+                         </ul>
+                     </div>
+                 </div>
                     
-                    </div>
-                   </div>
-                </div>
 
+                 <div  className="pushUp">
+                 <label> Pick Your Currency</label>
+
+                    <select className="input-field" onChange={this.changeCurrency} id="currencies" required >
+                    <option value="USD">USD</option>
+                    <option value="RWF">RWF</option>
+                    <option value="NGN">NGN</option>
+                    <option value="ZMW">ZMW</option>
+                    <option value="GHS">GHS</option>
+                    <option value="KES">KES</option>
+                    <option value="UGX">UGX</option>
+                    <option value="GBP">GBP</option>
+                    <option value="EUR">EUR</option>
+
+
+                    </select>
+                </div>
+                {this.props.dataTable.length > 1 ?
+                <Fragment>
+                 <h6 className="topBottom">Your Bidding History </h6>
+                 <Tables 
+                       heads={Object.keys(fetchDataArr[0])}
+                       information={fetchDataArr}
+                 />  
+                </Fragment>
+                 : <h6 className="topBottom">No Bidding History </h6>}
+
+                 <div className="flexBtn">
+                 <button className="btn">  Download Bids Data</button>
+                 <button className="btn" onClick={this.props.winnners}> View Winners</button>
+                 {JSON.parse(localStorage.details).vendor ? <button className="btn" onClick={this.openProReq}> Create A Product</button> : null}
+
+                 
+                 </div>
+                </div>
+             </div>
+             </Fragment>
+}
             </Fragment>
 
         )

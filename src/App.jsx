@@ -18,8 +18,7 @@ class App extends Component {
     logined: localStorage.auth
   }
   componentDidMount() {
-    const M = window.M
-    M.AutoInit();
+    
   }
 
   logout = () => {

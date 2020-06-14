@@ -61,7 +61,7 @@ class ProducBox extends Component {
                   <Par 
                     info={{
                             type:"bidText", //homeText homePara
-                            text: "Bidding Price" + " " + this.props.info.price
+                            text: "Bidding Price" + " " + Math.floor(this.props.info.price / JSON.parse(localStorage.currency).rate) + " " +  JSON.parse(localStorage.currency).currency
                           }}
                         />
                         <div className="gridTwo topBottom">

@@ -7,18 +7,32 @@ import Tables from '../components/UI/tables';
 import CreatePro from '../components/forms/createpro'
 import CreateWin from '../components/forms/createwinn'
 import Counter from '../components/UI/counter'
-
 import Form from '../containers/formHolder'
+import SendMoMo from '../components/forms/sendMoney'
+import UpdatePro from '../components/forms/updatePro'
 
 class Admin extends Component {
     state={
-
+        currentInfo: null
     }
 
 
     componentWillMount() {
        
        this.runAllFunc()
+    }
+
+    componentDidMount() {
+      
+    }
+
+    openModify = () => {
+        
+    }
+
+    componentWillUpdate() {
+        const M = window.M
+        M.AutoInit();
     }
 
     runAllFunc = async () => {
@@ -29,6 +43,7 @@ class Admin extends Component {
          this.getVendReq()
          this.vendorProReq()
          this.getWinnerData()
+         this.dataInfo()
     }
 
     getWinnerData = () => {
@@ -97,7 +112,7 @@ class Admin extends Component {
                             date: n.date,
                             hour: n.hour,
                             price: n.price,
-                            action: (  <a className="insideTb blue-text">Approve </a>)
+                            action: (  <a className="insideTb blue-text" onClick={() => this.handleProUpdate(n)}>Approve </a>)
                         }
                     }),
                     proReq: true
@@ -123,6 +138,22 @@ class Admin extends Component {
                     bids: true 
                })
             }
+            }).catch(err => console.error(err))
+           
+    }
+
+    dataInfo = () => {
+        axios({
+            method: 'get',
+            url: localStorage.address + "/api/v1/dataday/" + "",
+            headers: {  Authorization: localStorage.auth }
+            })
+            .then( (response) => {
+                
+                 this.setState({
+                    today: response.data.data.todaty,
+                    all:  response.data.data.allTime 
+               })
             }).catch(err => console.error(err))
            
     }
@@ -156,6 +187,67 @@ class Admin extends Component {
     }
 
 
+    
+    approveVend = (id) => {
+        this.setState({
+                  loadPage: true
+              })
+
+
+      axios({
+          method: 'put',
+          url: localStorage.address + "/api/v1/makevend/" + id,
+          headers: {  Authorization: localStorage.auth }
+          })
+          .then( (response) => {
+              if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+                this.runAllFunc()
+
+              } else {
+                this.runAllFunc()
+
+              this.setState({
+                  loadPage: false
+              })
+          }
+             console.log(response)
+          }).catch(err => console.error(err))
+         
+  }
+
+
+   
+  rejectVend = (id, dataInfo) => {
+    this.setState({
+              loadPage: true
+          })
+
+
+  axios({
+      method: 'put',
+      url: localStorage.address + "/api/v1/rejectvend/" + id,
+      data: {
+          user: dataInfo
+      },
+      headers: {  Authorization: localStorage.auth }
+      })
+      .then( (response) => {
+          if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+            this.runAllFunc()
+
+          } else {
+            this.runAllFunc()
+
+          this.setState({
+              loadPage: false
+          })
+      }
+         console.log(response)
+      }).catch(err => console.error(err))
+     
+}
+
+
     getProData = () => {
         axios({
             method: 'get',
@@ -167,6 +259,7 @@ class Admin extends Component {
 
                 } else {
                 this.setState({
+                    realPro : response.data.data,
                     products: response.data.data.map(n =>{
                         return  {
                         name: n.name,
@@ -203,9 +296,9 @@ class Admin extends Component {
                             phone: n.phone,
                             selling: n.sells,
                             action: ( <div>
-                                <a className="insideTb blue-text row">accept</a>
-                                <a className="insideTb yellow-text row">reject</a>
-                                <a className="insideTb red-text row">delete</a>
+                               {n.verified ? null :  <a className="insideTb blue-text row" onClick={() => this.approveVend(n.account)}>accept</a>}
+                                {n.verified ? <a href="#" className="insideTb  green-text row">accepted</a> : <a className="insideTb yellow-text row" onClick={() => this.rejectVend(n.id, n.account)}>reject</a>}
+                                <a className="insideTb red-text row" onClick={() => this.rejectVend(n.id, n.account)}>delete</a>
 
                             </div>)
                         }
@@ -243,11 +336,23 @@ class Admin extends Component {
 
         let stateN = {...this.state}
         this.setState({
-            createWin: !stateN.createWin,
+            sendMoney: !stateN.sendMoney,
             openForm: !stateN.openForm
         })
     }
 
+    handleProUpdate  = (info) => {
+        this.runAllFunc()
+ 
+         let stateN = {...this.state}
+         this.setState({
+             approvePro: !stateN.approvePro,
+             openForm: !stateN.openForm,
+             currentInfo: info
+         })
+     }
+
+   
     downLoadData = (objArray) => {
         let items = objArray;
               const replacer = (key, value) => value === null ? '' : value; 
@@ -296,7 +401,15 @@ class Admin extends Component {
            
     }
     if(this.state.sendMoney) {
-        CurrentForm = null
+        CurrentForm = <SendMoMo/>
+        func = this.handleSendMoney
+
+           
+    }
+    if(this.state.approvePro) {
+        CurrentForm = <UpdatePro info={this.state.currentInfo}/>
+        func = this.handleProUpdate
+
            
     }
     
@@ -318,16 +431,17 @@ class Admin extends Component {
                     </div>
                     <div className="light1">
                         <p>Total Customers</p>
-                        <div> 0</div>
+                        {this.state.all ? <div>{this.state.all}</div> : <div>0</div>}
+
                     </div>
                     <div className="light1">
                         <p>New Customers</p>
-                        <div>0</div>
+                        {this.state.today ? <div>{this.state.today}</div> : <div>0</div>}
                     </div>
 
                     <div className="light1">
                         <p>Winners</p>
-                        <div>30</div>
+                        {this.state.win  ? <div>{this.state.winners.length }</div> : <div>0</div>}
                     </div>
                 </div>
 
@@ -337,10 +451,12 @@ class Admin extends Component {
                 <div className="row top20">
                 <div className="col s12">
                 <ul className="tabs ">
-                    <li className="tab col s3 white"><a   className="active black-text"  href="#winners">Winners</a></li>
+                    <li className="tab col s2 white"><a   className="active black-text"  href="#winners">Winners</a></li>
                     <li className="tab col s3"><a className="black-text" href="#current">Current Auction </a></li>
-                    <li className="tab col s3"><a  className="black-text"  href="#request">vendors</a></li>
+                    <li className="tab col s2"><a  className="black-text"  href="#request">vendors</a></li>
                     <li className="tab col s3"><a   className="black-text"  href="#req">requested Product</a></li>
+                    <li className="tab col s2"><a   className="black-text"  href="#finance"> Finance </a></li>
+                
                 </ul>
                 </div>
                 
@@ -354,6 +470,40 @@ class Admin extends Component {
                     />  
                    </Fragment>
                     : <h6 className="topBottom">No Current Auction </h6>} </div>
+                
+
+                
+                <div id="finance" className="col s12"> 
+                {this.state.pro ?
+                   <Fragment>
+                    <h6 className="topBottom">Products </h6>
+                    <Tables 
+                          heads={["product","vendor","revenue", "tax", "selling", "charge", "income"]}
+                          information={this.state.realPro.map(n => {
+                            let revenue = 0
+                              if(n.sold !== null) {
+                               revenue = parseInt(n.price) * JSON.parse(n.sold).length 
+                              }
+                              let selling =  parseInt(n.price) * parseInt(n.winners) 
+                              let tax = revenue * 0.05
+                              let charge = selling * 0.1
+                              let tot = revenue - selling - tax + charge
+                                return {
+                                    product: n.name,
+                                    vendor: n.vendor,
+                                    revenue: revenue,
+                                    tax: tax,
+                                    selling: selling,
+                                    charge: charge,
+                                    income: tot
+
+                                }
+                          })}
+                    />  
+                   </Fragment>
+                    : <h6 className="topBottom">No Current Auction </h6>} </div>
+                
+
                 <div id="winners" className="col s12">
                 {this.state.wins  ?
                    <Fragment>
@@ -424,7 +574,8 @@ class Admin extends Component {
              <Form 
              clecked={() => {
                 
-                window.location.reload()
+               func()
+               this.runAllFunc()
 
             }} 
              >

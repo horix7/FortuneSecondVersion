@@ -132,7 +132,8 @@ render() {
         <div className="spaceIn">
              <div>
                 <label>Product Type</label>
-                    <select id="type"  className="browser-default" onChange={this.handleInputs}>
+                    <select id="type"  className="browser-default" onChange={this.handleInputs} required>
+                    <option></option>
                     <option value="Brand New">Brand New </option>
                     <option value="Second Hand">Second Hand</option>
                     </select>

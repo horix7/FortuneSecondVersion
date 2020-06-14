@@ -50,10 +50,28 @@ class User extends Component {
                })
                .then( (response) => {
 
-                   this.setState({
+                 if(response.data.data.vendor) {
+                     localStorage.setItem("store", response.data.data.store)
+                    this.setState({
                         details: response.data.data,
+                        second: {
+                            username: response.data.data.secondname,
+                            gender: response.data.data.gender,
+                            store: response.data.data.store,
+                            address: response.data.data.address
+                        },
                         userInfo: true 
                    })
+                 }else {
+                    this.setState({
+                        details: response.data.data,
+                        second: {
+                            username: response.data.data.secondname,
+                            gender: response.data.data.gender
+                        },
+                        userInfo: true 
+                   })
+                 }
                     console.log(response)
                }).catch(err => console.error(err))
               
@@ -82,7 +100,7 @@ class User extends Component {
 
     }
     render() {
-        console.log(this.state)
+        
         return (
          <Fragment>
              
@@ -110,14 +128,11 @@ class User extends Component {
                         name: this.state.details.firstname,
                         email:  this.state.details.email,
                         age:  this.state.details.age,
-                        Phone:  this.state.details.phone,
+                        Phone:  this.state.details.phone
 
                     },
 
-                    two: {
-                        username: this.state.details.secondname,
-                        gender:  this.state.details.gender
-                    }
+                    two: this.state.second
                 }}
 
                 winnners={this.switchTOWinners}

@@ -2,7 +2,8 @@ import React, {Component, Fragment} from 'react';
 import ProBox from '../holders/productBox'
 import axios from 'axios';
 import Loader from '../UI/preloader';
-import Modal from '../../containers/modal'
+import Modal from '../../containers/modal';
+
 
 class Auction extends Component {
     state= {
