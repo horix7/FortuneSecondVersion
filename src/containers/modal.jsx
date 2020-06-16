@@ -184,48 +184,130 @@ Modal.setAppElement('#root')
 
 let tickets = props => {
     const [modal, setModal] = useState(false)
-   
+    const [waiting, setWaiting] = useState(false)
+    
     const [userNumber, setNumber] = useState(null)
-    const [countryCode, changeCode] = useState(null)
+    const [payOpt, changeCode] = useState(null)
+
     const [scroll, scrollNow] = useState({
         current: "keyboard_arrow_down",
         href: "#bottom"
     })
 
   
+
+    
     
 
-const bidRequest = () => {
+let bidRequest = () => {
     let bidInfo = {
             productid: props.id,
-            bids:JSON.stringify(props.chosen),
+            bids:JSON.stringify(props.chosen.map(n => parseInt(n))),
             fortunes:  props.chosen.length.toString(),
-            "momopay": userNumber || "credict-card Payment"
+            momopay: userNumber || "credict-card Payment"
             
     }
 
+    console.log(bidInfo)
     axios({
         method: 'post',
         url: localStorage.address + "/api/v1/bid/",
         data: bidInfo,
-        headers: {  
-            "Authorization": localStorage.auth,
-            "Content-Type": "application/json"
-                 }
+        headers: {
+            "Content-Type":"application/json",
+            "Accept":"application/json", 
+            "Authorization": localStorage.auth
+            
+            }
         })
         .then( (response) => {
-            console.log(response)
+           setBtnLoad(false)
 
-        }).catch(err => console.error(err))
+            if(response.data.data.length >= 1) {
+                console.log(response.data.data)
+            } else {
+                console.log("[All DOne ] Here ")
+                alert("Your Bid Was Made Successfully")
+            }
+         
+
+
+        }).catch(err =>{
+            alert("Something Wnet Wrong")
+            setBtnLoad(false)
+        })
+
+    
 }
 
 
 
 
+let chechStatusMomo = (id) => {
+ let link = "https://payments-api.fdibiz.com/v2/momo/trx/" + id + "/info"
+ axios({
+    method: 'get',
+    url:  link,
+    headers: { "Authorization": "Bearer" + " " + localStorage.paymentAuth }
+    })
+    .then( (response) => {
+        if(response.data.trxStatus == "pending") {
+            console.log("pending")
+            chechStatusMomo(id)    
+
+
+        } else if (response.data.trxStatus == "failed") {
+            console.log("failed")
+            alert("Your Payment Failed Try Again ")
+            setBtnLoad(false)
+
+        } else if (response.data.trxStatus == "successful") {
+            console.log("succeeded")
+            bidRequest()
+        }
+
+    }).catch(err => setBtnLoad(false))
+
+}
+
+
+let checkStatusAirtelMoney =  (id) => {
+    
+    console.log("[Status] Airtel Status Check")
+    let link = "https://api.havanao.com/api/sale/status?transactionId=" + id +"&api_token=NJoyXg1on9rG4RDUDfNN0nBUR1JJp8E4FRuGR6h767ApnuQ1cJmiqgNZW7wZ"
+ axios({
+    method: 'get',
+    url:  link
+    })
+    .then( (response) => {
+        console.log(response)
+
+            if(response.data.transactionStatus == "REQUESTED") {
+               console.log("proccessing")
+               checkStatusAirtelMoney(id)
+
+
+            } else if(response.data.transactionStatus == "DECLINED") {
+               console.log("failed")
+               alert("Your Payment Failed Try Again ")
+               setBtnLoad(false)
+
+            }else {
+               bidRequest()
+
+            }
+
+    }).catch(err =>  setBtnLoad(false))
+
+}
+
 
     let paymentRwandaTigoAirtel = () => {
+      setBtnLoad(true)
+
+
         let havanaoPaymentBody =  {
-            "amount": parseInt(total),
+            "amount": parseInt(total) / JSON.parse(localStorage.currency).rate,
             "customer": "250" + userNumber,
             "transactionid": "MC-" + Date.now(),
             "comment": "new Payment"
@@ -239,10 +321,17 @@ const bidRequest = () => {
                 "Accept":"application/json"                
                 }
             })
-            .then( (response) => {
-                 console.log(response)
+            .then( async (response) => {
+                if(response.data.transactionStatus == "REQUESTED") {
+                   
+                    checkStatusAirtelMoney(havanaoPaymentBody.transactionid)   
 
-            }).catch(err => console.error(err))
+                   
+                } else {
+                    console.log("error" , response)
+                }
+
+            }).catch(err =>  setBtnLoad(false))
       }
 
 
@@ -261,6 +350,12 @@ const bidRequest = () => {
       });
 
     const [payment, setPayment] = useState("momo")
+    const [counter, setCounter] = useState(0)
+    const [btnLoad, setBtnLoad] = useState(false)
+
+    const [makeBid, setMakeBid] = useState(false)
+
+
 
     let handleRadioOption = () => {
         let checkboxes = document.querySelectorAll('input[type=radio]:checked')
@@ -270,14 +365,16 @@ const bidRequest = () => {
 }
     let total = props.chosen.length * props.price
 
-    
+
   let  payMomo = () => {
+    setBtnLoad(true)
+      console.log("[MoMo] payment")
         let postForPayment = {
             "trxRef": new Date().getTime() + "-" + parseInt(Math.random() * 100),
             "channelId": "momo-mtn-rw",
             "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
             "msisdn": "0" + userNumber,
-            "amount":parseInt(total),
+            "amount":  parseInt(total) / JSON.parse(localStorage.currency).rate,
             "callback": "http://front-213v31.herokuapp.com/"
           }
           
@@ -293,10 +390,14 @@ const bidRequest = () => {
                 }
             })
             .then( (response) => {
-                 console.log(response)
-                    setBtn(false)
+                if(response.data.state == "processing") {
+                 chechStatusMomo(postForPayment.trxRef)
+                   
+                } else {
+                    console.log("error" , response)
+                }
 
-            }).catch(err => console.error(err))
+            }).catch(err => setBtnLoad(false))
       }
 
      let getPhoneNumber = e => {
@@ -312,7 +413,9 @@ const config = {
     currency: JSON.parse(localStorage.currency).currency,
     PBFPubKey: "FLWPUBK-b7454e2336475fcfa01d20f6343eeb41-X",
     production: true,
-    onSuccess: () => {},
+    onSuccess: () => {
+        bidRequest()
+    },
     onClose: () => {}
   } 
   
@@ -373,10 +476,10 @@ const config = {
                     },
                     content: {
                       position: 'absolute',
-                      top: '40px',
-                      left: '40px',
-                      right: '40px',
-                      bottom: '40px',
+                      top: '5%',
+                      left: '2%',
+                      right: '2%',
+                      bottom: '5%',
                       border: '1px solid #fff',
                       background: '#fff',
                       overflow: 'auto',
@@ -401,15 +504,15 @@ const config = {
                   <div className="spaceIn">
 
               <select className="input-field spaceIn"  name="countryCode" id="codes" onChange={() => changeCode(document.querySelector('#codes').value)} required>
-                <option  value="mtn" default>Airtel-Tigo cash Rwanda</option>
-                <option  value="tigo" default> Mtn Mobile Money Rwanda</option>
+                <option  value="mtn" default> Mtn Mobile Money Rwanda</option>
+                <option  value="tigo" default>Airtel-Tigo cash Rwanda</option>
 
              </select>
              </div>
 
               <div className="spaceIn gridTwo4">
               <div  className="pushUp2">
-              <select className="input-field"  name="countryCode" id="codes" onChange={() => changeCode(document.querySelector('#codes').value)} required>
+              <select className="input-field"  name="countryCode" required>
                 <option countryCode="RW" value="250" default> +250</option>
              </select>
               </div>
@@ -428,12 +531,18 @@ const config = {
                  
               </div>
                  <div className="spaceIn">
-                <button className="btn white green-text waves-effect waves-light " onClick={paymentRwandaTigoAirtel}>PAY {parseInt(total / JSON.parse(localStorage.currency).rate )}  { JSON.parse(localStorage.currency).currency}</button> 
+                {btnLoad ? <Loader/> : <button className="btn white green-text waves-effect waves-light " onClick={() => {
+                    if(payOpt === "tigo") {
+                        paymentRwandaTigoAirtel()
+                    } else {
+                        payMomo()
+                    }
+                }}>PAY {waiting ? waiting : parseInt(total / JSON.parse(localStorage.currency).rate)   + " " + JSON.parse(localStorage.currency).currency}</button> }
                    {/* <div className="midLoader"> <Loader type="circle" style="preloader-wrapper small active"/>  </div> } */}
                   </div>
                   </div> 
               </div>
-                  : null}
+                  : <div> </div>}
               
 
                   <div className="payCard">

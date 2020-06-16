@@ -228,7 +228,7 @@ console.log(fetchDataArr)
                  <label> Pick Your Currency</label>
 
                     <select className="input-field" onChange={this.changeCurrency} id="currencies" required >
-                    <option value="USD">USD</option>
+                    <option></option>
                     <option value="RWF">RWF</option>
                     <option value="NGN">NGN</option>
                     <option value="ZMW">ZMW</option>
@@ -237,6 +237,7 @@ console.log(fetchDataArr)
                     <option value="UGX">UGX</option>
                     <option value="GBP">GBP</option>
                     <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
 
 
                     </select>

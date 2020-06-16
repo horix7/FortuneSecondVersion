@@ -300,6 +300,7 @@ class Landing extends Component {
                {/* display about us 2 end  */}
 
               {this.state.products ?  <div id="products" className="">
+                  <h3 className="center-align">AUCTION</h3>
               <div className="hideSmall ProductsHere">
                 
                 {this.state.products.map(n => (
@@ -351,6 +352,8 @@ class Landing extends Component {
                 </div> : <Loader type="circle"  style="preloader-wrapper large active"/>}
 
               {this.state.winners ?  <div className="winners">
+              <h3 className="center-align">WINNERS</h3>
+
                 <div className="hideSmall ProductsHere">
                 {this.state.winners.map(n => (
                     <WinerBox 

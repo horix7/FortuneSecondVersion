@@ -74,6 +74,14 @@ a {
   width: 100%
 }
 
+.picturesShare {
+  display: grid;
+  grid-template-columns: 1fr  1fr 1fr 1fr;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
 .payment2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -785,6 +793,10 @@ background-color: rgb(211, 211, 211);
 
 
 @media screen and (max-width: 900px) {
+  .picturesShare {
+    grid-template-columns: 1fr 1fr ;
+
+  }
 
   .payment2 {
     grid-template-columns: 1fr;
@@ -908,6 +920,7 @@ background-color: rgb(211, 211, 211);
     width: 150px;
   }
   .homeNav {
+    position: sticky;
     grid-template-columns: 30% 40% 30%;
   }
   

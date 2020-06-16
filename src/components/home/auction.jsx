@@ -8,7 +8,8 @@ import Modal from '../../containers/modal';
 class Auction extends Component {
     state= {
         openModal: false,
-        checked: []
+        checked: [],
+        id: null 
     }
 
     componentDidMount() {
@@ -92,6 +93,7 @@ class Auction extends Component {
                     tickets: dataTick(response.data.data[0].current),
                     sold: dataTick(response.data.data[0].sold),
                     currentPrice: response.data.data[0].price,
+                    id: response.data.data[0].id,
                     ticket: true 
                })
             }).catch(err => console.error(err))
@@ -117,7 +119,7 @@ class Auction extends Component {
                       }}
                       showTickets={() => this.openModal(n.id)}
                       />)) : <Loader/>}
-                </div> : <Modal clecked={this.openModal2} chosen={this.state.checked} price={this.state.currentPrice}> 
+                </div> : <Modal id={this.state.id} clecked={this.openModal2} chosen={this.state.checked} price={this.state.currentPrice}> 
                        {this.state.ticket ? <div>  
                            <div className="row">
                     <button className="btn-small white black-text col5" width="100px" onClick={this.toggle}>Select All</button>

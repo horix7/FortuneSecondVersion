@@ -16,7 +16,8 @@ class CreatePro  extends Component{
             type: null,
             picture: null,
             tickets: null,
-            winners: null
+            winners: null,
+            selling: null
         },
         submit: false
     } 
@@ -141,7 +142,20 @@ render() {
 
                  </div>
 
-    
+                 <div className="spaceIn">
+                <Input 
+                 info={{
+                    style: "input-field",
+                    id: "selling",
+                    type: "number",
+                    label: "Product Price",
+            
+                 }}
+                 changed={this.handleInputs}
+
+                 />
+
+            </div>
 
     </div>
 

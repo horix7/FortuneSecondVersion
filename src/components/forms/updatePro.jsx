@@ -10,7 +10,7 @@ class CreatePro  extends Component{
     state = {
         productR: {
             tickets: null,
-            price: null
+            price: null,
         },
         submit: false
     } 
@@ -87,7 +87,7 @@ class CreatePro  extends Component{
 
 
      changeStateNow = () => {
-        const {name, store,hour,date,winners,picture}= this.props.info
+        const {name, store,hour,date,winners,picture,price}= this.props.info
         let newState = {...this.state.productR}
         let ChangeState = {
             ...newState,
@@ -96,7 +96,8 @@ class CreatePro  extends Component{
             hour: hour,
             date: date,
             winners: winners,
-            picture: picture
+            picture: picture,
+            selling: price
         }
 
         this.setState({

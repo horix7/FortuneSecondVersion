@@ -484,16 +484,15 @@ class Admin extends Component {
                               if(n.sold !== null) {
                                revenue = parseInt(n.price) * JSON.parse(n.sold).length 
                               }
-                              let selling =  parseInt(n.price) * parseInt(n.winners) 
                               let tax = revenue * 0.05
-                              let charge = selling * 0.1
-                              let tot = revenue - selling - tax + charge
+                              let charge = n.selling * 0.1
+                              let tot = revenue - n.selling - tax + charge
                                 return {
                                     product: n.name,
                                     vendor: n.vendor,
                                     revenue: revenue,
                                     tax: tax,
-                                    selling: selling,
+                                    selling: n.selling,
                                     charge: charge,
                                     income: tot
 
