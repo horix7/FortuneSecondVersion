@@ -20,6 +20,13 @@ import Loader from '../../components/UI/preloader'
 import WinerBox from '../../components/holders/winnerBox'
 import Slider from '../../components/holders/slider'
 import Counter from '../../components/holders/counter'
+import VendPolicy from '../../documents/vendors'
+import RefunfPolicy from '../../documents/refund'
+import TermsAndCond from '../../documents/document'
+import AboutCo from '../../documents/aboutCompany'
+import PrivacyPolicy from '../../documents/privacy'
+import ModalTerms from 'react-modal'
+
 
 
 
@@ -32,9 +39,10 @@ class Landing extends Component {
         terms: {
 
         },
+        timming: "3000",
         products: null,
         winners: null,
-
+        openedModal : false,
         forms: false,
         openAbout: false,
         aboutType: null
@@ -92,6 +100,21 @@ class Landing extends Component {
             forms: !newState.forms
         })
     }
+    openModalTimer  = () => {
+        this.setState({
+            timming: "900000‬"
+     })
+    }
+
+    closeModalHanlder  = () => {
+        this.setState({
+            timming: "3000"
+     })
+    }
+
+    openLogin21= () => {
+        console.log("some Have Failed ")
+    }
 
     openSign = () => {
         let newState = {...this.state}
@@ -121,6 +144,45 @@ class Landing extends Component {
         })
     }
 
+    openTerms = () => {
+        
+        this.setState({
+            openedModal : true,
+           showInfo: <TermsAndCond />
+        })
+    }
+
+    openRef = () => {
+        
+        this.setState({
+            openedModal : true,
+           showInfo: <RefunfPolicy />
+        })
+    }
+    
+    openVend = () => {
+        
+        this.setState({
+            openedModal : true,
+           showInfo: <VendPolicy />
+        })
+    }
+
+    openAbout2 = () => {
+        
+        this.setState({
+            openedModal : true,
+           showInfo: <AboutCo />
+        })
+    }
+
+    openPrivacy = () => {
+        
+        this.setState({
+            openedModal : true,
+           showInfo: <PrivacyPolicy />
+        })
+    }
     
     render() {
 
@@ -319,6 +381,10 @@ class Landing extends Component {
                        }}
                        login={this.openLogin}
                        check={true}
+                      onFinish={this.openLogin21}
+                      openModl={this.openModalTimer}
+                      closeMdl={this.closeModalHanlder}
+
                        />
                 ))}
                </div> 
@@ -326,7 +392,7 @@ class Landing extends Component {
                <div className="hideBig">
              <Slider 
                 
-                timer= "3000"
+                timer={this.state.timming}
                 displayIn={this.state.products.map(n => (
                     <ProBox 
                     key={n.id}
@@ -343,6 +409,12 @@ class Landing extends Component {
                       }}
                       login={this.openLogin}
                       check={true}
+                      onFinish={this.openLogin21}
+                      openModl={this.openModalTimer}
+                      closeMdl={this.closeModalHanlder}
+
+                      
+
                       />
                 ))} 
             />
@@ -371,6 +443,8 @@ class Landing extends Component {
                         video: n.video
 
                       }}
+                      openModl={this.openModalTimer}
+                      closeMdl={this.closeModalHanlder}
                     />
                 ))}
                 </div>
@@ -379,7 +453,7 @@ class Landing extends Component {
 
                 <Slider 
                 
-                timer= "3000"
+                timer={this.state.timming}
                 displayIn={this.state.winners.map(n => (
                     <WinerBox 
                     key={n.id}
@@ -395,6 +469,8 @@ class Landing extends Component {
                         video: n.video
 
                       }}
+                      openModl={this.openModalTimer}
+                      closeMdl={this.closeModalHanlder}
 
                     />
                 ))} 
@@ -404,7 +480,45 @@ class Landing extends Component {
 
                 </div> : <Loader type="circle"  style="preloader-wrapper large active"/>}
 
-                <Footer />
+                <Footer 
+                openTerms={this.openTerms}
+                openRef={this.openRef}
+                openAbout={this.openAbout2}
+                openPrivacy={this.openPrivacy}
+                openVend={this.openVend}
+
+
+                />
+
+                <ModalTerms
+                 style={{
+                    overlay: {
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: 'rgba(0, 0, 0, 0.404)'
+                    },
+                    content: {
+                      position: 'absolute',
+                      top: '5%',
+                      left: '2%',
+                      right: '2%',
+                      bottom: '5%',
+                      border: '1px solid #fff',
+                      background: '#fff',
+                      overflow: 'auto',
+                      WebkitOverflowScrolling: 'touch',
+                      borderRadius: '50px',
+                      outline: 'none',
+                      padding: '10px'
+                    }
+                  }}
+                 isOpen={this.state.openedModal} onRequestClose={() => this.setState({openedModal : false})}
+                >
+                    {this.state.showInfo}
+                </ModalTerms>
 
         </React.Fragment> : <Form 
         clecked={func} sign={func2}

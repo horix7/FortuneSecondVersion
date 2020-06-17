@@ -172,7 +172,7 @@ class Admin extends Component {
             })
             .then( (response) => {
                 if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
-       this.runAllFunc()
+                 this.runAllFunc()
 
                 } else {
        this.runAllFunc()
@@ -185,6 +185,33 @@ class Admin extends Component {
             }).catch(err => console.error(err))
            
     }
+
+    cancelAuction2 = (id) => {
+        this.setState({
+                  loadPage: true
+              })
+
+
+      axios({
+          method: 'post',
+          url: localStorage.address + "/api/v1/cancel/" + id.toString(),
+          headers: {  Authorization: localStorage.auth }
+          })
+          .then( (response) => {
+              if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+     this.runAllFunc()
+
+              } else {
+     this.runAllFunc()
+
+              this.setState({
+                  loadPage: false
+              })
+          }
+             console.log(response)
+          }).catch(err => console.error(err))
+         
+  }
 
 
     
@@ -266,8 +293,8 @@ class Admin extends Component {
                         vendor: n.vendor,
                         target: n.target,
                         winners: n.winners,
-                        timer: (<Counter date={n.date} hour={n.hour} key={n.id}/>),
-                        spin: ( <a className="insideTb  blue-text">Spin Now</a>),
+                        timer: (<Counter date={n.date} hour={n.hour} key={n.id} onFinish={() => this.chooseWinners(n.id)}/>),
+                        spin: ( <a className="insideTb  blue-text"  onClick={() => this.chooseWinners(n.id)}>Spin Now</a>),
                         action: ( <a className="insideTb  blue-text" onClick={() => this.cancelAuction(n.id)}>Cancel</a>)
                     }}),
                     pro: true 
@@ -277,6 +304,22 @@ class Admin extends Component {
            
     }
 
+
+    chooseWinners = (id) => {
+        axios({
+            method: 'patch',
+            url: localStorage.address + "/api/v1/choosetik/" + id,
+            headers: {  Authorization: localStorage.auth }
+            })
+            .then(res => {
+                console.log(res)
+                this.runAllFunc()
+
+            }).catch (err => {
+                alert("Failed To Choose The Winners")
+                this.cancelAuction2(id)
+            })
+    }
     getVendReq = () => {
         axios({
             method: 'get',

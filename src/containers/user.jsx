@@ -39,6 +39,22 @@ class User extends Component {
         this.setState({
             loading: !newState.loading
         })
+        setTimeout(() => {
+            this.setState({
+                loading: false
+            })
+        }, 2000);
+    }
+
+
+    updateInfoRefre = () => {
+        this.swithToAuction()
+        setTimeout(() => {
+        this.swithToAuction()
+        }, 300);
+
+       
+
     }
 
     getAccountInfo = () => {
@@ -111,6 +127,7 @@ class User extends Component {
                     loading: this.state.loading
                 }}
                 refresh={this.refreshData}
+                refresh1={this.updateInfoRefre}
                 switch={this.swithToAuction}
                 logout={this.props.onLogout}
                 /> : <div className="headLoader"> <Loader/>  </div> 

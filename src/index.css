@@ -460,7 +460,7 @@ background-color: rgb(211, 211, 211);
 .userNav {
   display: grid;
   text-align: center;
-  grid-template-columns: 40% 20% 40%;
+  grid-template-columns: 40% 20% 20% 20%;
   justify-content: center;
   align-items: center;
 }
@@ -914,7 +914,7 @@ background-color: rgb(211, 211, 211);
     grid-template-columns: 1fr;
   }
   .userNav {
-    grid-template-columns: 50% 20% 30%;
+    grid-template-columns: 45% 15% 17% 20%;
   }
   .viewAuction {
     width: 150px;

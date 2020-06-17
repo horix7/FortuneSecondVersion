@@ -80,62 +80,7 @@ class Profile extends Component {
        }).catch(err => console.error(err))
   }
 
-  changeCurrency = e => {
-    if(e.target.value == "USD") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "USD",
-        rate: 1
-      }))
-    }else if (e.target.value == "UGX") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "UGX",
-        rate: 0.000268837
-
-      }))
-    }else if (e.target.value == "KES") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "KES",
-        rate: 0.00939586
-
-      }))
-    } else if (e.target.value == "GHS") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "GHS",
-        rate: 0.172936
-
-      }))
-    } else if (e.target.value == "ZMW") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "ZMW",
-        rate: 0.0545316
-
-      }))
-    } else if (e.target.value == "NGN") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "NGN",
-        rate: 0.00258065
-
-      }))
-    }  else if (e.target.value == "RWF") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "RWF",
-        rate: 0.00105281
-
-      }))
-    } else if (e.target.value == "GBP") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "GBP",
-        rate: 1.25198
-
-      }))
-    }  else if (e.target.value == "EUR") {
-      localStorage.setItem("currency", JSON.stringify({
-        currency: "EUR",
-        rate: 1.12380
-
-      }))
-    }
-  }
+  
 
   handleInputs = (e) => {
    this.setState({
@@ -224,24 +169,7 @@ console.log(fetchDataArr)
                  </div>
                     
 
-                 <div  className="pushUp">
-                 <label> Pick Your Currency</label>
-
-                    <select className="input-field" onChange={this.changeCurrency} id="currencies" required >
-                    <option></option>
-                    <option value="RWF">RWF</option>
-                    <option value="NGN">NGN</option>
-                    <option value="ZMW">ZMW</option>
-                    <option value="GHS">GHS</option>
-                    <option value="KES">KES</option>
-                    <option value="UGX">UGX</option>
-                    <option value="GBP">GBP</option>
-                    <option value="EUR">EUR</option>
-                    <option value="USD">USD</option>
-
-
-                    </select>
-                </div>
+                
                 {this.props.dataTable.length > 1 ?
                 <Fragment>
                  <h6 className="topBottom">Your Bidding History </h6>

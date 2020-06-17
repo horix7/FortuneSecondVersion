@@ -46,6 +46,8 @@ class Counter extends React.Component {
           this.setState({
               timer: false
           })
+
+          this.props.onFinish()
         }
       }, 10);
       }

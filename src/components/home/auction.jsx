@@ -13,7 +13,7 @@ class Auction extends Component {
     }
 
     componentDidMount() {
-        this.getAllActivePro()
+        this.getDataBids()
     }
 
     getAllActivePro = () => {
@@ -31,6 +31,70 @@ class Auction extends Component {
             }).catch(err => console.error(err))
 
     }
+
+    chooseWinners = (id) => {
+      axios({
+          method: 'patch',
+          url: localStorage.address + "/api/v1/choosetik/" + id,
+          headers: {  Authorization: localStorage.auth }
+          })
+          .then(res => {
+              console.log(res)
+              this.getDataBids()
+
+          }).catch (err => {
+              alert("Failed To Choose The Winners")
+              this.cancelAuction2(id)
+          })
+  }
+    
+  
+  cancelAuction2 = (id) => {
+    this.setState({
+              loadPage: true
+          })
+
+
+  axios({
+      method: 'post',
+      url: localStorage.address + "/api/v1/cancel/" + id.toString(),
+      headers: {  Authorization: localStorage.auth }
+      })
+      .then( (response) => {
+          if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+              this.getDataBids()
+          } else {
+              this.getDataBids()
+          this.setState({
+              loadPage: false
+          })
+      }
+         console.log(response)
+      }).catch(err => console.error(err))
+     
+}
+    getDataBids = () => {
+      axios({
+          method: 'get',
+          url: localStorage.address + "/api/v1/bidzid/",
+          headers: {  Authorization: localStorage.auth }
+          })
+          .then( (response) => {
+              console.log(response.data)
+               if(reponse.data.data.length > 1 || eponse.data.data == null || eponse.data.data == undefined) {
+                this.setState({
+                  bidzid: [0]
+             })
+               } else {
+                this.setState({
+                  bidzid: response.data.data 
+             })
+               }
+          this.getAllActivePro()
+
+          }).catch(err => console.error(err))
+
+  }
 
     handleClickedCheckBox = () => {
             let array = []
@@ -104,21 +168,46 @@ class Auction extends Component {
             <Fragment>
               {!this.state.openModal ? <div className="ProductsHere">
 
-                {this.state.pro ? this.state.products.map(n => ( <ProBox 
-                    key={n.id}
-                    info={{
-                        name: n.name,
-                        winners: n.winners,
-                        price: n.price,
-                        fortunes: n.tickets,
-                        image: n.picture,
-                        date: n.date,
-                        hour: n.hour,
-                        sold: n.sold,
-                        type: n.type
-                      }}
-                      showTickets={() => this.openModal(n.id)}
-                      />)) : <Loader/>}
+                {this.state.pro ? this.state.products.map(n => {
+                  if(this.state.bidzid.some(y => y == n.id)) {
+                    return  ( <ProBox 
+                      text="Bid More"
+                      key={n.id}
+                      info={{
+                          name: n.name,
+                          winners: n.winners,
+                          price: n.price,
+                          fortunes: n.tickets,
+                          image: n.picture,
+                          date: n.date,
+                          hour: n.hour,
+                          sold: n.sold,
+                          type: n.type
+                        }}
+                        showTickets={() => this.openModal(n.id)}
+                        onFinish={() => this.chooseWinners(n.id)}
+                        />)
+
+                  } else {
+                    return  ( <ProBox 
+                      key={n.id}
+                      info={{
+                          name: n.name,
+                          winners: n.winners,
+                          price: n.price,
+                          fortunes: n.tickets,
+                          image: n.picture,
+                          date: n.date,
+                          hour: n.hour,
+                          sold: n.sold,
+                          type: n.type
+                        }}
+                        showTickets={() => this.openModal(n.id)}
+                        onFinish={() => this.chooseWinners(n.id)}
+                        />)
+                  }
+                  
+                }) : <Loader/>}
                 </div> : <Modal id={this.state.id} clecked={this.openModal2} chosen={this.state.checked} price={this.state.currentPrice}> 
                        {this.state.ticket ? <div>  
                            <div className="row">

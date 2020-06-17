@@ -32,6 +32,10 @@ class ProducBox extends Component {
       this.setState({
         modal: true
       })
+     if(typeof this.props.openModl == "function") {
+      this.props.openModl()
+     } 
+      
     }
     render() {
       let returnNum = (num) => {
@@ -46,7 +50,9 @@ class ProducBox extends Component {
           <Fragment>
 
          {!this.state.openModal ? <div>
-            <Counter date={this.props.info.date} hour={this.props.info.hour}/>
+         
+
+            <Counter date={this.props.info.date} hour={this.props.info.hour}  onFinish={this.props.onFinish}/>
          <div className="protype">{this.props.info.type}</div>
             <div className="bordered">
                   <Image 
@@ -86,8 +92,8 @@ class ProducBox extends Component {
                           <div>
                    {!this.props.check ?       
                     <Button
-                     style="btn  light-green darken-2"
-                     text="Bid Now"
+                     style={this.props.text ? "btn  green darken-2" :"btn  light-green darken-2"}
+                     text={this.props.text ? this.props.text : "Bid Now"}
                        info={{
                          type: "submit",
                          name: "action",
@@ -155,7 +161,13 @@ class ProducBox extends Component {
                       padding: '30px'
                     }
                   }}
-                 isOpen={this.state.modal} onRequestClose={() => this.setState({ modal: false})}> 
+                 isOpen={this.state.modal} onRequestClose={() => {
+                   this.setState({ modal: false})
+                    if(typeof this.props.closeMdl == "function") {
+                      this.props.closeMdl()
+                    }
+                  }
+                   }> 
                  {/* https://telegram.me/share/url?url=<URL><TEXT></TEXT> */}
                 <div className="picturesShare">
 

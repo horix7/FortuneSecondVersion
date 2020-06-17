@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-let footer = () => {
+let footer = props => {
 
 
     return (
@@ -10,23 +10,22 @@ let footer = () => {
             <div className="container">
                 <div className="row ">
                    <div className="flexCont">
-
+               
                     
                     <div>
                     <h5 className="white-text">Conditions</h5>
-                    <p className="grey-text text-lighten-4">Terms & Conditions</p>
-                    <p className="grey-text text-lighten-4">Return & Refund Policy</p>
-                    <p className="grey-text text-lighten-4">Privacy & Cookie Policy</p>
-                    <p className="grey-text text-lighten-4">Vendor Policy </p>
+                    <p className="grey-text text-lighten-4" onClick={props.openTerms}>Terms & Conditions</p>
+                    <p className="grey-text text-lighten-4"  onClick={props.openRef}>Return & Refund Policy</p>
+                    <p className="grey-text text-lighten-4"  onClick={props.openPrivacy}>Privacy & Cookie Policy</p>
+                    <p className="grey-text text-lighten-4"  onClick={props.openVend}>Vendor Policy </p>
 
                     </div>
 
                     <div className="">
                     <h5 className="white-text">Documentation</h5>
-                    <p className="grey-text text-lighten-4">About Company</p>
-                    <p className="grey-text text-lighten-4">About Vendors</p>
+                    <p className="grey-text text-lighten-4"  onClick={props.openAbout}>About Company</p>
+                    <p className="grey-text text-lighten-4"  onClick={props.openVend}>About Vendors</p>
                     <p className="grey-text text-lighten-4">Legal Document</p>
-                    <p className="grey-text text-lighten-4">FAQ </p>
 
                     </div>
 
