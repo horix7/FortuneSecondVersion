@@ -43,17 +43,13 @@ class Auction extends Component {
               this.getDataBids()
 
           }).catch (err => {
-              alert("Failed To Choose The Winners")
               this.cancelAuction2(id)
           })
   }
     
   
   cancelAuction2 = (id) => {
-    this.setState({
-              loadPage: true
-          })
-
+  
 
   axios({
       method: 'post',
@@ -63,8 +59,11 @@ class Auction extends Component {
       .then( (response) => {
           if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
               this.getDataBids()
+              console.log("datat{Here}")
           } else {
               this.getDataBids()
+              console.log("datat{Here}2")
+
           this.setState({
               loadPage: false
           })
@@ -81,7 +80,7 @@ class Auction extends Component {
           })
           .then( (response) => {
               console.log(response.data)
-               if(reponse.data.data.length > 1 || eponse.data.data == null || eponse.data.data == undefined) {
+               if( response.data.data.length > 1 || response.data.data == null || response.data.data == undefined) {
                 this.setState({
                   bidzid: [0]
              })
@@ -92,7 +91,13 @@ class Auction extends Component {
                }
           this.getAllActivePro()
 
-          }).catch(err => console.error(err))
+          }).catch(err => {
+            this.setState({
+              bidzid: [0]
+         })
+            this.getAllActivePro()
+            console.error(err)
+          })
 
   }
 

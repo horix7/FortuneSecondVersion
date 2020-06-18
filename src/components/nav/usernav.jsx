@@ -1,5 +1,18 @@
 import React, {useState} from 'react';
 import Loader from '../UI/preloader';
+import rw from '../../images/rw.png'
+import gh from '../../images/ghana.png'
+import euro from '../../images/euro.png'
+import ke from '../../images/kenya.png'
+import uk from '../../images/uk.png'
+import usa from '../../images/usa.png'
+import ug from '../../images/ug.png'
+import zm from '../../images/zambia.png'
+import ng from '../../images/nigeria.png'
+
+
+
+
 
 
 let userNav = props => {
@@ -69,7 +82,7 @@ let userNav = props => {
         <div className="userNav">
             <div className="viewAuction" onClick={props.switch}>
             {!props.info.account ?  <button className="btn-floating black pulse">
-             <i className="material-icons">timer</i> </button> : <button className="btn-floating black"> <i className="material-icons">account_circle</i> </button>}
+             <i className="material-icons small">timer</i> </button> : <button className="btn-floating black"> <i className="material-icons small">account_circle</i> </button>}
                 
                 <span> {props.info.account ? props.info.name : "View Auction"} </span>
             </div>
@@ -84,26 +97,24 @@ let userNav = props => {
                 </button>
             </div>
 
-            <div>
-            <select className="input-field" onChange={changeCurrency} id="currencies" required>
-                    <option></option>
-                    <option value="RWF">RWF</option>
-                    <option value="NGN">NGN</option>
-                    <option value="ZMW">ZMW</option>
-                    <option value="GHS">GHS</option>
-                    <option value="KES">KES</option>
-                    <option value="UGX">UGX</option>
-                    <option value="GBP">GBP</option>
-                    <option value="EUR">EUR</option>
-                    <option value="USD">USD</option>
-
-
+          <div className="input-field col s12 m6">
+            <select className="icons" onChange={changeCurrency} id="currencies" required>
+                    <option value="USD" data-icon={usa} selected={JSON.parse(localStorage.currency).currency == "USD" ? "selected" : null}>USD</option>
+                    <option value="RWF" data-icon={rw} selected={JSON.parse(localStorage.currency).currency == "RWF" ? "selected" : null}>RWF</option>
+                    <option value="NGN" data-icon={ng} selected={JSON.parse(localStorage.currency).currency == "NGN" ? "selected" : null}>NGN</option>
+                    <option value="ZMW" data-icon={zm} selected={JSON.parse(localStorage.currency).currency == "ZMW" ? "selected" : null}>ZMW</option>
+                    <option value="GHS" data-icon={gh} selected={JSON.parse(localStorage.currency).currency == "GHS" ? "selected" : null}>GHS</option>
+                    <option value="KES" data-icon={ke} selected={JSON.parse(localStorage.currency).currency == "KES" ? "selected" : null}>KES</option>
+                    <option value="UGX" data-icon={ug} selected={JSON.parse(localStorage.currency).currency == "UGX" ? "selected" : null}>UGX</option>
+                    <option value="GBP" data-icon={uk} selected={JSON.parse(localStorage.currency).currency == "GBP" ? "selected" : null}>GBP</option>
+                    <option value="EUR" data-icon={euro} selected={JSON.parse(localStorage.currency).currency == "EUR" ? "selected" : null}>EUR</option>
                     </select>
+
             </div>
 
             <div className="leftz">
-           <button class="btn-floating btn white" onClick={props.logout}>           
-                <i class="large material-icons black">power_settings_new</i>
+           <button className="btn-floating btn white" onClick={props.logout}>           
+                <i className="large material-icons black">power_settings_new</i>
            </button>
             </div>
         </div>

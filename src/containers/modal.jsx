@@ -476,7 +476,7 @@ const config = {
                     },
                     content: {
                       position: 'absolute',
-                      top: '5%',
+                      top: '10%',
                       left: '2%',
                       right: '2%',
                       bottom: '5%',

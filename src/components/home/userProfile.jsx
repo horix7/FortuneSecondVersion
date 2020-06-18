@@ -7,7 +7,7 @@ import axios from 'axios';
 import Loader from '../UI/preloader';
 import CreatePro from '../forms/productReq';
 import Form from '../../containers/formHolder'
-
+import SImage from '../../images/22-223965_no-profile-picture-icon-circle-member-icon-png.png'
 
 if(localStorage.currency == null ) {
   localStorage.setItem("currency", JSON.stringify({
@@ -37,6 +37,29 @@ class Profile extends Component {
       const M = window.M
       M.AutoInit();
   }
+
+     //  realPro bidata  realVend  allusers 
+     downLoadData = (objArray) => {
+      let items = objArray;
+            const replacer = (key, value) => value === null ? '' : value; 
+            const header = Object.keys(items[0]);
+            let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+            csv.unshift(header.join(','));
+            csv = csv.join('\r\n');
+    
+            alert("Press Ok To DownLoad Csv")
+    
+            let downloadLink = document.createElement("a");
+            let blob = new Blob(["\ufeff", csv]);`    `
+            let url = URL.createObjectURL(blob);
+            downloadLink.href = url;
+            downloadLink.download = `${parseInt(Math.floor(Math.random() * 100678700000) + 1000000).toString()}fortuneData.csv`;  //Name the file here
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+    
+    }
+    
 
   changeUserPic = e => {
       e.preventDefault()
@@ -115,7 +138,10 @@ console.log(fetchDataArr)
            {this.state.loadUpload ? <Loader /> : null}
              <div className="ProfileInfo">
                  <div className="imageCenter">
-                    {this.props.image ? <Image 
+                    {this.props.image ? 
+                    <form className="gridTwoe1">
+
+                    <Image 
                       info={{
                          class: "cirke2",
                          type: "squareImg", 
@@ -123,18 +149,15 @@ console.log(fetchDataArr)
                          height: "120px",
                          src: this.props.image
                        }}
-                       /> :  <form className="gridTwo">
-                          <div className="file-field input-field">
-                       <div className="btn black">
-                           <span>Select Your Profile Picture</span>
+                       /> 
+                       <div className="file-field paddsBttom">
+                       <div className="">
+                           <span>Update Profile</span>
                            <input type="file" id="picture" onChange={this.handleInputs} className="validate" required/>
-                       </div>
-                       <div className="file-path-wrapper">
-                           <input className="file-path validate"  type="text" />
                        </div>
    
                        </div>
-                         <div className="spaceIn">
+                         <div className="">
                         {this.state.img ?  <button 
                          className="btn  black-text white" 
                          style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
@@ -143,6 +166,31 @@ console.log(fetchDataArr)
                          >Upload</button>}
 
                          </div>
+                    </form>
+
+                         :  <form className="gridTwoe1">
+                      
+                      <div>
+                      <img src={SImage}  width="100px" height="100px" alt=""/>
+                      </div>
+                      
+                       <div className="file-field paddsBttom">
+                       <div className="">
+                           <span>Choose Profile</span>
+                           <input type="file" id="picture" onChange={this.handleInputs} className="validate" required/>
+                       </div>
+   
+                       </div>
+                         <div className="">
+                        {this.state.img ?  <button 
+                         className="btn  black-text white" 
+                         style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                         onClick={this.changeUserPic}>Upload</button> : <button className="btn black-text white"
+                         style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                         >Upload</button>}
+
+                         </div>
+                         
                          </form>
    }
 
@@ -181,7 +229,14 @@ console.log(fetchDataArr)
                  : <h6 className="topBottom">No Bidding History </h6>}
 
                  <div className="flexBtn">
-                 <button className="btn">  Download Bids Data</button>
+                 <button className="btn" onClick={() => {
+                  if(this.props.dataTable.length < 1) {
+                    alert("You have No Bids Data For now")
+                  } else {
+                    this.downLoadData(this.props.dataTable)
+                  }
+                 
+                 }}>  Download Bids Data</button>
                  <button className="btn" onClick={this.props.winnners}> View Winners</button>
                  {JSON.parse(localStorage.details).vendor ? <button className="btn" onClick={this.openProReq}> Create A Product</button> : null}
 

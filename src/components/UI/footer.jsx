@@ -32,7 +32,7 @@ let footer = props => {
                     <div className="">
                     <h5 className="white-text">Contact Us</h5>
                     <ul>
-                    <li><a className="grey-text text-lighten-3" href="#!"> Email: fortuneaction360@gmail.com</a></li>
+                    <li><a className="grey-text text-lighten-3" href="#!"> Email: support@fortuneauction260.com</a></li>
                     <li><a className="grey-text text-lighten-3" href="#!"> Call Us: +250780178459, +250734831742 </a></li>
                     <li><a className="grey-text text-lighten-3" href="#!"> Address: Rugando, Kigali Rwanda</a></li>
                     <li><a className="grey-text text-lighten-3" href="#!"></a></li>
@@ -46,7 +46,7 @@ let footer = props => {
             <div className="footer-copyright">
                 <div className="container">
                <div className="copy">
-               © 2018 Copyright Fortune Auction
+               © 2020 Copyright Fortune Auction
                </div>
                
                 <a className="grey-text text-lighten-4 right" href="#!">

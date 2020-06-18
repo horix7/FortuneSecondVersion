@@ -37,15 +37,21 @@ class ProducBox extends Component {
      } 
       
     }
-    render() {
-      let returnNum = (num) => {
-        if (num == null) {
-          return 0
-        } else {
-          return JSON.parse(num).length
-        }
-      }
 
+    returnNum = (num) => {
+      if (num == null) {
+        return 0
+      } else {
+        return JSON.parse(num).length
+      }
+    }
+
+    
+    render() {
+      if(this.returnNum(this.props.info.sold) ===  parseInt(this.props.info.fortunes)) {
+        this.props.onFinish()
+      }
+     
         return (
           <Fragment>
 
@@ -119,7 +125,7 @@ class ProducBox extends Component {
                 <Par 
                  info={{
                     type:"winnersPara", //homeText homePara
-                    text:  returnNum(this.props.info.sold) + " " + '/'+ this.props.info.fortunes + " " + "fortunes remains"
+                    text:  this.returnNum(this.props.info.sold) + " " + '/'+ this.props.info.fortunes + " " + "fortunes remains"
                   }}
                   />
                 <Button 

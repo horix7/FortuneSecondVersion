@@ -13,7 +13,8 @@ import UpdatePro from '../components/forms/updatePro'
 
 class Admin extends Component {
     state={
-        currentInfo: null
+        currentInfo: null,
+        downloading: []
     }
 
 
@@ -44,7 +45,9 @@ class Admin extends Component {
          this.vendorProReq()
          this.getWinnerData()
          this.dataInfo()
-    }
+         this.allUsersRegistered()
+
+        }
 
     getWinnerData = () => {
         axios({
@@ -134,7 +137,7 @@ class Admin extends Component {
 
                 } else {
                  this.setState({
-                    bidata: response.data.data,
+                    bidata1: response.data.data,
                     bids: true 
                })
             }
@@ -320,6 +323,22 @@ class Admin extends Component {
                 this.cancelAuction2(id)
             })
     }
+
+    
+    allUsersRegistered = () => {
+        axios({
+            method: 'get',
+            url: localStorage.address + "/api/v1/allusers/",
+            headers: {  Authorization: localStorage.auth }
+            })
+            .then(res => {
+                this.setState({
+                    allusers: res.data.data
+                })
+
+            }).catch (err => console.error(err))
+    }
+
     getVendReq = () => {
         axios({
             method: 'get',
@@ -331,6 +350,7 @@ class Admin extends Component {
 
                 } else {
                  this.setState({
+                     realVend: response.data.data,
                     vendors: response.data.data.map(n => {
                         return {
                             store: n.store,
@@ -395,7 +415,7 @@ class Admin extends Component {
          })
      }
 
-   
+    //  realPro bidata  realVend  allusers 
     downLoadData = (objArray) => {
         let items = objArray;
               const replacer = (key, value) => value === null ? '' : value; 
@@ -587,19 +607,64 @@ class Admin extends Component {
             <div className="gridTwo" style={{marginLeft:"20px"}}>
             <div className=" input-field">
 
-                <select multiple>
+                <select  multiple
+                onChange={e => {
+                    let newState = [...this.state.downloading]
+                    if(e.target.value == "users") {
+                        if(this.state.allusers == undefined || this.state.allusers == null) {
+                            
+                        }else {
+                            newState.push(this.state.allusers)
+                        }
+                    }else if(e.target.value == "vendors") {
+                        if(this.state.vendors == undefined || this.state.vendors == null) {
+                            
+                        }else {
+                            newState.push(this.state.vendors)
+                        }
+                       
+                    }else if(e.target.value == "bids") {
+                        if(this.state.bidata == undefined || this.state.bidata == null) {
+                            
+                        }else {
+                            newState.push(this.state.bidata)
+                        }
+                       
+                  }else if(e.target.value == "products") {
+                    if(this.state.realPro == undefined || this.state.realPro == null) {
+                            
+                    }else {
+                        newState.push(this.state.realPro)
+                    }
+                 }                     
+                 
+                 console.log(this.state)
+                    this.setState({
+                        downloading: [...newState]
+                    })
+                }}>
                 <option value="" disabled defaultValue>Choose Data To download </option>
-                <option value="users"> users</option>
+                <option value="users" > users</option>
                 <option value="vendors"> Vendors</option>
-                <option value="bids"> bids</option>
-                <option value="pro"> products</option>
+                <option value="bids" > bids</option>
+                <option value="products"> products</option>
                 <option value="finance"> all finances</option>
 
                 </select>
             </div>
 
             <div className="">
-                <button className="btn" style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}>Download </button>
+                <button className="btn" style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                onClick={() => {
+                    if(this.state.downloading.length < 1) {
+                        alert("You Did Not Chooose Data")
+                    } else {
+                        this.state.downloading.forEach(n => {
+                            this.downLoadData(n)
+                        })
+                    }
+                }}
+                >Download </button>
             </div>
             </div>
 

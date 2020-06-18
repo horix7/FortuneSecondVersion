@@ -457,9 +457,20 @@ background-color: rgb(211, 211, 211);
   visibility: hidden;
 }
 
+.paddsBttom {
+  margin-top: 20px;
+
+}
+
+.gridTwoe1 {
+  text-align: center;
+  display: grid;
+  grid-template-rows: 100px 20px 20px;
+}
 .userNav {
   display: grid;
   text-align: center;
+  margin-top: 0px;
   grid-template-columns: 40% 20% 20% 20%;
   justify-content: center;
   align-items: center;
@@ -914,7 +925,7 @@ background-color: rgb(211, 211, 211);
     grid-template-columns: 1fr;
   }
   .userNav {
-    grid-template-columns: 45% 15% 17% 20%;
+    grid-template-columns: 43% 12% 30% 15%;
   }
   .viewAuction {
     width: 150px;
@@ -931,9 +942,9 @@ background-color: rgb(211, 211, 211);
   }
 
   .userInfo {
-    margin: 20px;
-    display: list-item;
+    margin: 10%;
     text-align: start;
+    grid-template-columns: 1fr;
   }
   .introPage3 .bottomAligned {
     display: none
