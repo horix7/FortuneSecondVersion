@@ -5,8 +5,8 @@ import Landing  from './components/landing/landing';
 // import Pdf from './documents/document'
 // import Payment from './payment/payment'
 
-// localStora/ge.setItem("address", "https://fortunesecondv.herokuapp.com")
-localStorage.setItem("address", "http://localhost:5000")
+localStora/ge.setItem("address", "https://fortunesecondv.herokuapp.com")
+// localStorage.setItem("address", "http://localhost:5000")
 localStorage.setItem("auth", localStorage.auth || null)
 localStorage.setItem("details", localStorage.details || null)
 
