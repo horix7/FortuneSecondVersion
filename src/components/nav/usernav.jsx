@@ -21,56 +21,65 @@ let userNav = props => {
   let changeCurrency = e => {
     setCurrency(e.target.value)
     props.refresh()
-        if(e.target.value == "USD") {
+        if(e.target.value == "$") {
           localStorage.setItem("currency", JSON.stringify({
-            currency: "USD",
+            currency: "$",
+            curren: "USD",
             rate: 1
           }))
         }else if (e.target.value == "UGX") {
           localStorage.setItem("currency", JSON.stringify({
             currency: "UGX",
+            curren: "UGX",
             rate: 0.000268837
     
           }))
-        }else if (e.target.value == "KES") {
+        }else if (e.target.value == "KSH") {
           localStorage.setItem("currency", JSON.stringify({
-            currency: "KES",
+            currency: "KSH",
+            curren: "KES",
             rate: 0.00939586
     
           }))
-        } else if (e.target.value == "GHS") {
+        } else if (e.target.value == "₵") {
           localStorage.setItem("currency", JSON.stringify({
-            currency: "GHS",
+            currency: "₵",
+            curren: "GHS",
             rate: 0.172936
     
           }))
-        } else if (e.target.value == "ZMW") {
+        } else if (e.target.value == "K") {
           localStorage.setItem("currency", JSON.stringify({
-            currency: "ZMW",
+            currency: "K",
+            curren: "ZMW",
             rate: 0.0545316
     
           }))
-        } else if (e.target.value == "NGN") {
+        } else if (e.target.value == "₦") {
           localStorage.setItem("currency", JSON.stringify({
-            currency: "NGN",
+            currency: "₦",
+            curren: "NGN",
             rate: 0.00258065
     
           }))
         }  else if (e.target.value == "RWF") {
           localStorage.setItem("currency", JSON.stringify({
             currency: "RWF",
+            curren: "RWF",
             rate: 0.00105281
     
           }))
-        } else if (e.target.value == "GBP") {
+        } else if (e.target.value == "£") {
           localStorage.setItem("currency", JSON.stringify({
-            currency: "GBP",
+            currency: "£",
+            curren: "GBP",
             rate: 1.25198
     
           }))
-        }  else if (e.target.value == "EUR") {
+        }  else if (e.target.value == "€") {
           localStorage.setItem("currency", JSON.stringify({
-            currency: "EUR",
+            currency: "€",
+            curren: "EUR",
             rate: 1.12380
     
           }))
@@ -99,15 +108,15 @@ let userNav = props => {
 
           <div className="input-field col s12 m6">
             <select className="icons" onChange={changeCurrency} id="currencies" required>
-                    <option value="USD" data-icon={usa} selected={JSON.parse(localStorage.currency).currency == "USD" ? "selected" : null}>USD</option>
+                    <option value="$" data-icon={usa} selected={JSON.parse(localStorage.currency).currency == "$" ? "selected" : null}>$</option>
                     <option value="RWF" data-icon={rw} selected={JSON.parse(localStorage.currency).currency == "RWF" ? "selected" : null}>RWF</option>
-                    <option value="NGN" data-icon={ng} selected={JSON.parse(localStorage.currency).currency == "NGN" ? "selected" : null}>NGN</option>
-                    <option value="ZMW" data-icon={zm} selected={JSON.parse(localStorage.currency).currency == "ZMW" ? "selected" : null}>ZMW</option>
-                    <option value="GHS" data-icon={gh} selected={JSON.parse(localStorage.currency).currency == "GHS" ? "selected" : null}>GHS</option>
-                    <option value="KES" data-icon={ke} selected={JSON.parse(localStorage.currency).currency == "KES" ? "selected" : null}>KES</option>
+                    <option value="₦" data-icon={ng} selected={JSON.parse(localStorage.currency).currency == "₦" ? "selected" : null}>₦</option>
+                    <option value="K" data-icon={zm} selected={JSON.parse(localStorage.currency).currency == "K" ? "selected" : null}>K</option>
+                    <option value="₵" data-icon={gh} selected={JSON.parse(localStorage.currency).currency == "₵" ? "selected" : null}>₵</option>
+                    <option value="KSH" data-icon={ke} selected={JSON.parse(localStorage.currency).currency == "KSH" ? "selected" : null}>KSH</option>
                     <option value="UGX" data-icon={ug} selected={JSON.parse(localStorage.currency).currency == "UGX" ? "selected" : null}>UGX</option>
-                    <option value="GBP" data-icon={uk} selected={JSON.parse(localStorage.currency).currency == "GBP" ? "selected" : null}>GBP</option>
-                    <option value="EUR" data-icon={euro} selected={JSON.parse(localStorage.currency).currency == "EUR" ? "selected" : null}>EUR</option>
+                    <option value="£" data-icon={uk} selected={JSON.parse(localStorage.currency).currency == "£" ? "selected" : null}>£</option>
+                    <option value="€" data-icon={euro} selected={JSON.parse(localStorage.currency).currency == "€" ? "selected" : null}>€</option>
                     </select>
 
             </div>

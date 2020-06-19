@@ -287,9 +287,9 @@ class Login extends Component {
        />}
 
 
-        <div className="gridTwo">
+        <div className="gridTwow">
             <div className="btn1 white" onClick={this.changeLogin}>Forgot Password</div>
-            <div className="btn2 white" onClick={this.props.sign}>Create  Account</div>
+            <div className="btn1 white" onClick={this.props.sign}>Create  Account</div>
 
         </div>
     </div>

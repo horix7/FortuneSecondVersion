@@ -11,7 +11,8 @@ import SImage from '../../images/22-223965_no-profile-picture-icon-circle-member
 
 if(localStorage.currency == null ) {
   localStorage.setItem("currency", JSON.stringify({
-    currency: "USD",
+    currency: "$",
+    curren: "USD",
     rate: 1
   }))
 }
@@ -150,8 +151,8 @@ console.log(fetchDataArr)
                          src: this.props.image
                        }}
                        /> 
-                       <div className="file-field paddsBttom">
-                       <div className="">
+                       <div className=" paddsBttom">
+                       <div className="file-field">
                            <span>Update Profile</span>
                            <input type="file" id="picture" onChange={this.handleInputs} className="validate" required/>
                        </div>
@@ -162,7 +163,7 @@ console.log(fetchDataArr)
                          className="btn  black-text white" 
                          style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
                          onClick={this.changeUserPic}>Upload</button> : <button className="btn black-text white"
-                         style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                         style={{display: "none", height:"30px", marginTop:"30px", marginLeft:"10px"}}
                          >Upload</button>}
 
                          </div>
@@ -174,8 +175,8 @@ console.log(fetchDataArr)
                       <img src={SImage}  width="100px" height="100px" alt=""/>
                       </div>
                       
-                       <div className="file-field paddsBttom">
-                       <div className="">
+                       <div className=" paddsBttom">
+                       <div className="file-field">
                            <span>Choose Profile</span>
                            <input type="file" id="picture" onChange={this.handleInputs} className="validate" required/>
                        </div>
@@ -186,7 +187,7 @@ console.log(fetchDataArr)
                          className="btn  black-text white" 
                          style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
                          onClick={this.changeUserPic}>Upload</button> : <button className="btn black-text white"
-                         style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                         style={{display: "none", height:"30px", marginTop:"30px", marginLeft:"10px"}}
                          >Upload</button>}
 
                          </div>

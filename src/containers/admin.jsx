@@ -11,10 +11,11 @@ import Form from '../containers/formHolder'
 import SendMoMo from '../components/forms/sendMoney'
 import UpdatePro from '../components/forms/updatePro'
 
+
 class Admin extends Component {
     state={
         currentInfo: null,
-        downloading: []
+        downloading: null
     }
 
 
@@ -290,11 +291,37 @@ class Admin extends Component {
                 } else {
                 this.setState({
                     realPro : response.data.data,
+                    finances:  response.data.data.map(n => {
+                        let revenue = 0
+                        let ree = 0
+
+                          if(n.sold !== null) {
+                           revenue = parseInt(n.price) * JSON.parse(n.sold).length 
+                          }
+                          if(n.type == "Brand New") {
+                            ree = 0.1
+                          } else {
+                            ree = 0.09
+                          }
+                          let tax = revenue * 0.05
+                          let charge = n.selling * ree
+                          let tot = revenue - n.selling - tax + charge
+                            return {
+                                product: n.name,
+                                vendor: n.vendor,
+                                revenue: revenue,
+                                tax: tax,
+                                selling: n.selling,
+                                charge: charge,
+                                income: tot
+
+                            }
+                      }),
                     products: response.data.data.map(n =>{
                         return  {
                         name: n.name,
                         vendor: n.vendor,
-                        target: n.target,
+                        tickets: n.tickets,
                         winners: n.winners,
                         timer: (<Counter date={n.date} hour={n.hour} key={n.id} onFinish={() => this.chooseWinners(n.id)}/>),
                         spin: ( <a className="insideTb  blue-text"  onClick={() => this.chooseWinners(n.id)}>Spin Now</a>),
@@ -319,6 +346,7 @@ class Admin extends Component {
                 this.runAllFunc()
 
             }).catch (err => {
+                console.log(err)
                 alert("Failed To Choose The Winners")
                 this.cancelAuction2(id)
             })
@@ -333,7 +361,20 @@ class Admin extends Component {
             })
             .then(res => {
                 this.setState({
-                    allusers: res.data.data
+                    allusers: res.data.data.map(n => {
+                        return {
+                            names: n.firstname,
+                            user_name: n.secondname,
+                            email: n.email,
+                            phone: n.countrycode + n.phone,
+                            age: n.age,
+                            registered_on: n.registeredDate,
+                            isVendor: n.vendor,
+                            gender: n.gender,
+                            profilePic: n.picture
+
+                        }
+                    })
                 })
 
             }).catch (err => console.error(err))
@@ -542,25 +583,7 @@ class Admin extends Component {
                     <h6 className="topBottom">Products </h6>
                     <Tables 
                           heads={["product","vendor","revenue", "tax", "selling", "charge", "income"]}
-                          information={this.state.realPro.map(n => {
-                            let revenue = 0
-                              if(n.sold !== null) {
-                               revenue = parseInt(n.price) * JSON.parse(n.sold).length 
-                              }
-                              let tax = revenue * 0.05
-                              let charge = n.selling * 0.1
-                              let tot = revenue - n.selling - tax + charge
-                                return {
-                                    product: n.name,
-                                    vendor: n.vendor,
-                                    revenue: revenue,
-                                    tax: tax,
-                                    selling: n.selling,
-                                    charge: charge,
-                                    income: tot
-
-                                }
-                          })}
+                          information={this.state.finances}
                     />  
                    </Fragment>
                     : <h6 className="topBottom">No Current Auction </h6>} </div>
@@ -607,41 +630,48 @@ class Admin extends Component {
             <div className="gridTwo" style={{marginLeft:"20px"}}>
             <div className=" input-field">
 
-                <select  multiple
+                <select 
                 onChange={e => {
-                    let newState = [...this.state.downloading]
+                    let newState = this.state.downloading
                     if(e.target.value == "users") {
                         if(this.state.allusers == undefined || this.state.allusers == null) {
                             
                         }else {
-                            newState.push(this.state.allusers)
+                            newState = this.state.allusers
                         }
                     }else if(e.target.value == "vendors") {
-                        if(this.state.vendors == undefined || this.state.vendors == null) {
+                        if(this.state.realVend == undefined || this.state.realVend == null) {
                             
                         }else {
-                            newState.push(this.state.vendors)
+                            newState = this.state.realVend
                         }
                        
                     }else if(e.target.value == "bids") {
                         if(this.state.bidata == undefined || this.state.bidata == null) {
                             
                         }else {
-                            newState.push(this.state.bidata)
+                            newState = this.state.bidata
                         }
                        
                   }else if(e.target.value == "products") {
                     if(this.state.realPro == undefined || this.state.realPro == null) {
                             
                     }else {
-                        newState.push(this.state.realPro)
+                        newState = this.state.realPro
                     }
-                 }                     
+                 }   else if(e.target.value == "finance") {
+                    if(this.state.finances == undefined || this.state.finances == null) {
+                            
+                    }else {
+                        newState = this.state.finances
+                    }
+                }                  
                  
-                 console.log(this.state)
                     this.setState({
-                        downloading: [...newState]
+                        downloading: newState
                     })
+                    console.log(this.state)
+
                 }}>
                 <option value="" disabled defaultValue>Choose Data To download </option>
                 <option value="users" > users</option>
@@ -656,12 +686,11 @@ class Admin extends Component {
             <div className="">
                 <button className="btn" style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
                 onClick={() => {
-                    if(this.state.downloading.length < 1) {
-                        alert("You Did Not Chooose Data")
+                    if(this.state.downloading == null) {
+                        alert("no Data Available")
                     } else {
-                        this.state.downloading.forEach(n => {
-                            this.downLoadData(n)
-                        })
+                      
+                            this.downLoadData(this.state.downloading)
                     }
                 }}
                 >Download </button>

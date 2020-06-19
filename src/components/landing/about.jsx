@@ -5,13 +5,14 @@ import morris from '../../images/IMG-20200412-WA0000.jpg'
 
 let about = props => {
     
+    location.href = "#aboutBox"
 
     return (
 
         <React.Fragment> 
-        <div className="aboutBox">
+        <div className="aboutBox" id="aboutBox">
 
-        <div className="backIco" onClick={props.click}>
+        <div className="backIco2" onClick={props.click}>
         <i className="material-icons" >keyboard_backspace</i>
 
         </div>
@@ -62,13 +63,16 @@ let about = props => {
 
 :
                     <React.Fragment>
-                    <div className="about">
+                    <div className="">
                     <h3> ABOUT VENDORS </h3>
                     <p>We designed this platform to enable vendors/sellers with both used & new items to auction, get bids and sell the item. Item type Such as Cars, Computer/Gadgets, Clothes & Home Electronics.
                         <br/>  You too our registered user can also sell any of your used items. Just Request! Have your legal proof of ownership (receipt, papers etc.) Auction and get bids.         
                         </p>
 
-                        <button className="btn blue" onClick={props.openRequest}>Request Now </button>
+                        <button className="btn blue" onClick={() => {
+                            props.click()
+                            props.openRequest()
+                            }}>Request Now </button>
                     <h5>FEES & CHARGES</h5>
                     <p>
                     We charge a commission fee on every item sold both new and used at the following rate

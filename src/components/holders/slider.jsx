@@ -49,11 +49,11 @@ class Slider extends Component {
 
           <Fragment>
               <div className="gridSlide">
-              <i className="material-icons" onClick={this.backCurrent.bind(this)}>keyboard_arrow_left</i>
+              <i className="material-icons hideIco" onClick={this.backCurrent.bind(this)}>keyboard_arrow_left</i>
               <div className="proSlider">
                 {this.props.displayIn[this.state.current]}
               </div>
-              <i className="material-icons" onClick={this.changeCurrent.bind(this)}>keyboard_arrow_right</i>
+              <i className="material-icons hideIco" onClick={this.changeCurrent.bind(this)}>keyboard_arrow_right</i>
               </div>
               
           </Fragment>

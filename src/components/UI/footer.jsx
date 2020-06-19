@@ -24,7 +24,7 @@ let footer = props => {
                     <div className="">
                     <h5 className="white-text">Documentation</h5>
                     <p className="grey-text text-lighten-4"  onClick={props.openAbout}>About Company</p>
-                    <p className="grey-text text-lighten-4"  onClick={props.openVend}>About Vendors</p>
+                    <p className="grey-text text-lighten-4"  onClick={props.openVend1}>About Vendors</p>
                     <p className="grey-text text-lighten-4">Legal Document</p>
 
                     </div>
@@ -32,9 +32,9 @@ let footer = props => {
                     <div className="">
                     <h5 className="white-text">Contact Us</h5>
                     <ul>
-                    <li><a className="grey-text text-lighten-3" href="#!"> Email: support@fortuneauction260.com</a></li>
-                    <li><a className="grey-text text-lighten-3" href="#!"> Call Us: +250780178459, +250734831742 </a></li>
-                    <li><a className="grey-text text-lighten-3" href="#!"> Address: Rugando, Kigali Rwanda</a></li>
+                    <li><a className="grey-text text-lighten-3" href="contact@fortuneauction260.com" target="_blank"> contact@fortuneauction260.com</a></li>
+                    <li><a className="grey-text text-lighten-3" href="#!"> +250780178459, +250734831742 </a></li>
+                    <li><a className="grey-text text-lighten-3" href="#!"> Rugando, Kigali Rwanda</a></li>
                     <li><a className="grey-text text-lighten-3" href="#!"></a></li>
                     </ul>
                     </div>
@@ -49,15 +49,15 @@ let footer = props => {
                © 2020 Copyright Fortune Auction
                </div>
                
-                <a className="grey-text text-lighten-4 right" href="#!">
+                <a className="grey-text text-lighten-4 right" href=" https://www.facebook.com/Fortune-Auction-107927797633219"  target="_blank">
                 <i className="fa fa-facebook-official" style={{fontSize: "30px", color: "blue"}}></i>
                 </a>
-                <a className="grey-text text-lighten-4 right" href="#!">
+                <a className="grey-text text-lighten-4 right" href="https://www.instagram.com/fortune_auction/" target="_blank">
                 <i className="fa fa-instagram" style={{fontSize: "30px", color: "white"}}></i>
                 </a>
-                <a className="grey-text text-lighten-4 right" href="#!"> 
+                <a className="grey-text text-lighten-4 right"href="https://www.youtube.com/channel/UCshs4TrX8wYTZmCQDc6GjfA/?guided_help_flow=5"  target="_blank"> 
                 <i className="fa fa-youtube-play" style={{fontSize: "30px", color: "red"}}></i></a>
-                <a className="grey-text text-lighten-4 right" href="#!">
+                <a className="grey-text text-lighten-4 right" href="#!" >
                     Join Us 
                 </a>
                 </div>

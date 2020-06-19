@@ -188,6 +188,8 @@ let tickets = props => {
     
     const [userNumber, setNumber] = useState(null)
     const [payOpt, changeCode] = useState(null)
+    const [tokenPay, setTokenPay] = useState(null)
+
 
     const [scroll, scrollNow] = useState({
         current: "keyboard_arrow_down",
@@ -248,20 +250,26 @@ let chechStatusMomo = (id) => {
  axios({
     method: 'get',
     url:  link,
-    headers: { "Authorization": "Bearer" + " " + localStorage.paymentAuth }
+    headers: { "Authorization": "Bearer" + " " + localStorage.payemtAuth}
     })
     .then( (response) => {
-        if(response.data.trxStatus == "pending") {
+        if(response.data.data.trxStatus == "pending") {
             console.log("pending")
             chechStatusMomo(id)    
 
 
-        } else if (response.data.trxStatus == "failed") {
-            console.log("failed")
-            alert("Your Payment Failed Try Again ")
+        } else if (response.data.data.trxStatus == "failed") {
+            console.log("reachedHere")
+            let message = response.data.data.channelRef.split('_')
+            message.shift()
+            console.log(message)
+
+            message.join('-')
+            alert(message)
+
             setBtnLoad(false)
 
-        } else if (response.data.trxStatus == "successful") {
+        } else if (response.data.data.trxStatus == "successful") {
             console.log("succeeded")
             bidRequest()
         }
@@ -307,7 +315,7 @@ let checkStatusAirtelMoney =  (id) => {
 
 
         let havanaoPaymentBody =  {
-            "amount": parseInt(total) / JSON.parse(localStorage.currency).rate,
+            "amount": parseInt(parseFloat(total) / JSON.parse(localStorage.currency).rate),
             "customer": "250" + userNumber,
             "transactionid": "MC-" + Date.now(),
             "comment": "new Payment"
@@ -374,31 +382,45 @@ let checkStatusAirtelMoney =  (id) => {
             "channelId": "momo-mtn-rw",
             "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
             "msisdn": "0" + userNumber,
-            "amount":  parseInt(total) / JSON.parse(localStorage.currency).rate,
+            "amount":  parseInt(parseFloat(total) / JSON.parse(localStorage.currency).rate),
             "callback": "http://front-213v31.herokuapp.com/"
           }
           
-        axios({
-            method: 'post',
-            url: "https://payments-api.fdibiz.com/v2/momo/pull",
-            data: postForPayment,
-            headers: {
-                "Content-Type":"application/json",
-                "Accept":"application/json", 
-             "Authorization":"Bearer" + " " + localStorage.paymentAuth
-                
-                }
-            })
-            .then( (response) => {
-                if(response.data.state == "processing") {
-                 chechStatusMomo(postForPayment.trxRef)
-                   
-                } else {
-                    console.log("error" , response)
-                }
+          console.log(postForPayment)
 
-            }).catch(err => setBtnLoad(false))
-      }
+axios({
+    method:"get",
+    url: localStorage.address + "/api/v1/paytoken",
+    headers: {
+        Authorization: localStorage.auth
+    }
+}).then(results => {
+    localStorage.setItem("payemtAuth" , results.data.data)
+    axios({
+        method: 'post',
+        url: "https://payments-api.fdibiz.com/v2/momo/pull",
+        data: postForPayment, 
+        headers: {
+            "Content-Type":"application/json",
+            "Accept":"application/json", 
+            "Authorization":"Bearer" + " " + results.data.data
+            
+            }
+        })
+        .then( (response) => {
+            if(response.data.data.state == "processing") {
+             chechStatusMomo(postForPayment.trxRef)
+               
+            } else {
+                console.log("error" , response)
+            }
+
+        }).catch(err => {
+            setBtnLoad(false)
+            console.log(err.response)
+        })
+}).catch(err => console.error(err))
+}
 
      let getPhoneNumber = e => {
           setNumber(e.target.value)
@@ -409,8 +431,8 @@ const config = {
     txref:"MC-" + new Date(),
     customer_email: JSON.parse(localStorage.details).email,
     customer_phone: JSON.parse(localStorage.details).phone,
-    amount: parseInt(total / JSON.parse(localStorage.currency).rate),
-    currency: JSON.parse(localStorage.currency).currency,
+    amount: parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(2),
+    currency: JSON.parse(localStorage.currency).curren,
     PBFPubKey: "FLWPUBK-b7454e2336475fcfa01d20f6343eeb41-X",
     production: true,
     onSuccess: () => {
@@ -438,7 +460,7 @@ const config = {
 
                      <div className="checkout">
                          <div className="total" id="bottom">
-                           Total {parseInt(total / JSON.parse(localStorage.currency).rate )} {" " + JSON.parse(localStorage.currency).currency}
+                           Total {" " + JSON.parse(localStorage.currency).currency} {parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2)} 
                          </div>
                          <button className="btn blue" onClick={() => setModal(true)}>Continue To Checkout</button>
                      </div>
@@ -490,12 +512,15 @@ const config = {
                     }
                   }}
                  isOpen={modal} onRequestClose={() => setModal(false)}>
+                    <a className="btn-floating black" onClick={() => setModal(false)}>
+                        <i className="material-icons">clear</i>
+                    </a>
               
               <div className="payment" onLoad={() => {
                     const M = window.M
                     M.AutoInit();
               }}>
-                 <div className="center-align"> Total Payment <span> {parseInt(total / JSON.parse(localStorage.currency).rate )} </span>{JSON.parse(localStorage.currency).currency}</div>
+                 <div className="center-align"> Total Payment  {JSON.parse(localStorage.currency).currency} <span> {parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2)} </span></div>
               <div className="payment2">
 
               {JSON.parse(localStorage.currency).currency == "RWF" ? 
@@ -537,7 +562,7 @@ const config = {
                     } else {
                         payMomo()
                     }
-                }}>PAY {waiting ? waiting : parseInt(total / JSON.parse(localStorage.currency).rate)   + " " + JSON.parse(localStorage.currency).currency}</button> }
+                }}>PAY {waiting ? waiting : " " + JSON.parse(localStorage.currency).currency + " " + parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(2) }</button> }
                    {/* <div className="midLoader"> <Loader type="circle" style="preloader-wrapper small active"/>  </div> } */}
                   </div>
                   </div> 
@@ -554,7 +579,7 @@ const config = {
                     <ErrorHandler>
 
                     <RaveProvider {...config}>
-                        <RavePaymentButton className="btn-large">Pay {parseInt(total / JSON.parse(localStorage.currency).rate )} {" " +JSON.parse(localStorage.currency).currency}</RavePaymentButton>
+                        <RavePaymentButton className="btn-large">Pay  {" " +JSON.parse(localStorage.currency).currency}  {parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2)}</RavePaymentButton>
                     </RaveProvider>
 
                     </ErrorHandler>

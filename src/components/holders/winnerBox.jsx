@@ -124,6 +124,11 @@ class WinnerBox extends Component {
                    <VideoPlayer url={detAIls}/>
                   
                  </div>
+                  <div class="fixed-action-btn">   
+                    <a className="btn-floating black" onClick={() => this.setState({modal : false})}>
+                        <i className="material-icons">clear</i>
+                    </a>
+                    </div>
                  </Modal>
           </React.Fragment>
         )

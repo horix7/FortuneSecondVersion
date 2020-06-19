@@ -148,7 +148,7 @@ render() {
                     style: "input-field",
                     id: "selling",
                     type: "number",
-                    label: "Product Price",
+                    label: "Total Market Price",
             
                  }}
                  changed={this.handleInputs}

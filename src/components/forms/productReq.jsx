@@ -222,7 +222,7 @@ render() {
                     style: "input-field",
                     id: "price",
                     type: "number",
-                    label: "Selling Price",
+                    label: "Selling Price in USD",
             
                  }}
                  changed={this.handleInputs}

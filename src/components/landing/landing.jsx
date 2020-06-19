@@ -319,9 +319,11 @@ class Landing extends Component {
                 </div>
                 
                 <div className="introPage4 padds2">
-                <h3 >Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.</ h3>
+                <h3 style={{textTransform: "uppercase", paddingBottom:"10px"}} >
+                    Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.
+                    </h3>
                 
-                <a className="linkBtn2" onClick={() => this.openAbout("about")}>Learn More</a>
+                <a className="linkBtn2" onClick={() => this.openAbout2()}>Learn More</a>
                 
                 </div>
                 
@@ -335,7 +337,7 @@ class Landing extends Component {
                             <h5>RETURN & REFUND</h5>
                             <p className=""> We refund your money Immediately when the bid target is not reached after the bid deadline. So share to win!
                             </p>   
-                            <a className="linkBtn2">Learn More</a>
+                            <a className="linkBtn2" onClick={this.openRef}>Learn More</a>
 
                         </div>
 
@@ -353,7 +355,7 @@ class Landing extends Component {
                             <h5>SECURITY</h5>
                             <p className="">We encrypt your password & payment information with safe technology. Your privacy is highly important to us.
                             </p>   
-                            <a className="linkBtn2">Learn More</a>
+                            <a className="linkBtn2" onClick={this.openPrivacy}>Learn More</a>
 
                         </div>
                     </div>
@@ -485,7 +487,9 @@ class Landing extends Component {
                 openRef={this.openRef}
                 openAbout={this.openAbout2}
                 openPrivacy={this.openPrivacy}
+                openVend1={() => this.openAbout("ww")}
                 openVend={this.openVend}
+
 
 
                 />
@@ -510,21 +514,30 @@ class Landing extends Component {
                       background: '#fff',
                       overflow: 'auto',
                       WebkitOverflowScrolling: 'touch',
-                      borderRadius: '50px',
+                      borderRadius: '5px',
                       outline: 'none',
-                      padding: '10px'
+                      padding: '20px'
                     }
                   }}
                  isOpen={this.state.openedModal} onRequestClose={() => this.setState({openedModal : false})}
                 >
+                  <div>
+                  <div class="fixed-action-btn">   
+                    <a className="btn-floating black" onClick={() => this.setState({openedModal : false})}>
+                        <i className="material-icons">clear</i>
+                    </a>
+                    </div>
                     {this.state.showInfo}
+                  </div>
                 </ModalTerms>
 
-        </React.Fragment> : <Form 
+        </React.Fragment> : <div className="homeform">
+        <Form 
         clecked={func} sign={func2}
         >
             {CurrentForm}
         </Form>
+        </div>
 
 
 }

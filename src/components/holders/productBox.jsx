@@ -80,7 +80,7 @@ class ProducBox extends Component {
                   <Par 
                     info={{
                             type:"bidText", //homeText homePara
-                            text: "Bidding Price" + " " + Math.floor(this.props.info.price / JSON.parse(localStorage.currency).rate) + " " +  JSON.parse(localStorage.currency).currency
+                            text: "Ticket Price" +  " " +  JSON.parse(localStorage.currency).currency + " " + (parseFloat(this.props.info.price) / JSON.parse(localStorage.currency).rate).toFixed(2) 
                           }}
                         />
                         <div className="gridTwo topBottom">
@@ -157,7 +157,7 @@ class ProducBox extends Component {
                       top: '20%',
                       left: '10%',
                       right: '10%',
-                      height: "400px",
+                      height: "100px",
                       border: '1px solid #fff',
                       background: '#fff',
                       overflow: 'auto',
@@ -174,6 +174,19 @@ class ProducBox extends Component {
                     }
                   }
                    }> 
+                    <div class="fixed-action-btn">   
+                    <a className="btn-floating black" onClick={
+                      () => {
+                        this.setState({ modal: false})
+                         if(typeof this.props.closeMdl == "function") {
+                           this.props.closeMdl()
+                         }
+                       }
+                        
+                    }>
+                        <i className="material-icons">clear</i>
+                    </a>
+                    </div>
                  {/* https://telegram.me/share/url?url=<URL><TEXT></TEXT> */}
                 <div className="picturesShare">
 
@@ -182,7 +195,7 @@ class ProducBox extends Component {
                   window.open(
                     'https://telegram.me/share/url?url='+location.href + "&text=" + "home")
                   return false;}}>
-                <img src={Tel} width="100px" height="100px" alt=""/>
+                <img src={Tel} width="35px" height="35px" alt=""/>
 
               </a>
                    <a href="#" target="_blank"
@@ -190,7 +203,7 @@ class ProducBox extends Component {
                   window.open(
                     'whatsapp://send?text='+ encodeURIComponent(location.href))
                   return false;}}>
-                <img src={WhatsApp} width="100px" height="100px" alt=""/>
+                <img src={WhatsApp} width="35px" height="35px" alt=""/>
 
               </a>
                  <a href="#" target="_blank"
@@ -200,7 +213,7 @@ class ProducBox extends Component {
                     'facebook-share-dialog', 
                     'width=626,height=436')
                   return false;}}>
-                <img src={Fb} width="100px" height="100px" alt=""/>
+                <img src={Fb} width="35px" height="35px" alt=""/>
 
               </a>
 
@@ -210,7 +223,7 @@ class ProducBox extends Component {
                   'https://www.instagram.com/?url='+ encodeURIComponent(location.href))
                     return false;}}
                 >
-                  <img src={Ig} width="100px" height="100px" alt=""/>
+                  <img src={Ig} width="35px" height="35px" alt=""/>
 
               </a>
               </div>

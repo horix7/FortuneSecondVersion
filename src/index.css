@@ -16,6 +16,10 @@ body {
 
 .mySlides {display:none;}
 
+.homeform {
+  width: 70%;
+  margin-left: 15%;
+}
 .tickets {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -27,6 +31,10 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.hideIco {
+  visibility: hidden;
 }
 
 code {
@@ -58,6 +66,19 @@ button, i {
 a {
   cursor: pointer
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
+.flexCont div p {
+  cursor: pointer
+}
+.flexCont div p:hover {
+  text-decoration: underline;
+
+}
+
 
 .topBottom {
   margin-top: 20px;
@@ -158,7 +179,7 @@ grid-template-columns: 1fr 1fr 1fr;
 .payment .center-align {
   padding: 0px;
   font-size: medium;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 .payment .center-align span{
@@ -266,7 +287,19 @@ text-decoration: underline;
   font-size: large;
 font-weight: normal;
 border: none;
+text-decoration: underline;
 
+
+}
+
+.gridTwow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.gridTwow div:last-child {
+  text-align: end;
 }
 .linkBtn2 {
   color: rgb(68, 68, 255);
@@ -278,6 +311,8 @@ border: none;
   font-size: large;
   text-align: center;
   font-weight: bold;
+text-decoration: underline;
+
 }
 
 .homePara {
@@ -758,11 +793,12 @@ background-color: rgb(211, 211, 211);
   font-weight: lighter;
 }
 
+
 .blackBokx .linkBtn2 {
   padding: 0px;
 }
 .aboutBox {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 5%;
   width: 90%;
 }
@@ -804,10 +840,16 @@ background-color: rgb(211, 211, 211);
 
 
 @media screen and (max-width: 900px) {
-  .picturesShare {
-    grid-template-columns: 1fr 1fr ;
+  
+.hideIco {
+  visibility: visible;
+}
 
-  }
+
+.homeform {
+  width: 100%;
+  margin-left: 0%;
+}
 
   .payment2 {
     grid-template-columns: 1fr;
@@ -925,7 +967,7 @@ background-color: rgb(211, 211, 211);
     grid-template-columns: 1fr;
   }
   .userNav {
-    grid-template-columns: 43% 12% 30% 15%;
+    grid-template-columns: 45% 15% 25% 13%;
   }
   .viewAuction {
     width: 150px;
