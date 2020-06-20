@@ -26,7 +26,7 @@ import TermsAndCond from '../../documents/document'
 import AboutCo from '../../documents/aboutCompany'
 import PrivacyPolicy from '../../documents/privacy'
 import ModalTerms from 'react-modal'
-
+import PayMentOpt from '../../images/PaymentOptions3.png'
 
 
 
@@ -67,7 +67,6 @@ class Landing extends Component {
     getFrontPro = () => {
         axios.get(localStorage.address + "/api/v1/frontpro")
         .then(response => {
-            console.log(response.data.data)
             let newArray = [...response.data.data]
             
              this.setState({
@@ -75,14 +74,12 @@ class Landing extends Component {
             })
         })
         .catch(error => {
-          console.log(error);
         })
     }
 
     getFrontWin = () => {
         axios.get(localStorage.address + "/api/v1/frontwin")
         .then(response => {
-            console.log(response.data.data)
             let newArray = [...response.data.data]
             
              this.setState({
@@ -90,7 +87,6 @@ class Landing extends Component {
             })
         })
         .catch(error => {
-          console.log(error);
         })
     }
     openLogin = () => {
@@ -113,7 +109,6 @@ class Landing extends Component {
     }
 
     openLogin21= () => {
-        console.log("some Have Failed ")
     }
 
     openSign = () => {
@@ -319,7 +314,7 @@ class Landing extends Component {
                 </div>
                 
                 <div className="introPage4 padds2">
-                <h3 style={{textTransform: "uppercase", paddingBottom:"10px"}} >
+                <h3 style={{textTransform: "capitalize", paddingBottom:"10px"}} >
                     Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.
                     </h3>
                 
@@ -365,6 +360,8 @@ class Landing extends Component {
 
               {this.state.products ?  <div id="products" className="">
                   <h3 className="center-align">AUCTION</h3>
+              <a className="viewMore" onClick={this.openLogin}>view more</a>
+
               <div className="hideSmall ProductsHere">
                 
                 {this.state.products.map(n => (
@@ -427,6 +424,7 @@ class Landing extends Component {
 
               {this.state.winners ?  <div className="winners">
               <h3 className="center-align">WINNERS</h3>
+              <a className="viewMore" onClick={this.openLogin}>view more</a>
 
                 <div className="hideSmall ProductsHere">
                 {this.state.winners.map(n => (
@@ -481,6 +479,9 @@ class Landing extends Component {
 
 
                 </div> : <Loader type="circle"  style="preloader-wrapper large active"/>}
+
+
+                <img src={PayMentOpt} width="100%" alt=""/>
 
                 <Footer 
                 openTerms={this.openTerms}

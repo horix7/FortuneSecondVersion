@@ -88,7 +88,6 @@ class User extends Component {
                         userInfo: true 
                    })
                  }
-                    console.log(response)
                }).catch(err => console.error(err))
               
          }

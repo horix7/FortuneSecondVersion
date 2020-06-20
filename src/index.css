@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hideSome {
+  position: sticky;
+}
+
 .payCard h3 {
   text-transform: uppercase;
   padding-top: 10px;
@@ -179,7 +183,7 @@ grid-template-columns: 1fr 1fr 1fr;
 .payment .center-align {
   padding: 0px;
   font-size: medium;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
 }
 
 .payment .center-align span{
@@ -346,6 +350,11 @@ text-decoration: underline;
   color: white;
 }
 
+.viewMore {
+  margin-left: 5%;
+  font-size: large;
+}
+
 .winnersPara {
   margin: 10px 4px 2px 4px;
   font-size: medium;
@@ -497,6 +506,17 @@ background-color: rgb(211, 211, 211);
 
 }
 
+.payOpt12 {
+  margin-top: -5%;
+  width: 50%;
+  margin-left: 25%;
+  padding-bottom: 10px;
+}
+
+.payOpt1 {
+  padding: 10px;
+}
+
 .gridTwoe1 {
   text-align: center;
   display: grid;
@@ -559,6 +579,12 @@ background-color: rgb(211, 211, 211);
   text-transform: uppercase;
 }
 
+.loginSmalF {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20%;
+}
+
 .highlight {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -604,6 +630,11 @@ background-color: rgb(211, 211, 211);
   display: grid;
   grid-template-columns: 30% 70%;
   text-align: center;
+}
+
+.file-field {
+  color: blue;
+  text-decoration: underline;
 }
 
 .userInfo {
@@ -668,6 +699,7 @@ background-color: rgb(211, 211, 211);
 }
 .btn1 {
  color: blue;
+ cursor: pointer;
 }
 
 .btn2 {
@@ -802,7 +834,9 @@ background-color: rgb(211, 211, 211);
   padding: 5%;
   width: 90%;
 }
-
+#padx {
+  padding-bottom: 10px;
+}
 .blackBokx h5 {
   color: white;
   text-decoration: underline;
@@ -835,12 +869,28 @@ background-color: rgb(211, 211, 211);
   .ProductsHere {
     grid-template-columns: 1fr 1fr ;
   }
+  .loginSmalF {
+    width: 100%;
+    margin-left: 0%;
+    margin-top: 0%;
+  }
+  
 }
 
 
 
 @media screen and (max-width: 900px) {
+
+  .viewMore {
+    margin-left: 10%;
+  }
   
+  .payOpt12 {
+    margin-top: -5%;
+    width: 100%;
+    margin-left: 0%;
+  }
+
 .hideIco {
   visibility: visible;
 }

@@ -71,7 +71,6 @@ class Login extends Component {
            })
            .then( (response) => {
 
-            console.log(response)
                 this.setState({
                     reset: false,
                     btnLoad: false,
@@ -85,8 +84,6 @@ class Login extends Component {
                this.showError()
 
               let info = err.response.data
-              console.log(info)
-              console.log(info)
               if (info.status == 400) {
                  this.setState({
                     error: "Your Provided Invalid Information",
@@ -144,8 +141,6 @@ class Login extends Component {
 
 
               let info = err.response.data
-              console.log(info)
-              console.log(info)
               if (info.status == 400) {
                  this.setState({
                     error: "Your Provided Invalid Information",
@@ -223,7 +218,6 @@ class Login extends Component {
 
 
     changeSubmit = () => {
-        console.log(Object.values(this.state.loginInfo).some(n => n == null))
         if(!Object.values(this.state.loginInfo).some(n => n == null)) {
               this.setState({
                  submit: true
@@ -380,9 +374,12 @@ class Login extends Component {
 
     return(
         <Fragment>
+           <div className="loginSmalF">
              {this.state.error ? <div id="err" className="errorz">{this.state.error}</div> : null}
              {this.state.mess ? <div id="err" className="successz">{this.state.mess}</div> : null}
            {!this.state.reset ? <div> {this.state.login ? login : forgot} </div> : reset}
+           </div>
+
         </Fragment>
     )
 }

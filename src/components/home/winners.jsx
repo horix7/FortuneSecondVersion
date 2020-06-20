@@ -19,7 +19,6 @@ class Winners extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
-                console.log(response.data)
                  this.setState({
                     winners: response.data.data,
                     wins: true 

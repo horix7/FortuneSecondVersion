@@ -34,7 +34,6 @@ class SignUp extends Component {
   }
 
    changeSubmit = () => {
-      console.log(Object.values(this.state.signUp).some(n => n == null))
       if(!Object.values(this.state.signUp).some(n => n == null)) {
             this.setState({
                submit: true
@@ -76,7 +75,6 @@ class SignUp extends Component {
              localStorage.setItem("details", JSON.stringify(response.data.data[0].details))
 
 
-             console.log(localStorage.auth);
              this.setState({
                 error: null
              })
@@ -86,7 +84,6 @@ class SignUp extends Component {
             this.showError()
            try {
             let info = err.response.data
-            console.log(info)
             if (info.status == 400) {
                this.setState({
                   error: "Your Provided Invalid Information ",
@@ -108,7 +105,6 @@ class SignUp extends Component {
    }
 
    handleInputChange = (e) => {
-      console.log(this.state)
       this.state.signUp[e.target.id] = e.target.value
       this.changeSubmit()
 
@@ -179,7 +175,7 @@ class SignUp extends Component {
                 <div  className="pushUp">
                 <label>Choose Your Gender</label>
 
-                    <select className="input-field" onChange={this.changeGender} required >
+                    <select className="browser-default" onChange={this.changeGender} required >
 
                     <option ></option>
                     <option value="male">Male</option>
@@ -204,7 +200,7 @@ class SignUp extends Component {
                     <div className="pushUp">
                     <label>select Country Code</label>
 
-                    <select className="input-field"  name="countryCode" id="" onChange={this.changeCode} required>
+                    <select className="browser-default"  name="countryCode" id="" onChange={this.changeCode} required>
 		<option ></option>
       <option countryCode="DZ" value="213">Algeria (+213)</option>
 		<option countryCode="AD" value="376">Andorra (+376)</option>
@@ -438,7 +434,7 @@ class SignUp extends Component {
            <div>
            <label htmlFor="country">Choose Your Country</label>
 
-            <select className="input-field" required  id="country" name="country" onChange={this.changeCountry}>
+            <select className="browser-default" required  id="country" name="country" onChange={this.changeCountry}>
 		          <option ></option>
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Åland Islands">Åland Islands</option>

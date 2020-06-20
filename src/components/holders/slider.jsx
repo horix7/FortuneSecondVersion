@@ -30,7 +30,6 @@ class Slider extends Component {
 
     backCurrent() {
         let newState = {...this.state}
-        console.log(newState)
         if(newState.current !== 0) {
             
             this.setState({

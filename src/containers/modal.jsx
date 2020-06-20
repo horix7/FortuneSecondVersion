@@ -8,6 +8,8 @@ import ErrorHandler from '../containers/erroHandle'
 import payPic from '../images/payOptions.jpg'
 import Ravepay from 'flutterwave-node';
 import 'dotenv/config'
+import PaymentOption2 from '../images/PaymentOptions3.png'
+
 
 // const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
 
@@ -38,9 +40,7 @@ const Gh_mobilemoney =  async ()=>{
         }
  
        const response =  await rave.MobileMoney.ghana(payload, rave)
-       console.log(response);
     } catch (error) {
-        console.log(error)
     }                            
    
 }
@@ -68,9 +68,7 @@ const callMpesa =  async ()=>{
     }
     try {
        const response =  await rave.MobileMoney.mpesa(payload, rave)
-       console.log(response);
     } catch (error) {
-        console.log(error)
     }                            
    
 }
@@ -99,9 +97,7 @@ const zmw_mobilemoney=  async ()=>{
     }
     try {
        const response =  await rave.MobileMoney.zambia(payload, rave)
-       console.log(response);
     } catch (error) {
-        console.log(error)
     }                            
    
 }
@@ -130,9 +126,7 @@ const Ugx_mob_money=  async ()=>{
     }
     try {
        const response =  await rave.MobileMoney.uganda(payload, rave)
-       console.log(response);
     } catch (error) {
-        console.log(error)
     }                            
    
 }
@@ -156,9 +150,7 @@ const franco_mobilemoney=  async ()=>{
    }
     try {
        const response =  await rave.MobileMoney.francophone(payload, rave)
-       console.log(response);
     } catch (error) {
-        console.log(error)
     }                            
    
 }
@@ -172,9 +164,7 @@ const callVerify =  async (ref) => {
     }
     try {
        const response =  await rave.VerifyTransaction.verify(payload, rave)
-       console.log(response);
     } catch (error) {
-        console.log(error)
     }                            
    
 }
@@ -209,8 +199,8 @@ let bidRequest = () => {
             momopay: userNumber || "credict-card Payment"
             
     }
+    localStorage.setItem("payemtAuth" , null)
 
-    console.log(bidInfo)
     axios({
         method: 'post',
         url: localStorage.address + "/api/v1/bid/",
@@ -225,12 +215,21 @@ let bidRequest = () => {
         .then( (response) => {
            setBtnLoad(false)
 
-            if(response.data.data.length >= 1) {
-                console.log(response.data.data)
-            } else {
-                console.log("[All DOne ] Here ")
+               if(response.data.data == "done") {
                 alert("Your Bid Was Made Successfully")
-            }
+                window.location.reload()
+               }else {
+                if(response.data.data.tickets.length < response.data.data.size) {
+                    alert("Your Bid Was Not  Successfull contact support on contact@fortuneauction360.com")
+                    window.location.reload()
+               
+                }else {
+                    alert("An error Occured When Bidding contact support on contact@fortuneauction360.com")
+                    window.location.reload()
+                    
+                }
+
+               }
          
 
 
@@ -254,15 +253,12 @@ let chechStatusMomo = (id) => {
     })
     .then( (response) => {
         if(response.data.data.trxStatus == "pending") {
-            console.log("pending")
             chechStatusMomo(id)    
 
 
         } else if (response.data.data.trxStatus == "failed") {
-            console.log("reachedHere")
             let message = response.data.data.channelRef.split('_')
             message.shift()
-            console.log(message)
 
             message.join('-')
             alert(message)
@@ -270,7 +266,6 @@ let chechStatusMomo = (id) => {
             setBtnLoad(false)
 
         } else if (response.data.data.trxStatus == "successful") {
-            console.log("succeeded")
             bidRequest()
         }
 
@@ -281,22 +276,18 @@ let chechStatusMomo = (id) => {
 
 let checkStatusAirtelMoney =  (id) => {
     
-    console.log("[Status] Airtel Status Check")
     let link = "https://api.havanao.com/api/sale/status?transactionId=" + id +"&api_token=NJoyXg1on9rG4RDUDfNN0nBUR1JJp8E4FRuGR6h767ApnuQ1cJmiqgNZW7wZ"
  axios({
     method: 'get',
     url:  link
     })
     .then( (response) => {
-        console.log(response)
 
             if(response.data.transactionStatus == "REQUESTED") {
-               console.log("proccessing")
                checkStatusAirtelMoney(id)
 
 
             } else if(response.data.transactionStatus == "DECLINED") {
-               console.log("failed")
                alert("Your Payment Failed Try Again ")
                setBtnLoad(false)
 
@@ -336,10 +327,12 @@ let checkStatusAirtelMoney =  (id) => {
 
                    
                 } else {
-                    console.log("error" , response)
                 }
 
-            }).catch(err =>  setBtnLoad(false))
+            }).catch(err =>  {
+                alert("anError Occured Processing Your Payment")
+                console.error(err)
+                setBtnLoad(false)})
       }
 
 
@@ -376,7 +369,6 @@ let checkStatusAirtelMoney =  (id) => {
 
   let  payMomo = () => {
     setBtnLoad(true)
-      console.log("[MoMo] payment")
         let postForPayment = {
             "trxRef": new Date().getTime() + "-" + parseInt(Math.random() * 100),
             "channelId": "momo-mtn-rw",
@@ -386,7 +378,7 @@ let checkStatusAirtelMoney =  (id) => {
             "callback": "http://front-213v31.herokuapp.com/"
           }
           
-          console.log(postForPayment)
+
 
 axios({
     method:"get",
@@ -412,14 +404,16 @@ axios({
              chechStatusMomo(postForPayment.trxRef)
                
             } else {
-                console.log("error" , response)
             }
 
         }).catch(err => {
             setBtnLoad(false)
-            console.log(err.response)
         })
-}).catch(err => console.error(err))
+}).catch(err => {
+    alert("anError Occured Processing Your Payment")
+    console.error(err)
+    setBtnLoad(false)
+})
 }
 
      let getPhoneNumber = e => {
@@ -427,6 +421,9 @@ axios({
       }
 
       
+      let  numberWithCommas = x => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 const config = {
     txref:"MC-" + new Date(),
     customer_email: JSON.parse(localStorage.details).email,
@@ -460,7 +457,7 @@ const config = {
 
                      <div className="checkout">
                          <div className="total" id="bottom">
-                           Total {" " + JSON.parse(localStorage.currency).currency} {parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2)} 
+                           Total = {" " + JSON.parse(localStorage.currency).currency}{numberWithCommas(parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2))} 
                          </div>
                          <button className="btn blue" onClick={() => setModal(true)}>Continue To Checkout</button>
                      </div>
@@ -520,7 +517,8 @@ const config = {
                     const M = window.M
                     M.AutoInit();
               }}>
-                 <div className="center-align"> Total Payment  {JSON.parse(localStorage.currency).currency} <span> {parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2)} </span></div>
+                  <img src={PaymentOption2} width="100%" className="payOpt12" alt=""/>
+                 <div className="center-align"> Total Payment  {JSON.parse(localStorage.currency).currency} <span> {numberWithCommas(parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2))} </span></div>
               <div className="payment2">
 
               {JSON.parse(localStorage.currency).currency == "RWF" ? 
@@ -528,17 +526,17 @@ const config = {
 
                   <div className="spaceIn">
 
-              <select className="input-field spaceIn"  name="countryCode" id="codes" onChange={() => changeCode(document.querySelector('#codes').value)} required>
+              <select className="input-field spaceIn"   id="codes" onChange={() => changeCode(document.querySelector('#codes').value)} required>
                 <option  value="mtn" default> Mtn Mobile Money Rwanda</option>
                 <option  value="tigo" default>Airtel-Tigo cash Rwanda</option>
 
              </select>
              </div>
 
-              <div className="spaceIn gridTwo4">
+              <div className="spaceIn gridTwo4" >
               <div  className="pushUp2">
-              <select className="input-field"  name="countryCode" required>
-                <option countryCode="RW" value="250" default> +250</option>
+              <select className="input-field"  name="countrycode" required>
+                <option countrycode="RW" value="250" default> +250</option>
              </select>
               </div>
               
@@ -562,7 +560,7 @@ const config = {
                     } else {
                         payMomo()
                     }
-                }}>PAY {waiting ? waiting : " " + JSON.parse(localStorage.currency).currency + " " + parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(2) }</button> }
+                }}>PAYING = {waiting ? waiting : " " + JSON.parse(localStorage.currency).currency + numberWithCommas(parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(2)) }</button> }
                    {/* <div className="midLoader"> <Loader type="circle" style="preloader-wrapper small active"/>  </div> } */}
                   </div>
                   </div> 
@@ -573,13 +571,12 @@ const config = {
                   <div className="payCard">
                     <h3>Pay With Credit-Card</h3>
                     <br/>
-                    <img src={payPic} alt=""/>
                     <br/>
 
                     <ErrorHandler>
 
                     <RaveProvider {...config}>
-                        <RavePaymentButton className="btn-large">Pay  {" " +JSON.parse(localStorage.currency).currency}  {parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2)}</RavePaymentButton>
+                        <RavePaymentButton className="btn-large">Paying = {" " + JSON.parse(localStorage.currency).currency}{numberWithCommas(parseFloat(total / JSON.parse(localStorage.currency).rate ).toFixed(2))}</RavePaymentButton>
                     </RaveProvider>
 
                     </ErrorHandler>

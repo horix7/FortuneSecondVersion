@@ -22,11 +22,18 @@ import Loader from '../UI/preloader'
             "trxRef": "MC-" + Date.now(),
             "channelId": "momo-mtn-rw",
             "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
-            "msisdn": this.state.number,
-            "amount": 100,
+            "msisdn": this.state.money.number,
+            "amount": parseInt(this.state.money.amount),
             "callback": "https://your-callback.example-app.com"
           }
 
+axios({
+    method:"get",
+    url: localStorage.address + "/api/v1/paytoken",
+    headers: {
+        Authorization: localStorage.auth
+    }
+}).then(results => {
           axios({
             method: 'post',
             url: "https://payments-api.fdibiz.com/v2/momo/push",
@@ -34,15 +41,21 @@ import Loader from '../UI/preloader'
             headers: {
                 "Content-Type":"application/json",
                 "Accept":"application/json", 
-                "Authorization":"Bearer" + " " + localStorage.paymentAuth
+                "Authorization":"Bearer" + " " + results.data.data
                 
                 }
             })
             .then( (response) => {
-                 console.log(response)
 
-            }).catch(err => console.error(err))
- }
+            }).catch(err => {
+                alert("Something Wrong Happened")
+                console.error(err)
+                if(err.response) {
+                }
+            })
+        })
+    .catch(err => console.error(err))
+        }
   
  
    handleInputs = (e) => {

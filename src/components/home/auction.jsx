@@ -4,7 +4,6 @@ import axios from 'axios';
 import Loader from '../UI/preloader';
 import Modal from '../../containers/modal';
 
-
 class Auction extends Component {
     state= {
         openModal: false,
@@ -23,7 +22,6 @@ class Auction extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
-                console.log(response.data)
                  this.setState({
                     products: response.data.data,
                     pro: true 
@@ -39,7 +37,6 @@ class Auction extends Component {
           headers: {  Authorization: localStorage.auth }
           })
           .then(res => {
-              console.log(res)
               this.getDataBids()
 
           }).catch (err => {
@@ -59,16 +56,13 @@ class Auction extends Component {
       .then( (response) => {
           if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
               this.getDataBids()
-              console.log("datat{Here}")
           } else {
               this.getDataBids()
-              console.log("datat{Here}2")
 
           this.setState({
               loadPage: false
           })
       }
-         console.log(response)
       }).catch(err => console.error(err))
      
 }
@@ -79,7 +73,6 @@ class Auction extends Component {
           headers: {  Authorization: localStorage.auth }
           })
           .then( (response) => {
-              console.log(response.data)
                if( response.data.data.length > 1 || response.data.data == null || response.data.data == undefined) {
                 this.setState({
                   bidzid: [0]
@@ -150,7 +143,6 @@ class Auction extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
-                console.log(response.data)
                 let dataTick = (tick) => {
                    if(tick == null || tick == "[]") {
                        return ["No Data"]

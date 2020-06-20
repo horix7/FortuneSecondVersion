@@ -3,8 +3,9 @@ import React from 'react';
 let privacyInfo = () => {
     return (
         <div className="info1212">
-       Welcome to the Privacy & Cookie Policy
-The Privacy Policy
+      <h3> Welcome to the Privacy & Cookie Policy
+The Privacy Policy</h3>
+<br/>
 Introduction
 This Policy applies to our websites, applications, products or services that link to this policy or do
 not have a separate privacy policy (collectively our “Services”).

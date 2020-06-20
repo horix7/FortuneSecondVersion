@@ -19,6 +19,7 @@ class ProducBox extends Component {
       openModal: false
     }
     
+  
     componentDidMount() {
 
     }
@@ -52,10 +53,14 @@ class ProducBox extends Component {
         this.props.onFinish()
       }
      
+      let  numberWithCommas = x => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+        
         return (
           <Fragment>
 
-         {!this.state.openModal ? <div>
+   {!this.state.openModal ? <div>
          
 
             <Counter date={this.props.info.date} hour={this.props.info.hour}  onFinish={this.props.onFinish}/>
@@ -80,7 +85,7 @@ class ProducBox extends Component {
                   <Par 
                     info={{
                             type:"bidText", //homeText homePara
-                            text: "Ticket Price" +  " " +  JSON.parse(localStorage.currency).currency + " " + (parseFloat(this.props.info.price) / JSON.parse(localStorage.currency).rate).toFixed(2) 
+                            text: "Ticket Price = " +  " " +  numberWithCommas(JSON.parse(localStorage.currency).currency + (parseFloat(this.props.info.price) / JSON.parse(localStorage.currency).rate).toFixed(2))
                           }}
                         />
                         <div className="gridTwo topBottom">
@@ -193,7 +198,7 @@ class ProducBox extends Component {
                  <a href="#" target="_blank"
                 onClick={() => {
                   window.open(
-                    'https://telegram.me/share/url?url='+location.href + "&text=" + "home")
+                    'https://telegram.me/share/url?url='+location.href + "&text=" + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360" )
                   return false;}}>
                 <img src={Tel} width="35px" height="35px" alt=""/>
 
@@ -201,7 +206,7 @@ class ProducBox extends Component {
                    <a href="#" target="_blank"
                 onClick={() => {
                   window.open(
-                    'whatsapp://send?text='+ encodeURIComponent(location.href))
+                    'whatsapp://send?text='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360" + encodeURIComponent(location.href))
                   return false;}}>
                 <img src={WhatsApp} width="35px" height="35px" alt=""/>
 
@@ -209,7 +214,7 @@ class ProducBox extends Component {
                  <a href="#" target="_blank"
                 onClick={() => {
                   window.open(
-                    'https://www.facebook.com/sharer/sharer.php?u='+ encodeURIComponent(location.href), 
+                    'https://www.facebook.com/sharer/sharer.php?u='+" Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360" + comencodeURIComponent(location.href), 
                     'facebook-share-dialog', 
                     'width=626,height=436')
                   return false;}}>
@@ -220,7 +225,7 @@ class ProducBox extends Component {
               <a href="#" target="_blank"
               onClick={() => {
                 window.open(
-                  'https://www.instagram.com/?url='+ encodeURIComponent(location.href))
+                  'https://www.instagram.com/?url='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360"  +encodeURIComponent(location.href))
                     return false;}}
                 >
                   <img src={Ig} width="35px" height="35px" alt=""/>

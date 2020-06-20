@@ -30,7 +30,6 @@ import Loader from '../UI/preloader'
         })
         const fd = new FormData()
         fd.append('pro', this.state.winneR.picture)
-        console.log(fd)
        axios({
            method: 'post',
            url: localStorage.address + "/image/",
@@ -78,7 +77,6 @@ import Loader from '../UI/preloader'
                submit: false
            })
        }else {
-     console.log(this.state)
 
         this.setState({
             submit: true

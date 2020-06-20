@@ -8,6 +8,7 @@ import Loader from '../UI/preloader';
 import CreatePro from '../forms/productReq';
 import Form from '../../containers/formHolder'
 import SImage from '../../images/22-223965_no-profile-picture-icon-circle-member-icon-png.png'
+import PaymentOption2 from '../../images/PaymentOptions3.png'
 
 if(localStorage.currency == null ) {
   localStorage.setItem("currency", JSON.stringify({
@@ -70,7 +71,6 @@ class Profile extends Component {
       })
     const fd = new FormData()
     fd.append('pro', this.state.image)
-    console.log(fd)
    axios({
        method: 'post',
        url: localStorage.address + "/image/",
@@ -125,14 +125,18 @@ class Profile extends Component {
       let fetchDataArr =  this.props.dataTable.map(n => {
         return { product: n.product, date: n.time.toString().split('T')[0],price: n.revenue, tickets: n.fortunes}
       })
-console.log(fetchDataArr)
 
         return (
             <Fragment>
-           {this.state.proReq ? <Form
+           {this.state.proReq ?
+            <div className="homeform">
+
+            <Form
            clecked={this.openProReq}>
              <CreatePro />
            </Form>
+           </div>
+
            :  <Fragment>
 
 
@@ -160,9 +164,9 @@ console.log(fetchDataArr)
                        </div>
                          <div className="">
                         {this.state.img ?  <button 
-                         className="btn  black-text white" 
+                         className="btn  white-text light-green darken4" 
                          style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
-                         onClick={this.changeUserPic}>Upload</button> : <button className="btn black-text white"
+                         onClick={this.changeUserPic}>Upload</button> : <button className="btn white-text light-green darken4"
                          style={{display: "none", height:"30px", marginTop:"30px", marginLeft:"10px"}}
                          >Upload</button>}
 
@@ -184,9 +188,9 @@ console.log(fetchDataArr)
                        </div>
                          <div className="">
                         {this.state.img ?  <button 
-                         className="btn  black-text white" 
+                         className="btn  white-text light-green darken4" 
                          style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
-                         onClick={this.changeUserPic}>Upload</button> : <button className="btn black-text white"
+                         onClick={this.changeUserPic}>Upload</button> : <button className="btn white-text light-green darken4"
                          style={{display: "none", height:"30px", marginTop:"30px", marginLeft:"10px"}}
                          >Upload</button>}
 
@@ -218,6 +222,9 @@ console.log(fetchDataArr)
                  </div>
                     
 
+              <img src={PaymentOption2} alt="" width="100%" className="payOpt1" style={{
+                textAlign: "center"
+              }}/>
                 
                 {this.props.dataTable.length > 1 ?
                 <Fragment>

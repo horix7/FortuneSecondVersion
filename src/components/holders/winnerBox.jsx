@@ -4,6 +4,7 @@ import Par from '../UI/paragraphs';
 import Image from '../UI/image';
 import Modal from 'react-modal';
 import VideoPlayer from 'react-player'
+
 Modal.setAppElement('#root')
 
 
@@ -64,30 +65,24 @@ class WinnerBox extends Component {
                />
                     <div className="gridTwo topBottom">
                         <div>
-                        <Button 
-                        style="btn-small blue darken-3"
-                        text="watch Video"
-                        info={{
-                            type: "submit",
-                            name: "action",
-                    
-                        }}
-                        clicked={() => this.opneModal(this.props.info.video)}
+                        <a 
+                      className="btn-small blue darken-3"
+                      href={this.props.info.video}
+                      target="_blank"
+                      > 
+                      Watch Video 
+                       </a>
 
-                   /> 
                         </div>
 
                         <div>
-                        <Button 
-                        style="btn-small blue darken-3"
-                        text="listen Audio"
-                        info={{
-                            type: "submit",
-                            name: "action",
-                    
-                        }}
-                        clicked={() => this.opneModal(this.props.info.audio)}
-                   /> 
+                        <a 
+                      className="btn-small blue darken-3"
+                      href={this.props.info.audio}
+                      target="_blank"
+                      > 
+                      listen Audio
+                       </a>
                         </div>
                     </div>
                       

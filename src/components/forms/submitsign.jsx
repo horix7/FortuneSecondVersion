@@ -63,7 +63,7 @@ class SubmitSign  extends Component {
 
             let request = {...this.state.requestInfo}
             request.account = response.data.data[0].details.username
-            request.phone = response.data.data[0].details.phone
+            request.phone =  this.state.signUp.countrycode + response.data.data[0].details.phone
             request.email = response.data.data[0].details.email
 
              this.setState({
@@ -79,7 +79,6 @@ class SubmitSign  extends Component {
          }).catch(err => {
             this.showError()
             let info = err.response.data
-            console.log(info)
             if (info.status == 400) {
                this.setState({
                   error: "Your Provided Invalid Information ",
@@ -116,7 +115,7 @@ class SubmitSign  extends Component {
 
             let request = {...this.state.requestInfo}
             request.account = response.data.data[0].details.username
-            request.phone = response.data.data[0].details.phone
+            request.phone = response.data.data[0].details.countrycode + response.data.data[0].details.phone
             request.email = response.data.data[0].details.email
 
 
@@ -150,7 +149,6 @@ class SubmitSign  extends Component {
             }
            
 
-            console.log(err)
          })
         
       }
@@ -181,11 +179,9 @@ class SubmitSign  extends Component {
 
                   this.props.login()
             }, 1000)
-            console.log(response)
 
 
          }).catch(err => {
-           console.log(err)
            
          })
         
@@ -194,7 +190,6 @@ class SubmitSign  extends Component {
    handleInputChange = (e) => {
       this.state.signUp[e.target.id] = e.target.value
       this.changeSubmitAcc()
-      console.log(this.state)
 
      
    }
@@ -202,7 +197,6 @@ class SubmitSign  extends Component {
    handleInputChangeR = (e) => {
       this.state.loginInfo[e.target.id] = e.target.value
       this.changeSubmitAcc2()
-      console.log(this.state)
 
 
      
@@ -212,7 +206,6 @@ class SubmitSign  extends Component {
       this.state.requestInfo[e.target.id] = e.target.value
       this.changeSubmitAcc2()
       this.changeSubmitAcc()
-      console.log(this.state)
 
 
      
@@ -221,7 +214,6 @@ class SubmitSign  extends Component {
    
    changeSubmitAcc = () => {
       let checkAll =  Object.values(this.state.signUp).some(n => n == null) && Object.values(this.state.requestInfo).some(n => n == null)
-      console.log(checkAll)
       if(!checkAll) {
             this.setState({
                submit: true
@@ -235,7 +227,6 @@ class SubmitSign  extends Component {
 
    changeSubmitAcc2 = () => {
       let checkAll = Object.values(this.state.loginInfo).some(n => n == null) && Object.values(this.state.requestInfo).some(n => n == null)
-      console.log(checkAll)
 
       if(!checkAll) {
             this.setState({

@@ -36,7 +36,6 @@ class CreatePro  extends Component{
   uploadImage = () => {
     const fd = new FormData()
     fd.append('pro', this.state.productR.picture)
-    console.log(fd)
    axios({
        method: 'post',
        url: localStorage.address + "/image/",
@@ -56,7 +55,6 @@ class CreatePro  extends Component{
 
      }
     this.changeSub()
-    console.log(this.state)
     }
 
     submitProduct = e => {
@@ -102,7 +100,6 @@ class CreatePro  extends Component{
                 submit: false 
             })
         }else {
-     console.log(this.state)
 
          this.setState({
              submit: true

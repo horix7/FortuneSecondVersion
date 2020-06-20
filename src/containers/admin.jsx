@@ -47,7 +47,8 @@ class Admin extends Component {
          this.getWinnerData()
          this.dataInfo()
          this.allUsersRegistered()
-
+         this.getRefundOnes()
+         this.activateMomo()
         }
 
     getWinnerData = () => {
@@ -58,7 +59,6 @@ class Admin extends Component {
             })
             .then( (response) => {
                 if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
-                    console.log(response)
                 } else {
 
                     this.setState({
@@ -69,7 +69,36 @@ class Admin extends Component {
                  
             }).catch(err => console.error(err))
     }
-    
+
+    getRefundOnes = () => {
+        axios({
+            method: 'get',
+            url: localStorage.address + "/api/v1/refunem/" ,
+            headers: {  Authorization: localStorage.auth }
+            })
+            .then( (response) => {
+                  if(response.data.error.length < 1) {
+
+                  }else {
+                    this.setState({
+                        reundz: response.data.error
+                   })
+                  }
+                 
+            }).catch(err => console.error(err))
+    }
+
+    activateMomo  = () => {
+        axios({
+            method: 'get',
+            url: localStorage.address + "/api/v1/payment/" ,
+            headers: {  Authorization: localStorage.auth }
+            })
+            .then( (response) => {
+            }).catch(err => console.error(err))
+           
+    }
+
     getBidData = () => {
         axios({
             method: 'get',
@@ -100,12 +129,8 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
-                console.log(response)
                 if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
-                    console.log(response)
                 } else {
-                    console.log(response)
-                    console.log("response")
 
                  this.setState({
                     requestedPro: response.data.data.map(n => {
@@ -185,7 +210,6 @@ class Admin extends Component {
                     loadPage: false
                 })
             }
-               console.log(response)
             }).catch(err => console.error(err))
            
     }
@@ -212,7 +236,6 @@ class Admin extends Component {
                   loadPage: false
               })
           }
-             console.log(response)
           }).catch(err => console.error(err))
          
   }
@@ -241,7 +264,6 @@ class Admin extends Component {
                   loadPage: false
               })
           }
-             console.log(response)
           }).catch(err => console.error(err))
          
   }
@@ -273,7 +295,6 @@ class Admin extends Component {
               loadPage: false
           })
       }
-         console.log(response)
       }).catch(err => console.error(err))
      
 }
@@ -342,11 +363,9 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then(res => {
-                console.log(res)
                 this.runAllFunc()
 
             }).catch (err => {
-                console.log(err)
                 alert("Failed To Choose The Winners")
                 this.cancelAuction2(id)
             })
@@ -397,7 +416,7 @@ class Admin extends Component {
                             store: n.store,
                             account: n.account,
                             email: n.email,
-                            phone: n.phone,
+                            phone:  n.phone,
                             selling: n.sells,
                             action: ( <div>
                                {n.verified ? null :  <a className="insideTb blue-text row" onClick={() => this.approveVend(n.account)}>accept</a>}
@@ -516,6 +535,9 @@ class Admin extends Component {
 
            
     }
+    let  numberWithCommas = x => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     
         return (
            <Fragment>
@@ -531,7 +553,11 @@ class Admin extends Component {
                 <div className="highlight">
                     <div className="light1">
                         <p>Revenue</p>
-                        <div>RWF 0</div>
+          {this.state.pro ?  <div>US$ {this.state.realPro.map(n => {
+              if(n.sold !== null ) {
+                return n.price * JSON.parse(n.sold).length
+              }
+           }).reduce((a,b) => a + b)}</div> : <div>  0 </div>}
                     </div>
                     <div className="light1">
                         <p>Total Customers</p>
@@ -545,7 +571,7 @@ class Admin extends Component {
 
                     <div className="light1">
                         <p>Winners</p>
-                        {this.state.win  ? <div>{this.state.winners.length }</div> : <div>0</div>}
+                        {this.state.wins  ? <div>{this.state.winners.length }</div> : <div>0</div>}
                     </div>
                 </div>
 
@@ -635,51 +661,59 @@ class Admin extends Component {
                     let newState = this.state.downloading
                     if(e.target.value == "users") {
                         if(this.state.allusers == undefined || this.state.allusers == null) {
-                            
+                            newState = null
                         }else {
                             newState = this.state.allusers
                         }
                     }else if(e.target.value == "vendors") {
                         if(this.state.realVend == undefined || this.state.realVend == null) {
-                            
+                            newState = null
                         }else {
                             newState = this.state.realVend
                         }
                        
                     }else if(e.target.value == "bids") {
                         if(this.state.bidata == undefined || this.state.bidata == null) {
-                            
+                            newState = null
                         }else {
                             newState = this.state.bidata
                         }
                        
                   }else if(e.target.value == "products") {
                     if(this.state.realPro == undefined || this.state.realPro == null) {
-                            
+                        newState = null
                     }else {
                         newState = this.state.realPro
                     }
                  }   else if(e.target.value == "finance") {
                     if(this.state.finances == undefined || this.state.finances == null) {
-                            
+                        newState = null
                     }else {
                         newState = this.state.finances
                     }
-                }                  
-                 
+                }  
+                else if(e.target.value == "reundz") {
+                    if(this.state.reundz == undefined || this.state.reundz == null) {
+                        newState = null
+                    }else {
+                        newState = this.state.reundz
+                    }
+                }                     
+                       
                     this.setState({
                         downloading: newState
                     })
-                    console.log(this.state)
 
                 }}>
-                <option value="" disabled defaultValue>Choose Data To download </option>
+                <option value="" defaultValue>Choose Data To download </option>
                 <option value="users" > users</option>
                 <option value="vendors"> Vendors</option>
                 <option value="bids" > bids</option>
                 <option value="products"> products</option>
                 <option value="finance"> all finances</option>
-
+                <option value="reundz">Refund Users</option>
+               
+                
                 </select>
             </div>
 
@@ -702,11 +736,16 @@ class Admin extends Component {
                 <button className="btn black" onClick={this.handleCreatePro}>create Product</button>
                 <button className="btn black" onClick={this.handleCreateWin}>Publish A winner</button>
                 <button className="btn black" onClick={this.handleSendMoney}> Send Money</button>
+                <button className="btn black" onClick={() => window.location.reload()}> Refersh All Data</button>
+
+               
 
             </div>
 
             
             </Fragment> : 
+            <div className="homeform">
+
              <Form 
              clecked={() => {
                 
@@ -717,6 +756,7 @@ class Admin extends Component {
              >
                  {CurrentForm}
              </Form>
+             </div>
         }
            </Fragment>
         )

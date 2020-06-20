@@ -106,8 +106,10 @@ let userNav = props => {
                 </button>
             </div>
 
-          <div className="input-field col s12 m6">
-            <select className="icons" onChange={changeCurrency} id="currencies" required>
+            
+
+          <div className="browser-default hideSome" >
+            <select className="" onChange={changeCurrency} id="currencies">
                     <option value="$" data-icon={usa} selected={JSON.parse(localStorage.currency).currency == "$" ? "selected" : null}>$</option>
                     <option value="RWF" data-icon={rw} selected={JSON.parse(localStorage.currency).currency == "RWF" ? "selected" : null}>RWF</option>
                     <option value="₦" data-icon={ng} selected={JSON.parse(localStorage.currency).currency == "₦" ? "selected" : null}>₦</option>

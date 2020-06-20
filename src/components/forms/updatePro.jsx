@@ -26,7 +26,6 @@ class CreatePro  extends Component{
     this.state.productR[e.target.id] = e.target.value
 
     this.changeSub()
-    console.log(this.state)
     }
 
     submitProduct = e => {
@@ -77,7 +76,6 @@ class CreatePro  extends Component{
                 submit: false 
             })
         }else {
-     console.log(this.state)
 
          this.setState({
              submit: true
@@ -107,7 +105,6 @@ class CreatePro  extends Component{
 
         }
 render() {
-    console.log(this.props)
     const {name, store,hour,date,price,winners}= this.props.info
 
     return(
