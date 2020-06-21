@@ -39,14 +39,13 @@ class Admin extends Component {
 
     runAllFunc = async () => {
       
-
+        this.allUsersRegistered()
          this.getProData()
          this.getBidData()
          this.getVendReq()
          this.vendorProReq()
          this.getWinnerData()
          this.dataInfo()
-         this.allUsersRegistered()
          this.getRefundOnes()
          this.activateMomo()
         }
@@ -95,6 +94,7 @@ class Admin extends Component {
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
+                console.log(response)
             }).catch(err => console.error(err))
            
     }
@@ -334,7 +334,8 @@ class Admin extends Component {
                                 tax: tax,
                                 selling: n.selling,
                                 charge: charge,
-                                income: tot
+                                income: tot,
+                                type: n.type
 
                             }
                       }),
@@ -385,17 +386,18 @@ class Admin extends Component {
                             names: n.firstname,
                             user_name: n.secondname,
                             email: n.email,
-                            phone: n.countrycode + n.phone,
+                            phone: (n.countrycode ? n.countrycode : 0 ).toString() + (n.phone ?  n.phone : 0).toString(),
                             age: n.age,
                             registered_on: n.registeredDate,
                             isVendor: n.vendor,
                             gender: n.gender,
-                            profilePic: n.picture
+                            profilePic: n.picture,
+                            country: n.country
+
 
                         }
                     })
                 })
-
             }).catch (err => console.error(err))
     }
 
@@ -418,6 +420,7 @@ class Admin extends Component {
                             email: n.email,
                             phone:  n.phone,
                             selling: n.sells,
+                            location: n.address,
                             action: ( <div>
                                {n.verified ? null :  <a className="insideTb blue-text row" onClick={() => this.approveVend(n.account)}>accept</a>}
                                 {n.verified ? <a href="#" className="insideTb  green-text row">accepted</a> : <a className="insideTb yellow-text row" onClick={() => this.rejectVend(n.id, n.account)}>reject</a>}
@@ -608,7 +611,7 @@ class Admin extends Component {
                    <Fragment>
                     <h6 className="topBottom">Products </h6>
                     <Tables 
-                          heads={["product","vendor","revenue", "tax", "selling", "charge", "income"]}
+                          heads={["product","vendor","revenue", "tax", "selling", "charge", "income", "type"]}
                           information={this.state.finances}
                     />  
                    </Fragment>

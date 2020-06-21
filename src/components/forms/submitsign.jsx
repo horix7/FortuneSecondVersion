@@ -898,7 +898,7 @@ class SubmitSign  extends Component {
 
              />
 
-         <p className="">By Signing Up You Agree To Our Terms And Conditions </p>
+         <p className="">By Signing Up You Agree To Our <a onClick={this.props.openTerms}>  Terms And Conditions </a> &  <a onClick={this.props.openPrivacy}> Privacy Policy </a> </p>
               <br/>
 
        {this.state.btnLoad ? <Loader />: <div>

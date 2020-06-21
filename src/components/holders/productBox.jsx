@@ -130,7 +130,7 @@ class ProducBox extends Component {
                 <Par 
                  info={{
                     type:"winnersPara", //homeText homePara
-                    text:  this.returnNum(this.props.info.sold) + " " + '/'+ this.props.info.fortunes + " " + "fortunes remains"
+                    text:  (parseInt(this.props.info.fortunes) - this.returnNum(this.props.info.sold)).toString() + " " + '/'+ this.props.info.fortunes + " " + "fortunes remains"
                   }}
                   />
                 <Button 

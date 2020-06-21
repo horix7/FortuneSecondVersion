@@ -27,7 +27,7 @@ import AboutCo from '../../documents/aboutCompany'
 import PrivacyPolicy from '../../documents/privacy'
 import ModalTerms from 'react-modal'
 import PayMentOpt from '../../images/PaymentOptions3.png'
-
+import AboutCustoms from '../../documents/aboutVendN'
 
 
 
@@ -55,12 +55,16 @@ class Landing extends Component {
 
     }
 
-    openAbout = (type) => {
+    openAbout = () => {
         let newState = {...this.state}
 
         this.setState({
-            openAbout: !newState.openAbout,
-            aboutType: type
+            openedModal : !newState.openedModal,
+            showInfo: <AboutCustoms openForm={() => {
+                this.openAbout()
+                this.openRequest()
+            }} />,
+           
         })
     }
 
@@ -193,12 +197,30 @@ class Landing extends Component {
         }
 
         if(this.state.sign) {
-            CurrentForm =( <SignForm  login={this.props.onLogin}/>)
+            CurrentForm =( <SignForm openTerms={ () => {
+                this.openRequest()    
+                this.openTerms()
+            
+            }} openPrivacy={() => {
+                
+                this.openSign()    
+                this.openPrivacy()
+               }} 
+      login={this.props.onLogin}/>)
             func = this.openSign
         }
 
          if (this.state.request) {
-            CurrentForm = (<RequestForm login={this.props.onLogin} />)
+            CurrentForm = (<RequestForm login={this.props.onLogin} openTerms={ () => {
+                this.openRequest()    
+                this.openTerms()
+            
+            }} openPrivacy={() => {
+                
+                this.openRequest()    
+                this.openPrivacy()
+               }} 
+                            />)
             func = this.openRequest
 
         }
@@ -315,7 +337,7 @@ class Landing extends Component {
                 
                 <div className="introPage4 padds2">
                 <h3 style={{textTransform: "capitalize", paddingBottom:"10px"}} >
-                    Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status.
+                    Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status using unbias technology & simple world class proccess
                     </h3>
                 
                 <a className="linkBtn2" onClick={() => this.openAbout2()}>Learn More</a>
@@ -340,7 +362,7 @@ class Landing extends Component {
                             <h5> VENDORS </h5>
                             <p className=""> We partner with vendors globally with legal new or used items to auction. 
                             </p>    
-                            <a className="linkBtn2" onClick={() => this.openAbout("ww")} >Learn More</a>
+                            <a className="linkBtn2" onClick={this.openAbout} >Learn More</a>
                             <br/>
                             <p className="">Do you have item(s) to auction? </p>
                             <a className="linkBtn2" onClick={this.openRequest} >Request Now</a>
@@ -488,7 +510,7 @@ class Landing extends Component {
                 openRef={this.openRef}
                 openAbout={this.openAbout2}
                 openPrivacy={this.openPrivacy}
-                openVend1={() => this.openAbout("ww")}
+                openVend1={this.openAbout}
                 openVend={this.openVend}
 
 
@@ -523,7 +545,7 @@ class Landing extends Component {
                  isOpen={this.state.openedModal} onRequestClose={() => this.setState({openedModal : false})}
                 >
                   <div>
-                  <div class="fixed-action-btn">   
+                  <div className="fixed-action-btn">   
                     <a className="btn-floating black" onClick={() => this.setState({openedModal : false})}>
                         <i className="material-icons">clear</i>
                     </a>

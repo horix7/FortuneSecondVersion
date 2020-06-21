@@ -144,7 +144,7 @@ class User extends Component {
                         name: this.state.details.firstname,
                         email:  this.state.details.email,
                         age:  this.state.details.age,
-                        Phone:  this.state.details.phone
+                        Phone:   this.state.details.countrycode ? this.state.details.countrycode.toString(): "0" +  this.state.details.phone.toString()
 
                     },
 

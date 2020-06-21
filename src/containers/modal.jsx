@@ -199,7 +199,6 @@ let bidRequest = () => {
             momopay: userNumber || "credict-card Payment"
             
     }
-    localStorage.setItem("payemtAuth" , null)
 
     axios({
         method: 'post',
