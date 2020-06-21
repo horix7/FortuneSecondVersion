@@ -558,9 +558,9 @@ class Admin extends Component {
                         <p>Revenue</p>
           {this.state.pro ?  <div>US$ {this.state.realPro.map(n => {
               if(n.sold !== null ) {
-                return n.price * JSON.parse(n.sold).length
+                return parseInt(n.price) * JSON.parse(n.sold).length
               }
-           }).reduce((a,b) => a + b)}</div> : <div>  0 </div>}
+           }).reduce((a,b) => a + b) || 0 }</div> : <div>  0 </div>}
                     </div>
                     <div className="light1">
                         <p>Total Customers</p>

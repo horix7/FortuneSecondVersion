@@ -32,7 +32,7 @@ let footer = props => {
                     <div className="">
                     <h5 className="white-text">Contact Us</h5>
                     <ul>
-                    <li id="padx"><a  className="grey-text text-lighten-3" href="contact@fortuneauction360.com" target="_blank"> contact@fortuneauction260.com</a></li>
+                    <li id="padx"><a  className="grey-text text-lighten-3" href="contact@fortuneauction360.com" target="_blank"> contact@fortuneauction360.com</a></li>
                     <li id="padx"><a  className="grey-text text-lighten-3" href="#!"> +250780178459, +250734831742 </a></li>
                     <li id="padx"><a  className="grey-text text-lighten-3" href="#!"> Rugando, Kigali Rwanda</a></li>
                     <li id="padx"><a  className="grey-text text-lighten-3" href="#!"></a></li>

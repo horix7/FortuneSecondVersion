@@ -206,6 +206,9 @@ class Auction extends Component {
                   
                 }) : <Loader/>}
                 </div> : <Modal id={this.state.id} clecked={this.openModal2} chosen={this.state.checked} price={this.state.currentPrice}> 
+                      <h3 className="center-align">Choose Your Lucky Fortune Number </h3>
+                      <h6 className="center-align">You Can Select More Than One Fortune Number to Stand A High Chance To Win </h6>
+
                        {this.state.ticket ? <div>  
                            <div className="row">
                     <button className="btn-small white black-text col5" width="100px" onClick={this.toggle}>Select All</button>
