@@ -427,7 +427,7 @@ const config = {
     txref:"MC-" + new Date(),
     customer_email: JSON.parse(localStorage.details).email,
     customer_phone: JSON.parse(localStorage.details).phone,
-    amount: parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(2),
+    amount: parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(1),
     currency: JSON.parse(localStorage.currency).curren,
     PBFPubKey: "FLWPUBK-b7454e2336475fcfa01d20f6343eeb41-X",
     production: true,
