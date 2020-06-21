@@ -427,8 +427,8 @@ const config = {
     txref:"MC-" + new Date(),
     customer_email: JSON.parse(localStorage.details).email,
     customer_phone: JSON.parse(localStorage.details).phone,
-    amount: parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(1),
-    currency: JSON.parse(localStorage.currency).curren,
+    amount: JSON.parse(localStorage.currency).curren == "RWF" || JSON.parse(localStorage.currency).curren == "GHS" || JSON.parse(localStorage.currency).curren == "UGX" || JSON.parse(localStorage.currency).curren == "ZMW" ? parseFloat(total).toFixed(2) : parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(1),
+    currency: JSON.parse(localStorage.currency).curren == "RWF" || JSON.parse(localStorage.currency).curren == "GHS" || JSON.parse(localStorage.currency).curren == "UGX" || JSON.parse(localStorage.currency).curren == "ZMW" ? "USD" : JSON.parse(localStorage.currency).curren,
     PBFPubKey: "FLWPUBK-b7454e2336475fcfa01d20f6343eeb41-X",
     production: true,
     onSuccess: () => {
@@ -553,7 +553,7 @@ const config = {
                  
               </div>
                  <div className="spaceIn">
-                {btnLoad ? <Loader/> : <button className="btn white green-text waves-effect waves-light " onClick={() => {
+                {btnLoad ? <Loader/> : <button className="btn white green-text left" onClick={() => {
                     if(payOpt === "tigo") {
                         paymentRwandaTigoAirtel()
                     } else {
