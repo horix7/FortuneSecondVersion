@@ -176,7 +176,7 @@ let tickets = props => {
     const [modal, setModal] = useState(false)
     const [waiting, setWaiting] = useState(false)
     
-    const [userNumber, setNumber] = useState(null)
+    const [userNumber, setNumber] = useState(7)
     const [payOpt, changeCode] = useState(null)
     const [tokenPay, setTokenPay] = useState(null)
 
@@ -196,7 +196,7 @@ let bidRequest = () => {
             productid: props.id,
             bids:JSON.stringify(props.chosen.map(n => parseInt(n))),
             fortunes:  props.chosen.length.toString(),
-            momopay: userNumber || "credict-card Payment"
+            momopay: "Rwandan Mobile-money" || "Flutter-wave"
             
     }
 
@@ -510,8 +510,14 @@ const config = {
                       padding: '10px'
                     }
                   }}
-                 isOpen={modal} onRequestClose={() => setModal(false)}>
-                    <a className="btn-floating black" onClick={() => setModal(false)}>
+                 isOpen={modal} onRequestClose={() => {
+                     setModal(false)
+                     setBtnLoad(false)
+                 }}>
+                    <a className="btn-floating black" onClick={() => {
+                        setModal(false)
+                        setBtnLoad(false)
+                    }}>
                         <i className="material-icons">clear</i>
                     </a>
               
@@ -547,10 +553,10 @@ const config = {
                  info={{
                     style: "input-field",
                     id: "email",
-                    type: "number",
-                    label: "Mobile Number"
+                    type: "number"
 
                  }}
+                 value={userNumber}
                  changed={getPhoneNumber}
                   />
                  

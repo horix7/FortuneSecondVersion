@@ -50,6 +50,14 @@ button, i {
   cursor: pointer;
 }
 
+.grid33 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 20px;
+  grid-gap: 10px
+
+}
+
 #how {
   padding-bottom: 20px;
 }
@@ -64,6 +72,7 @@ button, i {
   width: 150px;
   font-size: large;
   color: white;
+  text-transform: capitalize;
   background-color: rgb(61, 90, 255);
 }
 
@@ -353,6 +362,10 @@ text-decoration: underline;
   color: white;
 }
 
+.hideSome p {
+  margin-top: -2%;
+}
+
 .viewMore {
   margin-left: 5%;
   font-size: large;
@@ -369,7 +382,7 @@ text-decoration: underline;
 
 .bordered {
   width: 96%;
-  border: 2px solid rgb(61, 90, 255) ;
+  border: 2px solid black;
   text-align: center;
   margin: 2%;
   border-radius: 30px;
@@ -875,6 +888,11 @@ background-color: rgb(211, 211, 211);
   .ProductsHere {
     grid-template-columns: 1fr 1fr ;
   }
+  
+.hideSome p {
+  margin-top: -2%;
+  font-size: x-small;
+}
   .loginSmalF {
     width: 100%;
     margin-left: 0%;

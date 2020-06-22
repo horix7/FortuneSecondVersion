@@ -30,7 +30,7 @@ class Auction extends Component {
 
     }
 
-    chooseWinners = (id) => {
+    chooseWinners = (id, status) => {
       axios({
           method: 'patch',
           url: localStorage.address + "/api/v1/choosetik/" + id,
@@ -40,17 +40,17 @@ class Auction extends Component {
               this.getDataBids()
 
           }).catch (err => {
-              this.cancelAuction2(id)
+              this.cancelAuction2(id, status)
           })
   }
     
   
-  cancelAuction2 = (id) => {
+  cancelAuction2 = (id,status) => {
   
 
   axios({
       method: 'post',
-      url: localStorage.address + "/api/v1/cancel/" + id.toString(),
+      url: localStorage.address + "/api/v1/cancel/" + id.toString() + "/" + status,
       headers: {  Authorization: localStorage.auth }
       })
       .then( (response) => {
@@ -67,29 +67,34 @@ class Auction extends Component {
      
 }
     getDataBids = () => {
+      console.log("reached")
       axios({
           method: 'get',
-          url: localStorage.address + "/api/v1/bidzid/",
+          url: localStorage.address + "/api/v1/bidzid",
           headers: {  Authorization: localStorage.auth }
           })
           .then( (response) => {
-               if( response.data.data.length > 1 || response.data.data == null || response.data.data == undefined) {
+      
+            console.log("reached!!")
+            console.log(response)
+               if( response.data.data.length < 1 || response.data.data == null || response.data.data == undefined) {
                 this.setState({
                   bidzid: [0]
              })
+             this.getAllActivePro()
                } else {
                 this.setState({
                   bidzid: response.data.data 
              })
+             this.getAllActivePro()
                }
-          this.getAllActivePro()
 
           }).catch(err => {
             this.setState({
               bidzid: [0]
          })
             this.getAllActivePro()
-            console.error(err)
+            console.log(err)
           })
 
   }
@@ -163,6 +168,17 @@ class Auction extends Component {
     render() {
         return (
             <Fragment>
+              {this.state.openModal ?
+              <div>
+                 <h2 className="center-align" style={{
+                   paddingTop: "5%"
+                 }}>Choose Your Lucky Fortune Number </h2>
+                <h6 className="center-align">You Can Select More Than One Fortune Number to Stand A High Chance To Win </h6>
+              
+              </div>
+                 : null
+              }
+              
               {!this.state.openModal ? <div className="ProductsHere">
 
                 {this.state.pro ? this.state.products.map(n => {
@@ -182,7 +198,7 @@ class Auction extends Component {
                           type: n.type
                         }}
                         showTickets={() => this.openModal(n.id)}
-                        onFinish={() => this.chooseWinners(n.id)}
+                        onFinish={(status) => this.chooseWinners(n.id, status)}
                         />)
 
                   } else {
@@ -200,15 +216,13 @@ class Auction extends Component {
                           type: n.type
                         }}
                         showTickets={() => this.openModal(n.id)}
-                        onFinish={() => this.chooseWinners(n.id)}
+                        onFinish={(status) => this.chooseWinners(n.id,status)}
                         />)
                   }
                   
                 }) : <Loader/>}
                 </div> : <Modal id={this.state.id} clecked={this.openModal2} chosen={this.state.checked} price={this.state.currentPrice}> 
-                      <h3 className="center-align">Choose Your Lucky Fortune Number </h3>
-                      <h6 className="center-align">You Can Select More Than One Fortune Number to Stand A High Chance To Win </h6>
-
+                      
                        {this.state.ticket ? <div>  
                            <div className="row">
                     <button className="btn-small white black-text col5" width="100px" onClick={this.toggle}>Select All</button>

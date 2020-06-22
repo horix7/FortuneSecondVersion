@@ -47,7 +47,7 @@ class Counter extends React.Component {
               timer: false
           })
 
-          this.props.onFinish()
+          this.props.onFinish("expired")
         }
       }, 10);
       }

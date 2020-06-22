@@ -237,26 +237,27 @@ class Profile extends Component {
 
                  
                  </div>
-                 <img src={PaymentOption2} alt="" width="100%" className="payOpt1" style={{
-                textAlign: "center"
-              }}/>
-
-              
-             
-                
+                    
               {this.props.dataTable.length > 1 ?
                 <Fragment>
                  <h6 className="topBottom">Your Bidding History </h6>
-                 <Tables 
+                 {/* <Tables 
                        heads={Object.keys(fetchDataArr[0])}
                        information={fetchDataArr}
-                 />  
+                 />   */}
                 </Fragment>
                  : <h6 className="topBottom">No Bidding History </h6>}
                 </div>
              </div>
              </Fragment>
 }
+                 <img src={PaymentOption2} alt="" width="100%" className="payOpt1" style={{
+                textAlign: "center"
+              }}/>
+
+              
+             
+             
             </Fragment>
 
         )

@@ -120,7 +120,7 @@ let userNav = props => {
                     <option value="£" data-icon={uk} selected={JSON.parse(localStorage.currency).currency == "£" ? "selected" : null}>£</option>
                     <option value="€" data-icon={euro} selected={JSON.parse(localStorage.currency).currency == "€" ? "selected" : null}>€</option>
                     </select>
-
+                    <p>Choose Your Currency Here</p>
             </div>
 
             <div className="leftz">

@@ -18,11 +18,14 @@ import Loader from '../UI/preloader'
     } 
     senMoneyMomo = e => {
         e.preventDefault()
+        this.setState({
+            btnLoad: true
+        })
         let sendData = {
             "trxRef": "MC-" + Date.now(),
             "channelId": "momo-mtn-rw",
             "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
-            "msisdn": this.state.money.number,
+            "msisdn": this.state.money.number.toString(),
             "amount": parseInt(this.state.money.amount),
             "callback": "https://your-callback.example-app.com"
           }
@@ -47,10 +50,19 @@ axios({
             })
             .then( (response) => {
 
+                alert("Money Was Sent Successfully")
+                 this.setState({
+                    btnLoad: false
+                })
+
             }).catch(err => {
                 alert("Something Wrong Happened")
                 console.error(err)
+                 this.setState({
+                    btnLoad: false
+                })
                 if(err.response) {
+                    console.log(err.reponse)
                 }
             })
         })

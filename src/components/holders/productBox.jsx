@@ -50,7 +50,7 @@ class ProducBox extends Component {
     
     render() {
       if(this.returnNum(this.props.info.sold) ===  parseInt(this.props.info.fortunes)) {
-        this.props.onFinish()
+        this.props.onFinish("Failed")
       }
      
       let  numberWithCommas = x => {
@@ -63,8 +63,8 @@ class ProducBox extends Component {
    {!this.state.openModal ? <div>
          
 
-            <Counter date={this.props.info.date} hour={this.props.info.hour}  onFinish={this.props.onFinish}/>
-         <div className="protype">{this.props.info.type}</div>
+            <Counter date={this.props.info.date} hour={this.props.info.hour}  onFinish={(status)=> this.props.onFinish(status)}/>
+            {this.props.info.type == "brand New" ? <div className="protype amber darken-2">{this.props.info.type}</div> : <div className="protype light-green darken-2">{this.props.info.type}</div> } 
             <div className="bordered">
                   <Image 
                     info={{
@@ -103,7 +103,7 @@ class ProducBox extends Component {
                           <div>
                    {!this.props.check ?       
                     <Button
-                     style={this.props.text ? "btn  green darken-2" :"btn  light-green darken-2"}
+                     style={this.props.text ? "btn black white-text" :"btn  light-green darken-2"}
                      text={this.props.text ? this.props.text : "Bid Now"}
                        info={{
                          type: "submit",
@@ -179,7 +179,7 @@ class ProducBox extends Component {
                     }
                   }
                    }> 
-                    <div class="fixed-action-btn">   
+                    <div className="fixed-action-btn">   
                     <a className="btn-floating black" onClick={
                       () => {
                         this.setState({ modal: false})
@@ -198,7 +198,7 @@ class ProducBox extends Component {
                  <a href="#" target="_blank"
                 onClick={() => {
                   window.open(
-                    'https://telegram.me/share/url?url='+location.href + "&text=" + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360" )
+                    'https://telegram.me/share/url?url='+location.href + "&text=" + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " )
                   return false;}}>
                 <img src={Tel} width="35px" height="35px" alt=""/>
 
@@ -206,7 +206,7 @@ class ProducBox extends Component {
                    <a href="#" target="_blank"
                 onClick={() => {
                   window.open(
-                    'whatsapp://send?text='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360" + encodeURIComponent(location.href))
+                    'whatsapp://send?text='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + encodeURIComponent(location.href))
                   return false;}}>
                 <img src={WhatsApp} width="35px" height="35px" alt=""/>
 
@@ -214,7 +214,7 @@ class ProducBox extends Component {
                  <a href="#" target="_blank"
                 onClick={() => {
                   window.open(
-                    'https://www.facebook.com/sharer/sharer.php?u='+" Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360" + comencodeURIComponent(location.href), 
+                    'https://www.facebook.com/sharer/sharer.php?u='+" Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + comencodeURIComponent(location.href), 
                     'facebook-share-dialog', 
                     'width=626,height=436')
                   return false;}}>
@@ -225,7 +225,7 @@ class ProducBox extends Component {
               <a href="#" target="_blank"
               onClick={() => {
                 window.open(
-                  'https://www.instagram.com/?url='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now! www.fortuneauction360"  +encodeURIComponent(location.href))
+                  'https://www.instagram.com/?url='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " "  +encodeURIComponent(location.href))
                     return false;}}
                 >
                   <img src={Ig} width="35px" height="35px" alt=""/>

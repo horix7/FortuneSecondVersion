@@ -63,6 +63,8 @@ class SubmitSign  extends Component {
 
             let request = {...this.state.requestInfo}
             request.account = response.data.data[0].details.username
+            request.country = response.data.data[0].details.country
+            request.fullname = response.data.data[0].details.name
             request.phone =  this.state.signUp.countrycode + response.data.data[0].details.phone
             request.email = response.data.data[0].details.email
 
@@ -115,6 +117,8 @@ class SubmitSign  extends Component {
 
             let request = {...this.state.requestInfo}
             request.account = response.data.data[0].details.username
+            request.country = response.data.data[0].details.country
+            request.fullname = response.data.data[0].details.name
             request.phone = response.data.data[0].details.countrycode + response.data.data[0].details.phone
             request.email = response.data.data[0].details.email
 

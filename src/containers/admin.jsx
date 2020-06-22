@@ -48,6 +48,7 @@ class Admin extends Component {
          this.dataInfo()
          this.getRefundOnes()
          this.activateMomo()
+         this.getRunnerUp()
         }
 
     getWinnerData = () => {
@@ -63,6 +64,25 @@ class Admin extends Component {
                     this.setState({
                         winners: response.data.data,
                         wins: true 
+                   })
+                }
+                 
+            }).catch(err => console.error(err))
+    }
+
+    getRunnerUp = () => {
+        axios({
+            method: 'get',
+            url: localStorage.address + "/api/v1/runnerup/" ,
+            headers: {  Authorization: localStorage.auth }
+            })
+            .then( (response) => {
+                if(response.data.data == null ||  response.data.data.length < 1 ||response.data.data == undefined) {
+                } else {
+
+                    this.setState({
+                        runnerup: response.data.data,
+                        runner: true 
                    })
                 }
                  
@@ -196,7 +216,7 @@ class Admin extends Component {
 
         axios({
             method: 'post',
-            url: localStorage.address + "/api/v1/cancel/" + id.toString(),
+            url: localStorage.address + "/api/v1/cancel/" + id.toString() + "/cenceled",
             headers: {  Authorization: localStorage.auth }
             })
             .then( (response) => {
@@ -222,7 +242,7 @@ class Admin extends Component {
 
       axios({
           method: 'post',
-          url: localStorage.address + "/api/v1/cancel/" + id.toString(),
+          url: localStorage.address + "/api/v1/cancel/" + id.toString() + "/failed",
           headers: {  Authorization: localStorage.auth }
           })
           .then( (response) => {
@@ -320,14 +340,15 @@ class Admin extends Component {
                            revenue = parseInt(n.price) * JSON.parse(n.sold).length 
                           }
                           if(n.type == "Brand New") {
-                            ree = 0.1
-                          } else {
                             ree = 0.09
+                          } else {
+                            ree = 0.1
                           }
                           let tax = revenue * 0.05
                           let charge = n.selling * ree
                           let tot = revenue - n.selling - tax + charge
                             return {
+                                date: n.date,
                                 product: n.name,
                                 vendor: n.vendor,
                                 revenue: revenue,
@@ -392,7 +413,7 @@ class Admin extends Component {
                             isVendor: n.vendor,
                             gender: n.gender,
                             profilePic: n.picture,
-                            country: n.country
+                            country: n.country,                            
 
 
                         }
@@ -556,11 +577,7 @@ class Admin extends Component {
                 <div className="highlight">
                     <div className="light1">
                         <p>Revenue</p>
-          {this.state.pro ?  <div>US$ {this.state.realPro.map(n => {
-              if(n.sold !== null ) {
-                return parseInt(n.price) * JSON.parse(n.sold).length
-              }
-           }).reduce((a,b) => a + b) || 0 }</div> : <div>  0 </div>}
+           {this.state.pro ?  <div>US$ {this.state.finances.map(n => n.income).reduce((a,b) => a + b)}</div> : <div>  0 </div>}
                     </div>
                     <div className="light1">
                         <p>Total Customers</p>
@@ -701,6 +718,19 @@ class Admin extends Component {
                     }else {
                         newState = this.state.reundz
                     }
+                }  else if(e.target.value == "winners") {
+                    if(this.state.winners == undefined || this.state.winners == null) {
+                        newState = null
+                    }else {
+                        newState = this.state.winners
+                    }
+                } 
+                else if(e.target.value == "runnerup") {
+                    if(this.state.runnerup == undefined || this.state.runnerup == null) {
+                        newState = null
+                    }else {
+                        newState = this.state.runnerup
+                    }
                 }                     
                        
                     this.setState({
@@ -715,6 +745,9 @@ class Admin extends Component {
                 <option value="products"> products</option>
                 <option value="finance"> all finances</option>
                 <option value="reundz">Refund Users</option>
+                <option value="winners">Winners</option>
+                <option value="runnerup">RunnerUp</option>
+
                
                 
                 </select>
@@ -741,11 +774,17 @@ class Admin extends Component {
                 <button className="btn black" onClick={this.handleSendMoney}> Send Money</button>
                 <button className="btn black" onClick={() => window.location.reload()}> Refersh All Data</button>
 
-               
+            
 
             </div>
 
-            
+            <div className="grid33">
+              <a href="https://dashboard.havanao.com/login" target="_blank" rel="noopener noreferrer" className="btn">Havanao</a>
+                <a href="https://dashboard.flutterwave.com/dashboard/" target="_blank"  className="btn" rel="noopener noreferrer">Fluuter_wave</a>
+                <a href="https://analytics.google.com/analytics/web/provision/?authuser=2#/a165466248w231274810p217424125/admin/tracking/tracking-code/" target="_blank" className="btn" rel="noopener noreferrer">Google Analytics</a>
+
+               
+              </div>
             </Fragment> : 
             <div className="homeform">
 
