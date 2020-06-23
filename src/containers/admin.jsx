@@ -774,7 +774,7 @@ class Admin extends Component {
             </div>
 
             <div className="">
-                <button className="btn" style={{width: "150px", height:"30px", marginTop:"30px", marginLeft:"10px"}}
+                <button className="btn"
                 onClick={() => {
                     if(this.state.downloading == null) {
                         alert("no Data Available")

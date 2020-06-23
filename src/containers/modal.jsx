@@ -215,7 +215,7 @@ let bidRequest = () => {
            setBtnLoad(false)
 
                if(response.data.data == "done") {
-                alert("Your Bid Was Made Successfully")
+                alert("Your Bid Was Made Successfully Check your  Email Or Spam Email For Further Notification ")
                 window.location.reload()
                }else {
                 if(response.data.data.tickets.length < response.data.data.size) {

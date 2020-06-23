@@ -57,12 +57,14 @@ class SubmitSign  extends Component {
                mess: "your request is sent"
 
             })
+
+            this.showError()
             
             setTimeout(() => {
                localStorage.setItem("auth", this.state.token)
                localStorage.setItem("details", this.state.details)
 
-            }, 1000)
+            }, 100)
 
 
          }).catch(err => {
