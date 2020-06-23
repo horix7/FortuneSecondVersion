@@ -758,7 +758,6 @@ class Admin extends Component {
                     })
 
                 }}>
-                <option value="">Choose Data To download </option>
                 <option value="users" > users</option>
                 <option value="vendors"> Vendors</option>
                 <option value="bids" > bids</option>
