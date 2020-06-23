@@ -67,15 +67,13 @@ class Auction extends Component {
      
 }
     getDataBids = () => {
-      console.log("reached")
       axios({
           method: 'get',
-          url: localStorage.address + "/api/v1/bidzid",
+          url: localStorage.address + "/api/v1/biddenidz/111/",
           headers: {  Authorization: localStorage.auth }
           })
           .then( (response) => {
       
-            console.log("reached!!")
             console.log(response)
                if( response.data.data.length < 1 || response.data.data == null || response.data.data == undefined) {
                 this.setState({

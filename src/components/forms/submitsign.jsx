@@ -41,6 +41,39 @@ class SubmitSign  extends Component {
       
    }
 
+     rqVend  = () => {
+      
+         axios({
+         method: 'post',
+         url: localStorage.address + "/api/v1/reqvend/",
+         data: this.state.requestInfo,
+         headers: {'Content-Type': "application/json" }
+         })
+         .then( response => {
+            
+            this.setState({
+               btnLoad: true,
+               error: null,
+               mess: "your request is sent"
+
+            })
+            
+            setTimeout(() => {
+               localStorage.setItem("auth", this.state.token)
+               localStorage.setItem("details", this.state.details)
+
+            }, 1000)
+
+
+         }).catch(err => {
+
+           if(err.reponse) {
+              console.log(err.reponse)
+           }
+         })
+        
+   }
+
    
    showError = () => {
       location.href = "#err"
@@ -158,39 +191,7 @@ class SubmitSign  extends Component {
       }
    }
 
-   rqVend  = (e) => {
  
-         axios({
-         method: 'post',
-         url: localStorage.address + "/api/v1/reqvend",
-
-         data: this.state.requestInfo,
-         headers: {'Content-Type': "application/json" }
-         })
-         .then( (response) => {
-            this.showError()
-            
-            this.setState({
-               btnLoad: true,
-               error: null,
-               mess: "your request is sent"
-
-            })
-            
-            setTimeout(() => {
-               localStorage.setItem("auth", this.state.token)
-               localStorage.setItem("details", this.state.details)
-
-                  this.props.login()
-            }, 1000)
-
-
-         }).catch(err => {
-           
-         })
-        
-   }
-
    handleInputChange = (e) => {
       this.state.signUp[e.target.id] = e.target.value
       this.changeSubmitAcc()
@@ -902,8 +903,10 @@ class SubmitSign  extends Component {
 
              />
 
-         <p className="">By Signing Up You Agree To Our <a onClick={this.props.openTerms}>  Terms And Conditions </a> &  <a onClick={this.props.openPrivacy}> Privacy Policy </a> </p>
-              <br/>
+         <p className="linkBlue">By Signing Up You Agree To Our <a onClick={this.props.openTerms}>  Terms And Conditions </a> &  <a onClick={this.props.openPrivacy}> Privacy Policy </a> </p>
+         <p className="linkBlue"> By Requesting You Agree To Our <a onClick={this.props.openVendor12}>  Vendor Policy </a> &  <a onClick={this.props.openCharges12}>  Fee Charges </a> </p>
+         <br/>
+
 
        {this.state.btnLoad ? <Loader />: <div>
         {!this.state.submit ? <Button 
@@ -995,6 +998,11 @@ class SubmitSign  extends Component {
             changed={this.handleInputChangeR}
 
            />
+
+         <p className="linkBlue"> By Requesting You Agree To Our <a onClick={this.props.openVendor12}>  Vendor Policy </a> &  <a onClick={this.props.openCharges12}>  Fee Charges </a> </p>
+
+            <br/>
+
             {this.state.btnLoad ? <Loader />: <div>
       {!this.state.submit ? <Button 
             style="btn  waves-effect waves-light black"

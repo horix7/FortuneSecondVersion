@@ -49,8 +49,12 @@ class Admin extends Component {
          this.getRefundOnes()
          this.activateMomo()
          this.getRunnerUp()
+         this.allProoz()
         }
 
+  numberWithCommas = x => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     getWinnerData = () => {
         axios({
             method: 'get',
@@ -207,6 +211,22 @@ class Admin extends Component {
            
     }
 
+     allProoz = () => {
+        axios({
+            method: 'get',
+            url: localStorage.address + "/api/v1/prozz",
+            headers: {  Authorization: localStorage.auth }
+            })
+            .then( (response) => {
+                
+                 this.setState({
+                    alzP: response.data.data,
+                    allProzz:  true
+               })
+            }).catch(err => console.error(err))
+           
+    }
+
 
     cancelAuction = (id) => {
           this.setState({
@@ -351,11 +371,11 @@ class Admin extends Component {
                                 date: n.date,
                                 product: n.name,
                                 vendor: n.vendor,
-                                revenue: revenue,
-                                tax: tax,
+                                revenue: this.numberWithCommas(parseFloat(revenue).toFixed(2)),
+                                tax: parseFloat(tax).toFixed(2),
                                 selling: n.selling,
-                                charge: charge,
-                                income: tot,
+                                charge: parseFloat(charge).toFixed(2),
+                                income: this.numberWithCommas(parseFloat(tot).toFixed(2)),
                                 type: n.type
 
                             }
@@ -577,7 +597,7 @@ class Admin extends Component {
                 <div className="highlight">
                     <div className="light1">
                         <p>Revenue</p>
-           {this.state.pro ?  <div>US$ {this.state.finances.map(n => n.income).reduce((a,b) => a + b)}</div> : <div>  0 </div>}
+           {this.state.pro ?  <div>US$ {isNaN(this.state.finances.map(n => n.income).reduce((a,b) => a + b)) ? 0 : this.numberWithCommas(parseFloat(this.state.finances.map(n => n.income).reduce((a,b) => a + b)).toFixed(2))}</div> : <div>  0 </div>}
                     </div>
                     <div className="light1">
                         <p>Total Customers</p>
@@ -700,10 +720,10 @@ class Admin extends Component {
                         }
                        
                   }else if(e.target.value == "products") {
-                    if(this.state.realPro == undefined || this.state.realPro == null) {
+                    if(this.state.alzP == undefined || this.state.alzP == null) {
                         newState = null
                     }else {
-                        newState = this.state.realPro
+                        newState = this.state.alzP
                     }
                  }   else if(e.target.value == "finance") {
                     if(this.state.finances == undefined || this.state.finances == null) {
@@ -738,7 +758,7 @@ class Admin extends Component {
                     })
 
                 }}>
-                <option value="" defaultValue>Choose Data To download </option>
+                <option value="">Choose Data To download </option>
                 <option value="users" > users</option>
                 <option value="vendors"> Vendors</option>
                 <option value="bids" > bids</option>

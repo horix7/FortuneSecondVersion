@@ -64,7 +64,7 @@ class ProducBox extends Component {
          
 
             <Counter date={this.props.info.date} hour={this.props.info.hour}  onFinish={(status)=> this.props.onFinish(status)}/>
-            {this.props.info.type == "brand New" ? <div className="protype amber darken-2">{this.props.info.type}</div> : <div className="protype light-green darken-2">{this.props.info.type}</div> } 
+            {this.props.info.type == "Brand New" ? <div className="protype amber darken-2">{this.props.info.type}</div> : <div className="protype light-green darken-2">{this.props.info.type}</div> } 
             <div className="bordered">
                   <Image 
                     info={{
@@ -142,7 +142,13 @@ class ProducBox extends Component {
                     
                    }}
 
-                   clicked={this.opneModal}
+                   clicked={() =>{
+                      if(this.props.openModalaSec) {
+                        this.props.openModalaSec()
+                   }else {
+                    this.opneModal()
+                   }
+                  }}
                    />
             </div>
           </div> : null

@@ -26,10 +26,19 @@ import TermsAndCond from '../../documents/document'
 import AboutCo from '../../documents/aboutCompany'
 import PrivacyPolicy from '../../documents/privacy'
 import ModalTerms from 'react-modal'
+import Modal from 'react-modal'
+import WhatsApp from '../../images/iconfinder_whatsapp_287520.png'
+import Ig from '../../images/6225234-download-instagram-logo-icon-free-png-transparent-image-and-clipart-instagram-symbol-transparent-400_400_preview.png'
+import Tel from '../../images/iconfinder_telegram_3069742.png'
+import Fb from '../../images/facbook.png'
+
+
 import PayMentOpt from '../../images/PaymentOptions3.png'
 import AboutCustoms from '../../documents/aboutVendN'
 
 
+Modal.setAppElement('#root')
+ModalTerms.setAppElement('#root')
 
 class Landing extends Component {
     state={
@@ -91,6 +100,11 @@ class Landing extends Component {
             })
         })
         .catch(error => {
+        })
+    }
+    openSHare = () => {
+        this.setState({
+            modalShare: true
         })
     }
     openLogin = () => {
@@ -220,7 +234,18 @@ class Landing extends Component {
                 this.openRequest()    
                 this.openPrivacy()
                }} 
-                            />)
+            
+               openCharges12={() => {
+                this.openRequest()    
+                this.openAbout()    
+               }} 
+                  
+               openVendor12={() => {                
+                this.openRequest()    
+                this.openVend()    
+               }} 
+                  
+                  />)
             func = this.openRequest
 
         }
@@ -428,13 +453,12 @@ class Landing extends Component {
                         sold: n.sold,
                         type: n.type
                       }}
+                      openModalaSec={this.openSHare}
                       login={this.openLogin}
                       check={true}
                       onFinish={this.openLogin21}
                       openModl={this.openModalTimer}
                       closeMdl={this.closeModalHanlder}
-
-                      
 
                       />
                 ))} 
@@ -553,6 +577,94 @@ class Landing extends Component {
                     {this.state.showInfo}
                   </div>
                 </ModalTerms>
+
+                <Modal
+                style={{
+                    overlay: {
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: 'rgba(0, 0, 0, 0.304)'
+                    },
+                    content: {
+                      position: 'absolute',
+                      top: '20%',
+                      left: '10%',
+                      right: '10%',
+                      height: "100px",
+                      border: '1px solid #fff',
+                      background: '#fff',
+                      overflow: 'auto',
+                      WebkitOverflowScrolling: 'touch',
+                      borderRadius: '10px',
+                      outline: 'none',
+                      padding: '30px'
+                    }
+                  }}
+                 isOpen={this.state.modalShare} onRequestClose={() => {
+                   this.setState({ modalShare: false})
+                    if(typeof this.props.closeMdl == "function") {
+                      this.props.closeMdl()
+                    }
+                  }
+                   }> 
+                    <div className="fixed-action-btn">   
+                    <a className="btn-floating black" onClick={
+                      () => {
+                        this.setState({ modalShare: false})
+                        
+                       }
+                        
+                    }>
+                        <i className="material-icons">clear</i>
+                    </a>
+                    </div>
+                 {/* https://telegram.me/share/url?url=<URL><TEXT></TEXT> */}
+                <div className="picturesShare">
+
+                 <a href="#" target="_blank"
+                onClick={() => {
+                  window.open(
+                    'https://telegram.me/share/url?url='+location.href + "&text=" + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " )
+                  return false;}}>
+                <img src={Tel} width="35px" height="35px" alt=""/>
+
+              </a>
+                   <a href="#" target="_blank"
+                onClick={() => {
+                  window.open(
+                    'whatsapp://send?text='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + encodeURIComponent(location.href))
+                  return false;}}>
+                <img src={WhatsApp} width="35px" height="35px" alt=""/>
+
+              </a>
+                 <a href="#" target="_blank"
+                onClick={() => {
+                  window.open(
+                    'https://www.facebook.com/sharer/sharer.php?u='+" Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + comencodeURIComponent(location.href), 
+                    'facebook-share-dialog', 
+                    'width=626,height=436')
+                  return false;}}>
+                <img src={Fb} width="35px" height="35px" alt=""/>
+
+              </a>
+
+              <a href="#" target="_blank"
+              onClick={() => {
+                window.open(
+                  'https://www.instagram.com/?url='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " "  +encodeURIComponent(location.href))
+                    return false;}}
+                >
+                  <img src={Ig} width="35px" height="35px" alt=""/>
+
+              </a>
+              </div>
+
+
+                 </Modal>
+          
 
         </React.Fragment> : <div className="homeform">
         <Form 

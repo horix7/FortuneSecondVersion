@@ -57,6 +57,13 @@ button, i {
   grid-gap: 10px
 
 }
+#currencies {
+  position: relative;
+}
+
+.linkBlue a {
+  color: blue
+}
 
 #how {
   padding-bottom: 20px;

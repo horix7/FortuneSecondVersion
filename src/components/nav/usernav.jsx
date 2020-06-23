@@ -108,7 +108,9 @@ let userNav = props => {
 
             
 
-          <div className="browser-default hideSome" >
+          <div className="browser-default hideSome" style={{
+            position: "relative"
+          }}>
             <select className="" onChange={changeCurrency} id="currencies">
                     <option value="$" data-icon={usa} selected={JSON.parse(localStorage.currency).currency == "$" ? "selected" : null}>$</option>
                     <option value="RWF" data-icon={rw} selected={JSON.parse(localStorage.currency).currency == "RWF" ? "selected" : null}>RWF</option>

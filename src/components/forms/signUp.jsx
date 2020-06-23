@@ -707,7 +707,7 @@ class SignUp extends Component {
                  changed={this.handlePasswordChange}
                 />
 
-            <p className="">By Signing Up You Agree To Our <a onClick={this.props.openTerms}>  Terms And Conditions </a> &  <a onClick={this.props.openPrivacy}> Privacy Policy </a> </p>
+            <p className="linkBlue">By Signing Up You Agree To Our <a onClick={this.props.openTerms}>  Terms And Conditions </a> &  <a onClick={this.props.openPrivacy}> Privacy Policy </a> </p>
                  <br/>
 
               {this.state.submit ? btn : 
