@@ -362,7 +362,7 @@ class Landing extends Component {
                 
                 <div className="introPage4 padds2">
                 <h3 style={{textTransform: "capitalize", paddingBottom:"10px"}} >
-                    Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status using unbias technology & simple world class proccess
+                    Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status using unbias technology 
                     </h3>
                 
                 <a className="linkBtn2" onClick={() => this.openAbout2()}>Learn More</a>

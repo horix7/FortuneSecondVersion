@@ -69,7 +69,7 @@ class Auction extends Component {
     getDataBids = () => {
       axios({
           method: 'get',
-          url: localStorage.address + "/api/v1/biddenidz/111/",
+          url: localStorage.address + "/api/v1/biddenidz/111",
           headers: {  Authorization: localStorage.auth }
           })
           .then( (response) => {

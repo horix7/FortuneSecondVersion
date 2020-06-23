@@ -461,6 +461,7 @@ class Admin extends Component {
                             email: n.email,
                             phone:  n.phone,
                             selling: n.sells,
+                            country: n.country,
                             location: n.address,
                             action: ( <div>
                                {n.verified ? null :  <a className="insideTb blue-text row" onClick={() => this.approveVend(n.account)}>accept</a>}
@@ -694,9 +695,9 @@ class Admin extends Component {
             </div>
 
             <div className="gridTwo" style={{marginLeft:"20px"}}>
-            <div className=" input-field">
+            <div>
 
-                <select 
+                <select   className="browser-default"
                 onChange={e => {
                     let newState = this.state.downloading
                     if(e.target.value == "users") {
