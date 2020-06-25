@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import Button from '../UI/button';
 import Image from '../UI/image';
 import Par from '../UI/paragraphs';
@@ -15,236 +15,241 @@ Modal.setAppElement('#root')
 
 class ProducBox extends Component {
 
-    state= {
-      openModal: false
-    }
-    
-  
-    componentDidMount() {
+  state = {
+    openModal: false
+  }
 
-    }
 
-    showTickets = () => {
-      this.setState({
-        openModal: true
-      })
-    }
-    opneModal = () => {
-      this.setState({
-        modal: true
-      })
-     if(typeof this.props.openModl == "function") {
+  componentDidMount() {
+
+  }
+
+  showTickets = () => {
+    this.setState({
+      openModal: true
+    })
+  }
+  opneModal = () => {
+    this.setState({
+      modal: true
+    })
+    if (typeof this.props.openModl == "function") {
       this.props.openModl()
-     } 
-      
     }
 
-    returnNum = (num) => {
-      if (num == null) {
-        return 0
-      } else {
-        return JSON.parse(num).length
-      }
+  }
+
+  returnNum = (num) => {
+    if (num == null) {
+      return 0
+    } else {
+      return JSON.parse(num).length
+    }
+  }
+
+
+  render() {
+    if (this.returnNum(this.props.info.sold) === parseInt(this.props.info.fortunes)) {
+      // this.props.onFinish()
     }
 
-    
-    render() {
-      if(this.returnNum(this.props.info.sold) ===  parseInt(this.props.info.fortunes)) {
-        this.props.onFinish("Failed")
-      }
-     
-      let  numberWithCommas = x => {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    let numberWithCommas = x => {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-        
-        return (
-          <Fragment>
+    console.log(this.props)
 
-   {!this.state.openModal ? <div>
-         
+    return (
+      <Fragment>
 
-            <Counter date={this.props.info.date} hour={this.props.info.hour}  onFinish={(status)=> this.props.onFinish(status)}/>
-            {this.props.info.type == "Brand New" ? <div className="protype amber darken-2">{this.props.info.type}</div> : <div className="protype light-green darken-2">{this.props.info.type}</div> } 
-            <div className="bordered">
-                  <Image 
-                    info={{
-                        class: "image", // image 
-                        type: "bidImage", //bidImage  squareImg
-                        src: this.props.info.image
-
-                    }}
-                    
-                    />
-                     <Par 
-                    info={{
-                            type:"bidName", //homeText homePara
-                            text: this.props.info.name
-                          }}
-                        />
-
-                  <Par 
-                    info={{
-                            type:"bidText", //homeText homePara
-                            text: "Ticket Price = " +  " " +  numberWithCommas(JSON.parse(localStorage.currency).currency + (parseFloat(this.props.info.price) / JSON.parse(localStorage.currency).rate).toFixed(2))
-                          }}
-                        />
-                        <div className="gridTwo topBottom">
-    
-                          <div>
-
-                        <Par 
-                         info={{
-                            type:"winnersPara", //homeText homePara
-                            text: "For" + " " + this.props.info.winners + " " + "winners"
-                          }}
-                        />
-                          </div>
-
-                          <div>
-                   {!this.props.check ?       
-                    <Button
-                     style={this.props.text ? "btn black white-text" :"btn  light-green darken-2"}
-                     text={this.props.text ? this.props.text : "Bid Now"}
-                       info={{
-                         type: "submit",
-                         name: "action",
-                        
-                       }}
-                       clicked={this.props.showTickets}
-                        /> :
-                         <Button
-                     style="btn  light-green darken-2"
-                     text="Bid Now"
-                       info={{
-                         type: "submit",
-                         name: "action",
-                        
-                       }}
-                       clicked={this.props.login}
-                        />}
-                          </div>
-
-                          </div>
+        {!this.state.openModal ? <div>
 
 
-                <Par 
-                 info={{
-                    type:"winnersPara", //homeText homePara
-                    text:  (parseInt(this.props.info.fortunes) - this.returnNum(this.props.info.sold)).toString() + " " + '/'+ this.props.info.fortunes + " " + "fortunes remains"
+          <Counter date={this.props.info.date} hour={this.props.info.hour} onFinish={(status) => this.props.onFinish(status)} />
+          {this.props.info.type == "Brand New" ? <div className="protype amber darken-2">{this.props.info.type}</div> : <div className="protype light-green darken-2">{this.props.info.type}</div>}
+          <div className="bordered">
+            <Image
+              info={{
+                class: "image", // image 
+                type: "bidImage", //bidImage  squareImg
+                src: this.props.info.image
+
+              }}
+
+            />
+            <Par
+              info={{
+                type: "bidName", //homeText homePara
+                text: this.props.info.name
+              }}
+            />
+
+            <Par
+              info={{
+                type: "bidText", //homeText homePara
+                text: "Ticket Price = " + " " + numberWithCommas(JSON.parse(localStorage.currency).currency + (parseFloat(this.props.info.price) / JSON.parse(localStorage.currency).rate).toFixed(2))
+              }}
+            />
+            <div className="gridTwo topBottom">
+
+              <div>
+
+                <Par
+                  info={{
+                    type: "winnersPara", //homeText homePara
+                    text: "For" + " " + this.props.info.winners + " " + "winners"
                   }}
-                  />
-                <Button 
-                 style="btn   blue darken-3"
-                 text="share now"
-                   info={{
-                     type: "submit",
-                     name: "action",
-                    
-                   }}
-
-                   clicked={() =>{
-                      if(this.props.openModalaSec) {
-                        this.props.openModalaSec()
-                   }else {
-                    this.opneModal()
-                   }
-                  }}
-                   />
-            </div>
-          </div> : null
-          }
-            <Modal
-                style={{
-                    overlay: {
-                      position: 'fixed',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      backgroundColor: 'rgba(0, 0, 0, 0.304)'
-                    },
-                    content: {
-                      position: 'absolute',
-                      top: '20%',
-                      left: '10%',
-                      right: '10%',
-                      height: "100px",
-                      border: '1px solid #fff',
-                      background: '#fff',
-                      overflow: 'auto',
-                      WebkitOverflowScrolling: 'touch',
-                      borderRadius: '10px',
-                      outline: 'none',
-                      padding: '30px'
-                    }
-                  }}
-                 isOpen={this.state.modal} onRequestClose={() => {
-                   this.setState({ modal: false})
-                    if(typeof this.props.closeMdl == "function") {
-                      this.props.closeMdl()
-                    }
-                  }
-                   }> 
-                    <div className="fixed-action-btn">   
-                    <a className="btn-floating black" onClick={
-                      () => {
-                        this.setState({ modal: false})
-                         if(typeof this.props.closeMdl == "function") {
-                           this.props.closeMdl()
-                         }
-                       }
-                        
-                    }>
-                        <i className="material-icons">clear</i>
-                    </a>
-                    </div>
-                 {/* https://telegram.me/share/url?url=<URL><TEXT></TEXT> */}
-                <div className="picturesShare">
-
-                 <a href="#" target="_blank"
-                onClick={() => {
-                  window.open(
-                    'https://telegram.me/share/url?url='+location.href + "&text=" + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " )
-                  return false;}}>
-                <img src={Tel} width="35px" height="35px" alt=""/>
-
-              </a>
-                   <a href="#" target="_blank"
-                onClick={() => {
-                  window.open(
-                    'whatsapp://send?text='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + encodeURIComponent(location.href))
-                  return false;}}>
-                <img src={WhatsApp} width="35px" height="35px" alt=""/>
-
-              </a>
-                 <a href="#" target="_blank"
-                onClick={() => {
-                  window.open(
-                    'https://www.facebook.com/sharer/sharer.php?u='+" Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + comencodeURIComponent(location.href), 
-                    'facebook-share-dialog', 
-                    'width=626,height=436')
-                  return false;}}>
-                <img src={Fb} width="35px" height="35px" alt=""/>
-
-              </a>
-
-              <a href="#" target="_blank"
-              onClick={() => {
-                window.open(
-                  'https://www.instagram.com/?url='+ " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " "  +encodeURIComponent(location.href))
-                    return false;}}
-                >
-                  <img src={Ig} width="35px" height="35px" alt=""/>
-
-              </a>
+                />
               </div>
 
+              <div>
+                {!this.props.check ?
+                  <Button
+                    style={this.props.text ? "btn black white-text" : "btn  light-green darken-2"}
+                    text={this.props.text ? this.props.text : "Bid Now"}
+                    info={{
+                      type: "submit",
+                      name: "action",
 
-                 </Modal>
-          </Fragment>
+                    }}
+                    clicked={this.props.showTickets}
+                  /> :
+                  <Button
+                    style="btn  light-green darken-2"
+                    text="Bid Now"
+                    info={{
+                      type: "submit",
+                      name: "action",
 
-        )
-    }
+                    }}
+                    clicked={this.props.login}
+                  />}
+              </div>
+
+            </div>
+
+
+            <Par
+              info={{
+                type: "winnersPara", //homeText homePara
+                text: (parseInt(this.props.info.fortunes) - this.returnNum(this.props.info.sold)).toString() + " " + '/' + this.props.info.fortunes + " " + "fortunes remains"
+              }}
+            />
+            <Button
+              style="btn   blue darken-3"
+              text="share now"
+              info={{
+                type: "submit",
+                name: "action",
+
+              }}
+
+              clicked={() => {
+                if (this.props.openModalaSec) {
+                  this.props.openModalaSec()
+                } else {
+                  this.opneModal()
+                }
+              }}
+            />
+          </div>
+        </div> : null
+        }
+        <Modal
+          style={{
+            overlay: {
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.304)'
+            },
+            content: {
+              position: 'absolute',
+              top: '20%',
+              left: '10%',
+              right: '10%',
+              height: "100px",
+              border: '1px solid #fff',
+              background: '#fff',
+              overflow: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              borderRadius: '10px',
+              outline: 'none',
+              padding: '30px'
+            }
+          }}
+          isOpen={this.state.modal} onRequestClose={() => {
+            this.setState({ modal: false })
+            if (typeof this.props.closeMdl == "function") {
+              this.props.closeMdl()
+            }
+          }
+          }>
+          <div className="fixed-action-btn">
+            <a className="btn-floating black" onClick={
+              () => {
+                this.setState({ modal: false })
+                if (typeof this.props.closeMdl == "function") {
+                  this.props.closeMdl()
+                }
+              }
+
+            }>
+              <i className="material-icons">clear</i>
+            </a>
+          </div>
+          {/* https://telegram.me/share/url?url=<URL><TEXT></TEXT> */}
+          <div className="picturesShare">
+
+            <a href="#" target="_blank"
+              onClick={() => {
+                window.open(
+                  'https://telegram.me/share/url?url=' + location.href + "&text=" + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " ")
+                return false;
+              }}>
+              <img src={Tel} width="35px" height="35px" alt="" />
+
+            </a>
+            <a href="#" target="_blank"
+              onClick={() => {
+                window.open(
+                  'whatsapp://send?text=' + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + encodeURIComponent(location.href))
+                return false;
+              }}>
+              <img src={WhatsApp} width="35px" height="35px" alt="" />
+
+            </a>
+            <a href="#" target="_blank"
+              onClick={() => {
+                window.open(
+                  'https://www.facebook.com/sharer/sharer.php?u=' + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + comencodeURIComponent(location.href),
+                  'facebook-share-dialog',
+                  'width=626,height=436')
+                return false;
+              }}>
+              <img src={Fb} width="35px" height="35px" alt="" />
+
+            </a>
+
+            <a href="#" target="_blank"
+              onClick={() => {
+                window.open(
+                  'https://www.instagram.com/?url=' + " Never has such a global guarantee platform been made that enables you to have the opportunity to get your heart wishes for as low as $1.Don’t Miss out! Check it out now!" + " " + encodeURIComponent(location.href))
+                return false;
+              }}
+            >
+              <img src={Ig} width="35px" height="35px" alt="" />
+
+            </a>
+          </div>
+
+
+        </Modal>
+      </Fragment>
+
+    )
+  }
 }
 
 

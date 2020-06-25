@@ -1,11 +1,11 @@
-import React, {Fragment, Component} from 'react';
+import React, { Fragment, Component } from 'react';
 import Input from '../UI/input';
 import Button from '../UI/button';
 import axios from 'axios'
 import Loader from '../UI/preloader'
 
 
-class CreatePro  extends Component{
+class CreatePro extends Component {
 
     state = {
         productR: {
@@ -13,7 +13,7 @@ class CreatePro  extends Component{
             price: null,
         },
         submit: false
-    } 
+    }
 
     componentDidMount() {
         this.changeStateNow()
@@ -21,11 +21,11 @@ class CreatePro  extends Component{
 
 
 
- handleInputs = (e) => {
-  
-    this.state.productR[e.target.id] = e.target.value
+    handleInputs = (e) => {
 
-    this.changeSub()
+        this.state.productR[e.target.id] = e.target.value
+
+        this.changeSub()
     }
 
     submitProduct = e => {
@@ -34,65 +34,66 @@ class CreatePro  extends Component{
             method: 'post',
             url: localStorage.address + "/api/v1/product/",
             data: this.state.productR,
-            headers: {  
+            headers: {
                 "Authorization": localStorage.auth,
                 "Content-Type": "application/json"
-                     }
-            })
-            .then( (response) => {
+            }
+        })
+            .then((response) => {
                 this.deleteRePro(this.props.info.id)
                 this.setState({
                     error: null,
                     mess: "Product Was Created Successfully",
-                    btnLoad: false  
-    
+                    btnLoad: false
+
                 })
-    
-              
+
+
             }).catch(err => console.error(err))
-      
+
     }
 
     deleteRePro = (id) => {
         axios({
             method: 'get',
-            url: localStorage.address + "/api/v1/deletereq/"+ id,
+            url: localStorage.address + "/api/v1/deletereq/" + id,
             data: this.state.productR,
-            headers: {  
+            headers: {
                 "Authorization": localStorage.auth,
                 "Content-Type": "application/json"
-                     }
-            })
-            .then( (response) => {
-             
-    
-              
+            }
+        })
+            .then((response) => {
+
+
+
             }).catch(err => console.error(err))
-      
+
     }
     changeSub = () => {
-        if(Object.values(this.state.productR).some(n => n == null)) {
+        if (Object.values(this.state.productR).some(n => n == null)) {
             this.setState({
-                submit: false 
+                submit: false
             })
-        }else {
+        } else {
 
-         this.setState({
-             submit: true
-         })
+            this.setState({
+                submit: true
+            })
         }
-     }
+    }
 
 
-     changeStateNow = () => {
-        const {name, store,hour,date,winners,picture,price}= this.props.info
-        let newState = {...this.state.productR}
+    changeStateNow = () => {
+        const { name, store, hour, type, date, winners, picture, price } = this.props.info
+        let newState = { ...this.state.productR }
         let ChangeState = {
             ...newState,
             name: name,
             vendor: store || "admin",
             hour: hour,
             date: date,
+            type: type,
             winners: winners,
             picture: picture,
             selling: price
@@ -103,99 +104,99 @@ class CreatePro  extends Component{
         })
         this.changeSub()
 
-        }
-render() {
-    const {name, store,hour,date,price,winners}= this.props.info
+    }
+    render() {
+        const { name, store, hour, date, price, winners } = this.props.info
 
-    return(
-        <Fragment>
-             {this.state.error ? <div id="err" className="errorz">{this.state.error}</div> : null}
-             {this.state.mess ? <div id="err" className="successz">{this.state.mess}</div> : null}
-            <div>
+        return (
+            <Fragment>
+                {this.state.error ? <div id="err" className="errorz">{this.state.error}</div> : null}
+                {this.state.mess ? <div id="err" className="successz">{this.state.mess}</div> : null}
+                <div>
 
 
-            <p>
-                name: {name}
-                <br/>
+                    <p>
+                        name: {name}
+                        <br />
 
                 store: {store}
-                <br/>
-                <br/>
+                        <br />
+                        <br />
                 ending-hour: {hour}
-                <br/>
+                        <br />
 
                 Ending-date: {date}
-                <br/>
+                        <br />
 
                 Selling-price: {price}
-                <br/>
+                        <br />
 
                 winners: {winners}
 
 
-            </p>
-            <div className="gridTwo">
+                    </p>
+                    <div className="gridTwo">
 
-                     <div className="spaceIn">
-             <Input 
-                 info={{
-                    style: "input-field",
-                    id: "tickets",
-                    type: "number",
-                    label: "Number Of Tickets",
-            
-                 }}
-                 changed={this.handleInputs}
+                        <div className="spaceIn">
+                            <Input
+                                info={{
+                                    style: "input-field",
+                                    id: "tickets",
+                                    type: "number",
+                                    label: "Number Of Tickets",
 
-                 />
+                                }}
+                                changed={this.handleInputs}
 
-            </div>
-            <div className="spaceIn">
+                            />
 
-                <Input 
-                 info={{
-                    style: "input-field",
-                    id: "price",
-                    type: "number",
-                    label: "ticket Price",
-            
-                 }}
-                 changed={this.handleInputs}
+                        </div>
+                        <div className="spaceIn">
 
-                 />
+                            <Input
+                                info={{
+                                    style: "input-field",
+                                    id: "price",
+                                    type: "number",
+                                    label: "ticket Price",
 
-                 </div>
-                 </div>
+                                }}
+                                changed={this.handleInputs}
 
-                 
+                            />
+
+                        </div>
+                    </div>
 
 
-              {
-                  !this.state.submit ?   <Button 
-                  style="btn longBtn waves-effect waves-light black"
-                  text="Submit"
-                    info={{
-                      type: "submit",
-                      name: "action",
-                     
-                    }}
-                 />:   <Fragment>
-                 {!this.state.btnLoad ?
-                  <Button 
-                 style="btn longBtn  waves-effect waves-light black"
-                 text="submit"
-                 info={{
-                     type: "submit",
-                     name: "action",
-                 
-                 }}
-                 clicked={this.submitProduct} /> : <Loader/>}
-             </Fragment>}
-             
-            </div>
-        </Fragment>
-    )
-}
+
+
+                    {
+                        !this.state.submit ? <Button
+                            style="btn longBtn waves-effect waves-light black"
+                            text="Submit"
+                            info={{
+                                type: "submit",
+                                name: "action",
+
+                            }}
+                        /> : <Fragment>
+                                {!this.state.btnLoad ?
+                                    <Button
+                                        style="btn longBtn  waves-effect waves-light black"
+                                        text="submit"
+                                        info={{
+                                            type: "submit",
+                                            name: "action",
+
+                                        }}
+                                        clicked={this.submitProduct} /> : <Loader />}
+                            </Fragment>}
+
+                </div>
+            </Fragment>
+        )
+    }
 }
 
 export default CreatePro;

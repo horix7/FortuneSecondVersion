@@ -1,9 +1,7 @@
-import React, {Fragment, Component} from 'react';
+import React, { Fragment, Component } from 'react';
 import Admin from './containers/admin';
-import User  from './containers/user';
-import Landing  from './components/landing/landing';
-// import Pdf from './documents/document'
-// import Payment from './payment/payment'
+import User from './containers/user';
+import Landing from './components/landing/landing';
 
 localStorage.setItem("address", "https://fortunesecondv.herokuapp.com")
 // localStorage.setItem("address", "http://localhost:5000")
@@ -18,7 +16,7 @@ class App extends Component {
     logined: localStorage.auth
   }
   componentDidMount() {
-    
+
   }
 
   logout = () => {
@@ -34,44 +32,44 @@ class App extends Component {
     })
   }
 
-  changeAdminNul = (num ) => {
-    if(num === null || num === "null") {
-      return false 
+  changeAdminNul = (num) => {
+    if (num === null || num === "null") {
+      return false
     } else {
       return JSON.parse(num).isAdmin
     }
   }
 
 
-  checkToken = (num) =>  {
-    if(num === null || num === "null") {
-      return false 
+  checkToken = (num) => {
+    if (num === null || num === "null") {
+      return false
     } else {
       return num
     }
   }
- render() {
- let check = this.changeAdminNul(localStorage.details)
- let tCheck = this.checkToken(localStorage.auth) 
-  return (
-    <Fragment>
-      {!check ? <Fragment>
-       {tCheck && this.state.logined ?  <User onLogout={this.logout}/> : <Landing  onLogin={this.logIn}/>}
+  render() {
+    let check = this.changeAdminNul(localStorage.details)
+    let tCheck = this.checkToken(localStorage.auth)
+    return (
+      <Fragment>
+        {!check ? <Fragment>
+          {tCheck && this.state.logined ? <User onLogout={this.logout} /> : <Landing onLogin={this.logIn} />}
 
-        </Fragment> :  <Admin logout={() => {
-           
+        </Fragment> : <Admin logout={() => {
+
           localStorage.details = null
-          localStorage.auth = null 
+          localStorage.auth = null
           this.setState({
             logined: false
           })
-        }}/> }  
-    </Fragment>
-  );
- }
+        }} />}
+      </Fragment>
+    );
+  }
 }
 
 export default App;
-                                                           
+
 
 
