@@ -1,0 +1,46 @@
+$num-segments: 6;
+$colors: (red, pink, blue, green, yellow, blue, yellowgreen, lightblue, green, blue, green, pink);
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: gray;
+}
+.spinner div {
+  position: absolute;
+  transform-origin: bottom right;
+  width: 100px;
+  height: 100px;
+ 
+}
+.spinner {
+  div {
+    @for $i from 1 to $num-segments + 1  {
+      &:nth-child(#{$i}) {
+        @if $i == $num-segments {
+          overflow: hidden;
+          &:before {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: nth($colors, $i);
+            top: 0;
+            left: 0;
+            position: absolute;
+            transform-origin: bottom right;
+            transform: rotate(-90 + (360 / $num-segments) + deg);
+          }
+        } @else {
+          background: nth($colors, $i);  
+        }
+        transform: rotate((($i - 1) * 360 / $num-segments) + deg);
+      }
+    }
+    
+  }
+}
