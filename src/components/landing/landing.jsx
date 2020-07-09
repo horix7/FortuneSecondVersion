@@ -275,30 +275,55 @@ class Landing extends Component {
 
             </div>
 
-            <div id="how" className="homePara padds2 black-text">
-            We Auction Valuable Item as a winning Prize for one of you with the lucky Fortune Number to Claim it
+          
+            <div id="how" className="introPage5">
+                   
+                    <p className="homePara">
+                    We Auction Valuable Items as the Winning Prize For One of You With the Lucky Fortune Number to Claim It. Our Winner Items are Sponsored through Tickets Sales.
+                         </p>
+                
+                <div className="gridBtn">
+                <a href="#how1" className="linkBtn21">How It Work </a>
+                <a href="#"  className="btn blue darken-2 loginBtn2">Watch Demo</a>
 
-            </div>
-            <div  className="introPage2"> 
+                </div>
+
+                </div>
+            <div id="how1" className="introPage2"> 
              <h5>How It Works </h5>
-             <div className="grid-three padds2">
+             <div className="grid-flex padds2">
                  <div>
-                    <img src={one} alt=""/>
-                    <p>Our Vendors Auction Brand New Items you Desire</p>
+                    <img width="180px" height="110px" src={one} alt=""/>
+                    <p>Vendors Auction Brand New or Used items on the platform</p>
                  </div>
 
                  <div>
-                    <img src={two} alt=""/>
-                    <p>You Choose your Desired Item & Lucky Fortune Number(s). Then, Pay the Bid price as Ticket fee to stand a chance of winning </p>
+                    <img width="180px" height="110px" src={two} alt=""/>
+                    <p> You Choose an item you like, Then, Select and Buy one or more Lucky Tickets you Wish to Stand a Chance to Win </p>
                  </div>
 
                  <div>
-                    <img src={three} alt=""/>
-                    <p> Our Technology Shuffles & Spins your Fortune Numbers to Choose the Lucky Winner</p>
+                    <img width="180px" height="110px" src={three} alt=""/>
+                    <p> You Confirm if your ticket(s) Are the Winning Ticket(s) </p>
                  </div>
+
+                 <div>
+                    <img width="180px" height="110px" src={three} alt=""/>
+                    <p> We Ship your Won Item to your Location Even Globally   </p>
+                 </div>
+
              </div>
+             <a href="#how3" className="linkBtn2">What We Do</a>
             </div>
 
+            <div id="how3" className="introPage4 padds2">
+                <h3 style={{textTransform: "capitalize", paddingBottom:"10px"}} >
+                Fortune Auction is a Digital Product-Lottery Platform that Uses Unbais Technology that Select Winners Through Pure Luck 
+                    </h3>
+                
+                <a className="linkBtn2" onClick={() => this.openAbout2()}>Learn More</a>
+                
+                </div>
             <div className="introPage3">
 
                     <h5 className="padds2">YOUR NEXT WISH COULD BE $1</h5>
@@ -355,19 +380,9 @@ class Landing extends Component {
             </Fragment>
                 </div>
                 
-                <div className="introPage5">
-                    <p className="homeText">YOUR LOCATION IS NEVER A BARRIER</p>
-                    <p className="homePara">WINNER’S PRIZE IS DELIVERED GLOBALLY REGARDLESS OF THE LOCATION </p>
-                </div>
+              
                 
-                <div className="introPage4 padds2">
-                <h3 style={{textTransform: "capitalize", paddingBottom:"10px"}} >
-                    Fortune Auction is on a Mission to build a community of lucky people whose desires are meant regardless of their background, gender, race, & status using unbias technology 
-                    </h3>
-                
-                <a className="linkBtn2" onClick={() => this.openAbout2()}>Learn More</a>
-                
-                </div>
+             
                 
                         {/* About  Appears here  */}
                 

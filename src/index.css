@@ -7,6 +7,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.stspin {
+  box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+			outline: none;
+}
+
+
+.bodySpin {
+	font-family: Open Sans;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			overflow: hidden;
+			background: #ffffff;
+      background-size: cover;
+      transform: rotate(-90deg); 
+}
 .hideSome {
   position: sticky;
 }
@@ -105,6 +124,141 @@ a:hover {
   margin-bottom: 20px;
 
 }
+		.mainbox {
+			position: relative;
+			width: 500px;
+      height: 500px;
+		}
+
+		.mainbox:after {
+			position: absolute;
+			content: '';
+			width: 32px;
+			height: 32px;
+			background: url('./images/arrow-left.png') no-repeat;
+			background-size: 32px;
+			right: -30px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
+		.box {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			border-radius: 50%;
+			border: 10px solid #fff;
+			overflow: hidden;
+			transition: all ease 5s;
+		}
+
+		.alspan {
+			width: 50%;
+			height: 50%;
+			display: inline-block;
+			position: absolute;
+		}
+
+		.span1 {
+			clip-path: polygon(0 92%, 100% 50%, 0 8%);
+			background-color: blue;
+			top: 120px;
+			left: 0;
+		}
+
+		.span2 {
+			clip-path: polygon(100% 92%, 0 50%, 100% 8%);
+			background-color: red;
+			top: 120px;
+			right: 0;
+		}
+
+		.span3 {
+			clip-path: polygon(50% 0%, 8% 100%, 92% 100%);
+			background-color: blue;
+			bottom: 0;
+			left: 120px;
+		}
+
+		.span4 {
+			clip-path: polygon(50% 100%, 92% 0, 8% 0);
+			background-color: red;
+			top: 0;
+			left: 120px;
+		}
+
+		/*Little bit adjust the value*/
+		.box1 .span3 b {
+			transform: translate(-50%, -50%) rotate(-270deg);
+		}
+
+		.box1 .span1 b,
+		.box2 .span1 b {
+			transform: translate(-50%, -50%) rotate(185deg);
+		}
+
+		.box2 .span3 b {
+			transform: translate(-50%, -50%) rotate(90deg);
+		}
+
+		.box1 .span4 b,
+		.box2 .span4 b {
+			transform: translate(-50%, -50%) rotate(-85deg);
+		}
+
+		.box2 {
+			width: 100%;
+			height: 100%;
+			transform: rotate(-135deg);
+		}
+
+		span b {
+			width: 65px;
+			height: 65px;
+			line-height: 65px;
+			font-size: 26px;
+			text-align: center;
+			/* background-color: #fff; */
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			color: white;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.spin {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 75px;
+			height: 75px;
+			border-radius: 50%;
+			border: 4px solid #fff;
+			background-color: gold;
+			color: #fff;
+			box-shadow: 0 5px 20px #000;
+			font-weight: bold;
+			font-size: 22px;
+      cursor: pointer;
+		}
+
+		.spin:active {
+			width: 70px;
+			height: 70px;
+			font-size: 20px;
+		}
+
+		.mainbox.animate:after {
+			animation: animateArrow 0.7s ease infinite;
+		}
+
+		@keyframes animateArrow {
+			50% {
+				right: -40px;
+			}
+		}
 
 .pushUp {
   margin-top: -7.4px;
@@ -158,6 +312,29 @@ a:hover {
   align-items:center;
   align-self: center;
 }
+
+.gridBtn a{
+  margin: 20px;
+}
+
+
+.gridBtn {
+text-align: center;
+
+  display: grid;
+  text-align: center;
+  row-gap: 20px;
+  align-items: center;
+  grid-template-rows: 30px 30px;
+}
+
+
+.twoGridz {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+}
+
 
 
 .Counter {
@@ -338,6 +515,14 @@ text-decoration: underline;
 
 }
 
+.linkBtn21 {
+  color: rgb(68, 68, 255);
+  background: transparent;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+text-decoration: underline;
+}
 .homePara {
   font-size: x-large;
   text-align: center;
@@ -417,6 +602,14 @@ text-decoration: underline;
   margin: auto;
 }
 
+.grid-flex {
+  display: grid;
+  margin: auto;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 100px;
+
+}
 .flexBtn button{
   margin: 20px;
 }
@@ -689,6 +882,26 @@ background-color: rgb(211, 211, 211);
 
 }
 
+.ticketsBuy {
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px 60px;
+  grid-template-rows: 50px;
+  width: 300px;
+  row-gap: 5px;
+  column-gap: 5px;
+
+
+  
+}
+
+.oneTick {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  height: 20px;
+  row-gap: 0px;
+}
+
 .btn2 {
   width: 200px;
   height: 40px;
@@ -714,7 +927,7 @@ background-color: rgb(211, 211, 211);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 700px;
+  height: 1000px;
   text-align: center;
 
 }
@@ -766,9 +979,6 @@ background-color: rgb(211, 211, 211);
   font-size: 1.8rem;
 }
 
-.introPage2 div img {
-  height: 200px;
-}
 
 .introPage2 div p {
   font-size: 1.77rem;
@@ -876,7 +1086,16 @@ background-color: rgb(211, 211, 211);
   background-size: cover;
   height: 500px;
   text-align: center;
+  margin-top: -20px;
+  justify-content: center;
+  align-items: center;
 
+}
+
+.introPage5 .homePara {
+   align-self: center;
+   padding-top: 200px;
+   justify-self: center;
 }
 
 
@@ -916,7 +1135,156 @@ background-color: rgb(211, 211, 211);
   .viewMore {
     margin-left: 10%;
   }
+  .bodySpin { 
+    height: 500px;
+  }
+  .mainbox {
+    position: relative;
+    width: 250px;
+    height: 250px;
+  }
+  .mainbox:after {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: url('./images/arrow-left.png') no-repeat;
+    background-size: 16px;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    overflow: hidden;
+    transition: all ease 5s;
+  }
+
+  .alspan {
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+    position: absolute;
+  }
+
+  .span1 {
+    clip-path: polygon(0 92%, 100% 50%, 0 8%);
+    background-color: blue;
+    top: 60px;
+    left: 0;
+  }
+
+  .span2 {
+    clip-path: polygon(100% 92%, 0 50%, 100% 8%);
+    background-color: red;
+    top: 60px;
+    right: 0;
+  }
+
+  .span3 {
+    clip-path: polygon(50% 0%, 8% 100%, 92% 100%);
+    background-color: blue;
+    bottom: 0;
+    left: 60px;
+  }
+
+  .span4 {
+    clip-path: polygon(50% 100%, 92% 0, 8% 0);
+    background-color: red;
+    top: 0;
+    left: 60px;
+  }
+
+  /*Little bit adjust the value*/
+  .box1 .span3 b {
+    transform: translate(-50%, -50%) rotate(-270deg);
+  }
+
+  .box1 .span1 b,
+  .box2 .span1 b {
+    transform: translate(-50%, -50%) rotate(185deg);
+  }
+
+  .box2 .span3 b {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .box1 .span4 b,
+  .box2 .span4 b {
+    transform: translate(-50%, -50%) rotate(-85deg);
+  }
+
+  .box2 {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-135deg);
+  }
+
+  span b {
+    width: 32.5px;
+    height: 32.5px;
+    line-height: 32.5px;
+    font-size: 13px;
+    text-align: center;
+    /* background-color: #fff; */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .spin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: gold;
+    color: #fff;
+    box-shadow: 0 2.5px 10px #000;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .spin:active {
+    width: 35px;
+    height: 35px;
+    font-size: 10px;
+  }
+
+  .mainbox.animate:after {
+    animation: animateArrow 0.7s ease infinite;
+  }
+
+  @keyframes animateArrow {
+    50% {
+      right: -20px;
+    }
+  }
+
+  .gridBtn a{
+    margin: 20px;
+  }
+  .twoGridz {
+    grid-template-columns:  1fr;
+  }
   
+
+  
+  .grid-flex {
+    grid-template-columns: 1fr;
+  }
   .spaceIn .left {
     margin-left: 20%;
   }
@@ -1114,7 +1482,7 @@ background-color: rgb(211, 211, 211);
 
   .introPage5 p {
     color: black;
-    padding-top: 70px;
+    /* padding-top: 70px; */
   }
 
   .ProductsHere {

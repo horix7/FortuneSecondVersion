@@ -9,7 +9,7 @@ import payPic from '../images/payOptions.jpg'
 import Ravepay from 'flutterwave-node';
 import 'dotenv/config'
 import PaymentOption2 from '../images/PaymentOptions3.png'
-
+import Spinner from '../components/UI/spnninigWheel'
 
 // const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, false);
 
@@ -186,7 +186,9 @@ let tickets = props => {
     })
 
 
+    const [spinn, setSpinn] = useState(false)
 
+    // Spinner
 
 
 
@@ -440,8 +442,11 @@ let tickets = props => {
         onClose: () => { }
     }
 
+    // spinn
     return (
-        <div id="upper" className="formHolder">
+            <div className="mainMod">
+        { spinn ?
+          <div id="upper" className="formHolder">
             <div className="backIco" onClick={props.clecked}>
                 <i className="material-icons" >keyboard_backspace</i>
 
@@ -600,7 +605,48 @@ let tickets = props => {
 
             </Modal>
         </div>
-    )
+        
+           :
+           <div style={{position: "relative", width: "100%", height:"100%"}}>
+               <Modal
+           isOpen={true}
+           style={{
+               overlay: {
+                   position: 'fixed',
+                   top: 0,
+                   left: 0,
+                   right: 0,
+                   bottom: 0,
+                   backgroundColor: 'rgba(0, 0, 0, 0.404)'
+               },
+               content: {
+                   position: 'absolute',
+                   top: '9%',
+                   left: '0%',
+                   right: '0%',
+                   bottom: '0%',
+                   border: '1px solid #fff',
+                   background: '#fff',
+                   overflow: 'auto',
+                   WebkitOverflowScrolling: 'touch',
+                   borderRadius: '0px',
+                   outline: 'none',
+                   padding: '10px'
+               }
+           }}>
+        
+        <h4 style={{textTransform: "uppercase", textAlign:"center"}}>
+            Check If Your tickets are lucky
+        </h4>
+        
+        <Spinner /> 
+           
+           </Modal>
+           </div>
+            }
+           
+           </div>
+        )
 }
 
 export default tickets
