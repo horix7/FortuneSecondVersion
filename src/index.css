@@ -318,14 +318,21 @@ a:hover {
 
 .gridBtn {
 text-align: center;
-
   display: grid;
   text-align: center;
   row-gap: 20px;
   align-items: center;
-  grid-template-rows: 30px 30px;
+  grid-template-columns: 1fr 1fr;
 }
 
+.gridBtn .blue {
+  text-align: center;
+  align-self: center;
+  width: 150px;
+  padding: 12px;
+  color: white;
+  border-radius: 10px;
+}
 
 .twoGridz {
   display: grid;
@@ -520,6 +527,8 @@ text-decoration: underline;
   text-align: center;
   font-weight: bold;
 text-decoration: underline;
+width: 90%;
+text-align: end;
 }
 .homePara {
   font-size: x-large;
@@ -900,6 +909,10 @@ background-color: rgb(211, 211, 211);
   font-size: large;
 }
 
+.ticketsDsi button {
+  margin-top: 40%;
+margin-bottom: -40%;
+}
 .oneTick {
   background-color: white;
   color: black;
@@ -1143,12 +1156,16 @@ background-color: rgb(211, 211, 211);
   }
   
   .ticketsDsi {
-    width: 50%;
-    margin-left:25% ;
+    width: 70%;
+    margin-left: 15% ;
     margin-top: -50%;
     font-size: large;
   }
   
+  .ticketsDsi button {
+    margin-top: 100%;
+  margin-bottom: -100%;
+  }
   .mainbox {
     position: relative;
     width: 250px;

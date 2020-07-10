@@ -92,6 +92,8 @@ class Spinner extends React.Component {
 
     }
 
+    
+
  render() {
        
  let spinner = (
@@ -184,7 +186,8 @@ let Ticks = (
 
       {spinner}
         {Ticks}
-        </div>  : <div className="ticketsDsi">   
+        </div>  : <div className="ticketsDsi"> 
+        <button className="btn blue darken-3" onClick={() => document.querySelector(".viewAuction").click()}>Try Another Ticket Now!</button>  
         {Ticks}
         </div> }
 

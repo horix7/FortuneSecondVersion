@@ -4,6 +4,8 @@ import Par from '../UI/paragraphs';
 import one from '../../images/one.png';
 import two from '../../images/two.png';
 import three from '../../images/three.png';
+import four from '../../images/four.png';
+
 import Image from  '../UI/image';
 import GadgetPhone from '../../images/iphone.jpg';
 import Lcd from '../../images/lcdScreen.jpg';
@@ -284,7 +286,7 @@ class Landing extends Component {
                 
                 <div className="gridBtn">
                 <a href="#how1" className="linkBtn21">How It Work </a>
-                <a href="#"  className="btn blue darken-2 loginBtn2">Watch Demo</a>
+                <a href="#"  className="blue darken-3">Watch Demo</a>
 
                 </div>
 
@@ -308,7 +310,7 @@ class Landing extends Component {
                  </div>
 
                  <div>
-                    <img width="180px" height="110px" src={three} alt=""/>
+                    <img width="180px" height="110px" src={four} alt=""/>
                     <p> We Ship your Won Item to your Location Even Globally   </p>
                  </div>
 
