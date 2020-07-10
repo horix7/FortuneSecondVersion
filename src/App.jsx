@@ -11,7 +11,7 @@ import Landing from './components/landing/landing';
 
 
 // localStorage.setItem("address", "https://fortune-backend.uc.r.appspot.com")
-localStorage.setItem("address", "http://localhost:5000")
+localStorage.setItem("address", "https://fortunesecondv.herokuapp.com")
 
 localStorage.setItem("auth", localStorage.auth || null)
 localStorage.setItem("details", localStorage.details || null)
