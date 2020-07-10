@@ -186,7 +186,12 @@ let tickets = props => {
     })
 
 
-    const [spinn, setSpinn] = useState(false)
+    const [spinn, setSpinn] = useState(true)
+    const [luckLost, setLuckLost] = useState([])
+    const [luckies, setLuckies] = useState([])
+    const [unLuckies, setUnLuckies] = useState([])
+
+
 
     // Spinner
 
@@ -215,13 +220,25 @@ let tickets = props => {
             .then((response) => {
                 setBtnLoad(false)
 
-                if (response.data.data == "done") {
+                let allTickets = [...response.data.data.luck, ...response.data.data.unLuck]
+
+                setLuckies(response.data.data.luck)
+
+                setUnLuckies(response.data.data.unLuck)
+
+                setLuckLost(allTickets)
+
+               
+                console.log()
+                if (typeof response.data.data == "object") {
                     alert("Your Bid Was Made Successfully Check your  Email Or Spam Email For Further Notification ")
-                    window.location.reload()
+                        setSpinn(false)
+                        
+
                 } else {
                     if (response.data.data.tickets.length < response.data.data.size) {
                         alert("Your Bid Was Not  Successfull contact support on contact@fortuneauction360.com")
-                        window.location.reload()
+                        setSpinn(false)
 
                     } else {
                         alert("An error Occured When Bidding contact support on contact@fortuneauction360.com")
@@ -234,7 +251,7 @@ let tickets = props => {
 
 
             }).catch(err => {
-                alert("Something Wnet Wrong")
+                alert(JSON.stringify(err))
                 setBtnLoad(false)
             })
 
@@ -331,7 +348,6 @@ let tickets = props => {
 
             }).catch(err => {
                 alert("anError Occured Processing Your Payment")
-                console.error(err)
                 setBtnLoad(false)
             })
     }
@@ -636,10 +652,10 @@ let tickets = props => {
            }}>
         
         <h4 style={{textTransform: "uppercase", textAlign:"center"}}>
-            Check If Your tickets are lucky
+            spin to check If Your tickets are lucky
         </h4>
         
-        <Spinner /> 
+        <Spinner spinningTicks={luckLost} luckies={luckies} unLuckies={unLuckies}/> 
            
            </Modal>
            </div>

@@ -8,23 +8,15 @@ body {
 }
 
 .stspin {
-  box-sizing: border-box;
-			padding: 0;
-			margin: 0;
-			outline: none;
+ 
+			margin-top: 10px;
 }
 
 
 .bodySpin {
-	font-family: Open Sans;
 			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			overflow: hidden;
-			background: #ffffff;
-      background-size: cover;
       transform: rotate(-90deg); 
+      text-align: center;
 }
 .hideSome {
   position: sticky;
@@ -242,7 +234,13 @@ a:hover {
 			font-weight: bold;
 			font-size: 22px;
       cursor: pointer;
-		}
+      text-align: center;
+
+    }
+    
+    .spin p {
+      text-align: center;
+    }
 
 		.spin:active {
 			width: 70px;
@@ -889,9 +887,17 @@ background-color: rgb(211, 211, 211);
   width: 300px;
   row-gap: 5px;
   column-gap: 5px;
-
+  margin-top: 100px;
+  text-align: center
 
   
+}
+
+.ticketsDsi {
+  width: 30%;
+  margin-left:35% ;
+  margin-top: -10%;
+  font-size: large;
 }
 
 .oneTick {
@@ -1135,9 +1141,14 @@ background-color: rgb(211, 211, 211);
   .viewMore {
     margin-left: 10%;
   }
-  .bodySpin { 
-    height: 500px;
+  
+  .ticketsDsi {
+    width: 50%;
+    margin-left:25% ;
+    margin-top: -50%;
+    font-size: large;
   }
+  
   .mainbox {
     position: relative;
     width: 250px;
