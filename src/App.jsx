@@ -3,15 +3,14 @@ import Admin from './containers/admin';
 import User from './containers/user';
 import Landing from './components/landing/landing';
 
-// let checkSsl = window.location.href.split('://')[0] === "https"
+let checkSsl = window.location.href.split('://')[0] === "https"
 
-// if (!checkSsl) {
-//   location.href = "https://" + window.location.href.split('://')[1]
-// }
+if (!checkSsl) {
+  location.href = "https://" + window.location.href.split('://')[1]
+}
 
 
-// localStorage.setItem("address", "https://fortune-backend.uc.r.appspot.com")
-localStorage.setItem("address", "https://fortunesecondv.herokuapp.com")
+localStorage.setItem("address", "https://fortune-backend.uc.r.appspot.com")
 
 localStorage.setItem("auth", localStorage.auth || null)
 localStorage.setItem("details", localStorage.details || null)

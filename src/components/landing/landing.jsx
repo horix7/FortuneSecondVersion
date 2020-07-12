@@ -286,7 +286,7 @@ class Landing extends Component {
                 
                 <div className="gridBtn">
                 <a href="#how1" className="linkBtn21">How It Work </a>
-                <a href="#"  className="blue darken-3">Watch Demo</a>
+                <a href="https://www.youtube.com/watch?v=FteTrkjdb-0" target="_blank"  className="blue darken-3">Watch Demo</a>
 
                 </div>
 

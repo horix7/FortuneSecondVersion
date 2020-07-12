@@ -10,7 +10,7 @@ let Navigation = props => {
         <React.Fragment>
             <div className="homeNav">
           <div>
-          <a href="#" className="btn blue darken-2 hideSmall">Watch Demo</a>
+          <a href="https://www.youtube.com/watch?v=FteTrkjdb-0" target="_blank" className="btn blue darken-2 hideSmall">Watch Demo</a>
           <Button 
              clicked={props.click2} 
 
