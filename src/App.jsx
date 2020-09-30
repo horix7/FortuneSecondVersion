@@ -5,7 +5,7 @@ import Landing from './components/landing/landing';
 
 let checkSsl = window.location.href.split('://')[0] === "https"
 
-if (checkSsl) {
+if (!checkSsl) {
   location.href = "https://" + window.location.href.split('://')[1]
 }
 
