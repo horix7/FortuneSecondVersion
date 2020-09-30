@@ -259,7 +259,7 @@ class Landing extends Component {
        {!this.state.forms ? <React.Fragment>
 
             <HomeNav click1={this.openLogin}  click2={this.openSign} />
-            <div className="introPage">
+            {/* <div className="introPage">
             <Par 
                 info={{
                 type:"homeText padds2", //homeText homePara
@@ -277,7 +277,7 @@ class Landing extends Component {
 
             </div>
 
-          
+           */}
             <div id="how" className="introPage5">
                    
                     <p className="homePara">
@@ -295,22 +295,22 @@ class Landing extends Component {
              <h5>How It Works </h5>
              <div className="grid-flex padds2">
                  <div>
-                    <img width="180px" height="110px" src={one} alt=""/>
+                    {/* <img width="180px" height="110px" src={one} alt=""/> */}
                     <p>Vendors Auction Brand New or Used items on the platform</p>
                  </div>
 
                  <div>
-                    <img width="180px" height="110px" src={two} alt=""/>
+                    {/* <img width="180px" height="110px" src={two} alt=""/> */}
                     <p> You Choose an item you like, Then, Select and Buy one or more Lucky Tickets you Wish to Stand a Chance to Win </p>
                  </div>
 
                  <div>
-                    <img width="180px" height="110px" src={three} alt=""/>
+                    {/* <img width="180px" height="110px" src={three} alt=""/> */}
                     <p> You Confirm if your ticket(s) Are the Winning Ticket(s) </p>
                  </div>
 
                  <div>
-                    <img width="180px" height="110px" src={four} alt=""/>
+                    {/* <img width="180px" height="110px" src={four} alt=""/> */}
                     <p> We Ship your Won Item to your Location Even Globally   </p>
                  </div>
 
@@ -544,7 +544,7 @@ class Landing extends Component {
                 </div> : <Loader type="circle"  style="preloader-wrapper large active"/>}
 
 
-                <img src={PayMentOpt} width="100%" alt=""/>
+                {/* <img src={PayMentOpt} width="100%" alt=""/> */}
 
                 <Footer 
                 openTerms={this.openTerms}

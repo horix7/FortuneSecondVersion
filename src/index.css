@@ -613,8 +613,8 @@ text-align: end;
   display: grid;
   margin: auto;
   grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 100px;
+  column-gap: 100px;
+  row-gap: 10px;
 
 }
 .flexBtn button{
@@ -942,11 +942,11 @@ margin-bottom: -40%;
 }
 
 .introPage2 {
-  background-image: url(./images/land\ page\ image\ 4.png);
+  /* background-image: url(./images/land\ page\ image\ 4.png); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 1000px;
+  height: 700px;
   text-align: center;
 
 }
@@ -1105,7 +1105,7 @@ margin-bottom: -40%;
   background-size: cover;
   height: 500px;
   text-align: center;
-  margin-top: -20px;
+  margin-top: -30px;
   justify-content: center;
   align-items: center;
 
@@ -1351,7 +1351,7 @@ margin-bottom: -40%;
     grid-template-columns: 1fr
   }
   .introPage2 {
-    background: rgb(209, 209, 209);
+    /* background: rgb(209, 209, 209); */
     height: 100%
   }
   

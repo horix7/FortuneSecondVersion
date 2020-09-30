@@ -546,7 +546,7 @@ let tickets = props => {
                     const M = window.M
                     M.AutoInit();
                 }}>
-                    <img src={PaymentOption2} width="100%" className="payOpt12" alt="" />
+                    <img src={PaymentOption2} width="10px" className="mm" alt="" />
                     <div className="center-align"> Total Payment  {JSON.parse(localStorage.currency).currency} <span> {numberWithCommas(parseFloat(total / JSON.parse(localStorage.currency).rate).toFixed(2))} </span></div>
                     <div className="payment2">
 
