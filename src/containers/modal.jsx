@@ -553,7 +553,7 @@ let tickets = props => {
                         {JSON.parse(localStorage.currency).currency == "RWF" ?
                             <div className="includeBtn">
 
-                                <div className="spaceIn">
+                                 <div className="spaceIn">
 
                                     <select className="input-field spaceIn" id="codes" onChange={() => changeCode(document.querySelector('#codes').value)} required>
                                         <option value="mtn" default> Mtn Mobile Money Rwanda</option>
