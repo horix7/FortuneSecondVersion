@@ -172,10 +172,10 @@ class Auction extends Component {
       <Fragment>
         {this.state.openModal ?
           <div>
-            <h2 className="center-align" style={{
+            {/* <h2 className="center-align" style={{
               paddingTop: "5%"
             }}>Choose Your Lucky Fortune Number </h2>
-            <h6 className="center-align">You Can Select More Than One Fortune Number to Stand A High Chance To Win </h6>
+            <h6 className="center-align">You Can Select More Than One Fortune Number to Stand A High Chance To Win </h6> */}
 
           </div>
           : null
